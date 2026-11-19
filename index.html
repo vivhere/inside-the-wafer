@@ -23,10 +23,11 @@
             mono: ['"IBM Plex Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
           },
           colors: {
-            canvas: '#F2F4F7',
-            silicon: '#0F172A',
-            slateborder: '#CBD5E1',
-            copper: '#B45309',
+            canvas: '#F5F5F5',
+            charcoal: '#262626',
+            coral: '#FF5A52',
+            coraldark: '#E04840',
+            linegray: '#D4D4D4',
             wafergreen: '#047857',
           },
         },
@@ -37,12 +38,12 @@
   <style>
     /* Classic Semiconductor Drafting & Cleanroom Grid Base */
     body {
-      background-color: #F2F4F7;
+      background-color: #F5F5F5;
       background-image:
-        linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+        linear-gradient(to right, rgba(38, 38, 38, 0.045) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(38, 38, 38, 0.045) 1px, transparent 1px);
       background-size: 28px 28px;
-      color: #0F172A;
+      color: #262626;
       font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
       overflow-x: hidden;
     }
@@ -59,8 +60,8 @@
     /* Classic Datasheet / Hardware Instrument Panel */
     .lab-panel {
       background-color: #FFFFFF;
-      border: 1px solid #CBD5E1;
-      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+      border: 1px solid #D4D4D4;
+      box-shadow: 0 1px 2px rgba(38, 38, 38, 0.05);
       position: relative;
     }
 
@@ -71,20 +72,19 @@
       position: absolute;
       width: 7px;
       height: 7px;
-      border-color: #64748B;
       pointer-events: none;
     }
     .fiducial::before {
       top: -1px;
       left: -1px;
-      border-top: 2px solid #0F172A;
-      border-left: 2px solid #0F172A;
+      border-top: 2px solid #262626;
+      border-left: 2px solid #262626;
     }
     .fiducial::after {
       bottom: -1px;
       right: -1px;
-      border-bottom: 2px solid #0F172A;
-      border-right: 2px solid #0F172A;
+      border-bottom: 2px solid #262626;
+      border-right: 2px solid #262626;
     }
 
     /* Precision Vernier-Style Range Slider */
@@ -93,8 +93,8 @@
       appearance: none;
       width: 100%;
       height: 6px;
-      background: #E2E8F0;
-      border: 1px solid #CBD5E1;
+      background: #E5E5E5;
+      border: 1px solid #D4D4D4;
       border-radius: 2px;
       outline: none;
     }
@@ -104,26 +104,26 @@
       width: 18px;
       height: 24px;
       border-radius: 2px;
-      background: #0F172A;
+      background: #262626;
       border: 2px solid #FFFFFF;
-      box-shadow: 0 0 0 1px #0F172A, 0 2px 4px rgba(15, 23, 42, 0.25);
+      box-shadow: 0 0 0 1px #262626, 0 2px 4px rgba(38, 38, 38, 0.25);
       cursor: pointer;
       transition: background-color 0.15s ease;
     }
     input[type='range'].lab-slider::-webkit-slider-thumb:hover {
-      background: #B45309;
+      background: #FF5A52;
     }
     input[type='range'].lab-slider::-moz-range-thumb {
       width: 18px;
       height: 24px;
       border-radius: 2px;
-      background: #0F172A;
+      background: #262626;
       border: 2px solid #FFFFFF;
-      box-shadow: 0 0 0 1px #0F172A, 0 2px 4px rgba(15, 23, 42, 0.25);
+      box-shadow: 0 0 0 1px #262626, 0 2px 4px rgba(38, 38, 38, 0.25);
       cursor: pointer;
     }
 
-    /* Refined Wafer Widget Color Coding (Preserved & Sharpened) */
+    /* Refined Wafer Widget Color Coding */
     .blk-green {
       background-color: #ECFDF5;
       border-color: #6EE7B7;
@@ -145,25 +145,25 @@
       color: #1D4ED8;
     }
     .blk-fab {
-      background-color: #0F172A;
-      border-color: #0F172A;
-      color: #F8FAFC;
+      background-color: #262626;
+      border-color: #262626;
+      color: #FAFAFA;
     }
     .blk-coming {
-      background-color: #F8FAFC;
-      border-color: #CBD5E1;
+      background-color: #FAFAFA;
+      border-color: #D4D4D4;
       border-style: dashed;
-      color: #94A3B8;
+      color: #A3A3A3;
     }
 
     /* Crisp highlight for Top 2 matched blocks */
     .matched-ring {
-      box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #0F172A;
+      box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #FF5A52;
     }
 
     /* Clickable inline glossary word */
     .glossary-cue {
-      border-bottom: 1.5px dashed #64748B;
+      border-bottom: 1.5px dashed #737373;
       color: inherit;
       cursor: pointer;
       display: inline-flex;
@@ -174,28 +174,28 @@
       transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
     }
     .glossary-cue:hover {
-      color: #047857;
-      border-bottom-color: #047857;
-      background-color: #ECFDF5;
+      color: #E04840;
+      border-bottom-color: #FF5A52;
+      background-color: #FFF1F0;
     }
     .glossary-cue::after {
       content: '?';
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.65em;
       font-weight: 700;
-      color: #64748B;
+      color: #737373;
       vertical-align: super;
       line-height: 1;
     }
     .glossary-cue:hover::after {
-      color: #047857;
+      color: #FF5A52;
     }
 
     /* Glossary highlighted term pulse */
     @keyframes termPulse {
-      0%   { box-shadow: 0 0 0 0 rgba(4, 120, 87, 0.35); background-color: #ECFDF5; border-color: #6EE7B7; }
-      70%  { box-shadow: 0 0 0 6px rgba(4, 120, 87, 0); background-color: #ECFDF5; border-color: #6EE7B7; }
-      100% { box-shadow: 0 0 0 0 rgba(4, 120, 87, 0); background-color: #FFFFFF; border-color: #CBD5E1; }
+      0%   { box-shadow: 0 0 0 0 rgba(255, 90, 82, 0.35); background-color: #FFF1F0; border-color: #FF5A52; }
+      70%  { box-shadow: 0 0 0 6px rgba(255, 90, 82, 0); background-color: #FFF1F0; border-color: #FF5A52; }
+      100% { box-shadow: 0 0 0 0 rgba(255, 90, 82, 0); background-color: #FFFFFF; border-color: #D4D4D4; }
     }
     .glossary-highlight {
       animation: termPulse 2.2s ease-out;
@@ -205,18 +205,18 @@
     @media print {
       header, .no-print { display: none !important; }
       body { background: #FFFFFF !important; background-image: none !important; }
-      .lab-panel { box-shadow: none !important; border-color: #94A3B8 !important; }
+      .lab-panel { box-shadow: none !important; border-color: #A3A3A3 !important; }
     }
   </style>
 </head>
-<body class="min-h-screen antialiased selection:bg-[#0F172A] selection:text-white pb-24">
+<body class="min-h-screen antialiased selection:bg-[#FF5A52] selection:text-white pb-24">
 
   <!-- ======================================================================= -->
   <!-- NON-BLOCKING TOAST NOTIFICATION (Bottom-Left)                           -->
   <!-- ======================================================================= -->
   <div id="toast" class="fixed bottom-5 left-5 z-50 translate-y-16 opacity-0 transition-all duration-200 pointer-events-none no-print max-w-xs sm:max-w-sm">
-    <div class="bg-[#0F172A] text-slate-100 text-xs sm:text-sm px-4 py-3 border border-slate-700 shadow-lg flex items-center gap-2.5">
-      <span class="w-2 h-2 bg-emerald-400 flex-shrink-0"></span>
+    <div class="bg-[#262626] text-neutral-100 text-xs sm:text-sm px-4 py-3 border border-neutral-700 shadow-lg flex items-center gap-2.5">
+      <span class="w-2 h-2 bg-[#FF5A52] flex-shrink-0"></span>
       <span id="toast-msg" class="leading-snug">Updated</span>
     </div>
   </div>
@@ -229,37 +229,37 @@
     type="button"
     onclick="openGlossary()"
     aria-label="Open Word Guide"
-    class="no-print fixed bottom-5 right-5 z-40 inline-flex items-center gap-2.5 px-4 py-3 bg-[#0F172A] hover:bg-slate-800 text-white shadow-lg transition-colors cursor-pointer border border-slate-700 group"
+    class="no-print fixed bottom-5 right-5 z-40 inline-flex items-center gap-2.5 px-4 py-3 bg-[#262626] hover:bg-neutral-800 text-white shadow-lg transition-colors cursor-pointer border border-neutral-700 group"
   >
-    <span class="font-mono text-xs text-amber-400 font-bold">[?]</span>
+    <span class="font-mono text-xs text-[#FF5A52] font-bold">[?]</span>
     <span class="text-xs sm:text-sm font-semibold tracking-tight">Word Guide</span>
-    <span class="hidden sm:inline-flex items-center justify-center px-1.5 py-0.5 bg-slate-800 text-slate-300 font-mono text-[10px] font-semibold group-hover:bg-emerald-700 group-hover:text-white transition">18</span>
+    <span class="hidden sm:inline-flex items-center justify-center px-1.5 py-0.5 bg-neutral-700 text-neutral-200 font-mono text-[10px] font-semibold group-hover:bg-[#FF5A52] group-hover:text-white transition">18</span>
   </button>
 
   <!-- ======================================================================= -->
   <!-- CORNER SLIDE-OVER GLOSSARY DRAWER                                       -->
   <!-- ======================================================================= -->
-  <div id="glossary-backdrop" onclick="closeGlossary()" class="no-print fixed inset-0 z-50 bg-[#0F172A]/35 backdrop-blur-[1px] opacity-0 pointer-events-none transition-opacity duration-200"></div>
+  <div id="glossary-backdrop" onclick="closeGlossary()" class="no-print fixed inset-0 z-50 bg-[#262626]/35 backdrop-blur-[1px] opacity-0 pointer-events-none transition-opacity duration-200"></div>
 
   <aside
     id="glossary-drawer"
     aria-label="Word Guide — Simple Chip Dictionary"
-    class="no-print fixed top-0 right-0 z-50 h-full w-full max-w-md bg-[#F2F4F7] border-l border-[#CBD5E1] shadow-2xl transform translate-x-full transition-transform duration-300 ease-out flex flex-col"
+    class="no-print fixed top-0 right-0 z-50 h-full w-full max-w-md bg-[#F5F5F5] border-l border-[#D4D4D4] shadow-2xl transform translate-x-full transition-transform duration-300 ease-out flex flex-col"
   >
     <!-- Drawer Header -->
-    <div class="bg-[#0F172A] text-white px-5 py-4 flex items-start justify-between gap-3">
+    <div class="bg-[#262626] text-white px-5 py-4 flex items-start justify-between gap-3 border-b-2 border-[#FF5A52]">
       <div>
-        <div class="font-mono text-[10px] uppercase tracking-widest text-amber-400 font-semibold">
-          LAB REFERENCE // 18 TERMS
+        <div class="font-mono text-[10px] uppercase tracking-widest text-[#FF5A52] font-semibold">
+          LAB REFERENCE · 18 TERMS
         </div>
         <h2 class="text-lg font-bold mt-0.5">Simple Chip Word Guide</h2>
-        <p class="text-xs text-slate-300 mt-0.5">Plain, everyday explanations for every chip word used here.</p>
+        <p class="text-xs text-neutral-300 mt-0.5">Plain, everyday explanations for every chip word used here.</p>
       </div>
       <button
         type="button"
         onclick="closeGlossary()"
         aria-label="Close Word Guide"
-        class="p-1.5 text-slate-300 hover:text-white hover:bg-slate-800 transition cursor-pointer"
+        class="p-1.5 text-neutral-300 hover:text-white hover:bg-neutral-700 transition cursor-pointer"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -268,16 +268,16 @@
     </div>
 
     <!-- Search & Category Filters -->
-    <div class="bg-white border-b border-[#CBD5E1] px-5 py-3.5 space-y-3">
+    <div class="bg-white border-b border-[#D4D4D4] px-5 py-3.5 space-y-3">
       <div class="relative">
-        <svg class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <svg class="w-4 h-4 text-neutral-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.5 10.5a7.5 7.5 0 0013.15 6.15z" />
         </svg>
         <input
           id="glossary-search"
           type="text"
           placeholder="Search a word (wafer, yield, nm, die)..."
-          class="w-full pl-9 pr-3 py-2 bg-[#F8FAFC] border border-[#CBD5E1] focus:border-[#0F172A] focus:bg-white outline-none text-sm text-[#0F172A] placeholder:text-slate-400 transition"
+          class="w-full pl-9 pr-3 py-2 bg-[#FAFAFA] border border-[#D4D4D4] focus:border-[#262626] focus:bg-white outline-none text-sm text-[#262626] placeholder:text-neutral-400 transition"
         />
       </div>
       <div id="glossary-cats" class="flex flex-wrap gap-1.5">
@@ -291,23 +291,23 @@
     </div>
 
     <!-- Drawer Footer -->
-    <div class="bg-white border-t border-[#CBD5E1] px-5 py-3 text-[11px] text-slate-600 flex items-center justify-between">
-      <span>Tip: Click any <span class="border-b border-dashed border-slate-500 font-medium text-slate-800">underlined word?</span> anytime.</span>
-      <span class="font-mono text-[10px] text-slate-400">ESC to close</span>
+    <div class="bg-white border-t border-[#D4D4D4] px-5 py-3 text-[11px] text-neutral-600 flex items-center justify-between">
+      <span>Tip: Click any <span class="border-b border-dashed border-neutral-500 font-medium text-neutral-800">underlined word?</span> anytime.</span>
+      <span class="font-mono text-[10px] text-neutral-400">ESC to close</span>
     </div>
   </aside>
 
   <!-- ======================================================================= -->
   <!-- TOP INSTRUMENT BAR: BACK LINK · 4-STEP TRACK · RESET                    -->
   <!-- ======================================================================= -->
-  <header class="sticky top-0 z-30 bg-[#0F172A] text-white border-b-2 border-[#B45309]">
+  <header class="sticky top-0 z-30 bg-[#262626] text-white border-b-2 border-[#FF5A52]">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-3">
 
       <!-- Left: Back to Wafer Link -->
       <a
         id="link-back-wafer"
         href="/"
-        class="inline-flex items-center gap-1.5 px-3 py-1.5 border border-slate-700 bg-slate-900 hover:bg-slate-800 text-slate-100 font-mono text-xs font-medium transition"
+        class="inline-flex items-center gap-1.5 px-3 py-1.5 border border-neutral-600 bg-neutral-800 hover:bg-neutral-700 text-neutral-100 font-mono text-xs font-medium transition"
       >
         <span>←</span>
         <span>Back to Wafer</span>
@@ -315,14 +315,14 @@
 
       <!-- Center: 4-Step Hardware Track -->
       <nav aria-label="Lab steps" class="order-3 lg:order-2 w-full lg:w-auto flex justify-center pt-1 lg:pt-0 overflow-x-auto">
-        <div class="inline-flex items-center border border-slate-700 bg-slate-900/90">
-          <button type="button" onclick="navToStep(1)" id="prog-1" class="step-pill px-3 py-1.5 font-mono text-[11px] transition cursor-pointer whitespace-nowrap border-r border-slate-700">
+        <div class="inline-flex items-center border border-neutral-600 bg-neutral-900">
+          <button type="button" onclick="navToStep(1)" id="prog-1" class="step-pill px-3 py-1.5 font-mono text-[11px] transition cursor-pointer whitespace-nowrap border-r border-neutral-700">
             01. Pick a Chip
           </button>
-          <button type="button" onclick="navToStep(2)" id="prog-2" class="step-pill px-3 py-1.5 font-mono text-[11px] transition cursor-pointer whitespace-nowrap border-r border-slate-700">
+          <button type="button" onclick="navToStep(2)" id="prog-2" class="step-pill px-3 py-1.5 font-mono text-[11px] transition cursor-pointer whitespace-nowrap border-r border-neutral-700">
             02. Wafer Lab
           </button>
-          <button type="button" onclick="navToStep(3)" id="prog-3" class="step-pill px-3 py-1.5 font-mono text-[11px] transition cursor-pointer whitespace-nowrap border-r border-slate-700">
+          <button type="button" onclick="navToStep(3)" id="prog-3" class="step-pill px-3 py-1.5 font-mono text-[11px] transition cursor-pointer whitespace-nowrap border-r border-neutral-700">
             03. Fix a Problem
           </button>
           <button type="button" onclick="navToStep(4)" id="prog-4" class="step-pill px-3 py-1.5 font-mono text-[11px] transition cursor-pointer whitespace-nowrap">
@@ -335,7 +335,7 @@
       <button
         id="btn-reset"
         type="button"
-        class="order-2 lg:order-3 inline-flex items-center gap-1.5 px-3 py-1.5 border border-slate-700 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white font-mono text-xs font-medium transition cursor-pointer"
+        class="order-2 lg:order-3 inline-flex items-center gap-1.5 px-3 py-1.5 border border-neutral-600 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 hover:text-white font-mono text-xs font-medium transition cursor-pointer"
       >
         <span>↻</span>
         <span>Reset</span>
@@ -353,17 +353,17 @@
     <!-- STEP 1: PICK A CHIP                                                   -->
     <!-- ===================================================================== -->
     <section id="step-1" class="step-panel step-enter">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 pb-5 border-b border-[#CBD5E1]">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 pb-5 border-b border-[#D4D4D4]">
         <div class="max-w-2xl">
-          <div class="font-mono text-[11px] font-semibold uppercase tracking-widest text-[#B45309] mb-1.5">
-            STEP 01 OF 04 // SILICON LAB
+          <div class="font-mono text-[11px] font-semibold uppercase tracking-widest text-[#E04840] mb-1.5">
+            STEP 01 OF 04 · SILICON LAB
           </div>
-          <h1 class="text-2xl sm:text-3xl font-bold text-[#0F172A] tracking-tight">
+          <h1 class="text-2xl sm:text-3xl font-bold text-[#262626] tracking-tight">
             Pick a microchip to build.
           </h1>
-          <p class="text-slate-600 text-sm sm:text-base mt-2 leading-relaxed">
+          <p class="text-neutral-600 text-sm sm:text-base mt-2 leading-relaxed">
             Different gadgets need very different chips. Choose one below, place it onto a
-            <button type="button" onclick="openGlossary('wafer')" class="glossary-cue font-medium text-[#0F172A]">300mm silicon wafer</button>,
+            <button type="button" onclick="openGlossary('wafer')" class="glossary-cue font-medium text-[#262626]">300mm silicon wafer</button>,
             test how many chips survive, and fix a real factory problem.
           </p>
         </div>
@@ -372,7 +372,7 @@
           id="btn-step1-continue"
           type="button"
           disabled
-          class="px-5 py-3 font-mono text-xs uppercase tracking-wider font-semibold transition border flex items-center justify-center gap-2 self-start md:self-auto bg-slate-200 text-slate-400 border-slate-300 cursor-not-allowed"
+          class="px-5 py-3 font-mono text-xs uppercase tracking-wider font-semibold transition border flex items-center justify-center gap-2 self-start md:self-auto bg-neutral-200 text-neutral-400 border-neutral-300 cursor-not-allowed"
         >
           <span>Open Wafer Lab</span>
           <span>→</span>
@@ -385,9 +385,9 @@
       </div>
 
       <!-- Friendly Beginner Bar -->
-      <div class="mt-6 flex flex-wrap items-center justify-between gap-3 px-4 py-3 bg-white border border-[#CBD5E1] text-xs text-slate-600">
-        <span>First time learning about chips? Click any <button type="button" onclick="openGlossary('die')" class="glossary-cue font-medium text-[#0F172A]">underlined word</button> or open the <strong>Word Guide</strong> in the bottom-right corner.</span>
-        <span class="font-mono text-[11px] text-slate-500">EST. TIME: ~3 MIN</span>
+      <div class="mt-6 flex flex-wrap items-center justify-between gap-3 px-4 py-3 bg-white border border-[#D4D4D4] text-xs text-neutral-600">
+        <span>First time learning about chips? Click any <button type="button" onclick="openGlossary('die')" class="glossary-cue font-medium text-[#262626]">underlined word</button> or open the <strong>Word Guide</strong> in the bottom-right corner.</span>
+        <span class="font-mono text-[11px] text-neutral-500">EST. TIME: ~3 MIN</span>
       </div>
     </section>
 
@@ -395,60 +395,60 @@
     <!-- STEP 2: WAFER LAB                                                     -->
     <!-- ===================================================================== -->
     <section id="step-2" class="step-panel hidden">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6 pb-4 border-b border-[#CBD5E1]">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6 pb-4 border-b border-[#D4D4D4]">
         <div>
-          <div class="font-mono text-[11px] font-semibold uppercase tracking-widest text-[#B45309] mb-1">
-            STEP 02 OF 04 // WAFER SIMULATOR
+          <div class="font-mono text-[11px] font-semibold uppercase tracking-widest text-[#E04840] mb-1">
+            STEP 02 OF 04 · WAFER SIMULATOR
           </div>
-          <h2 class="text-2xl sm:text-3xl font-bold text-[#0F172A] tracking-tight">Build &amp; Test Your Wafer</h2>
-          <p class="text-slate-600 text-sm mt-1">
+          <h2 class="text-2xl sm:text-3xl font-bold text-[#262626] tracking-tight">Build &amp; Test Your Wafer</h2>
+          <p class="text-neutral-600 text-sm mt-1">
             Adjust the chip size and settings below, then run a
-            <button type="button" onclick="openGlossary('probe')" class="glossary-cue font-medium text-[#0F172A]">wafer test</button>
+            <button type="button" onclick="openGlossary('probe')" class="glossary-cue font-medium text-[#262626]">wafer test</button>
             to see how many working chips you get.
           </p>
         </div>
-        <div id="sim-mission-badge" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white border border-[#CBD5E1] font-mono text-xs text-[#0F172A] self-start md:self-auto">
+        <div id="sim-mission-badge" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white border border-[#D4D4D4] font-mono text-xs text-[#262626] self-start md:self-auto">
           <!-- Populated by JS -->
         </div>
       </div>
 
       <!-- Datasheet Readout Strip (6 Live Numbers) -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 bg-white border border-[#CBD5E1] divide-y sm:divide-y-0 sm:divide-x divide-[#CBD5E1] mb-6">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 bg-white border border-[#D4D4D4] divide-y sm:divide-y-0 sm:divide-x divide-[#D4D4D4] mb-6">
         <div class="p-3.5">
-          <div class="text-[11px] font-semibold text-slate-600">
+          <div class="text-[11px] font-semibold text-neutral-600">
             <button type="button" onclick="openGlossary('gross_good')" class="glossary-cue">Chips on Wafer</button>
           </div>
-          <div id="m-gross" class="font-mono text-lg font-bold text-[#0F172A] mt-1">548</div>
-          <div class="font-mono text-[10px] text-slate-400 uppercase mt-0.5">Total Printed</div>
+          <div id="m-gross" class="font-mono text-lg font-bold text-[#262626] mt-1">548</div>
+          <div class="font-mono text-[10px] text-neutral-400 uppercase mt-0.5">Total Printed</div>
         </div>
         <div class="p-3.5">
-          <div class="text-[11px] font-semibold text-slate-600">
+          <div class="text-[11px] font-semibold text-neutral-600">
             <button type="button" onclick="openGlossary('yield')" class="glossary-cue">Working Rate</button>
           </div>
           <div id="m-yield" class="font-mono text-lg font-bold text-[#047857] mt-1">82.1%</div>
-          <div class="font-mono text-[10px] text-slate-400 uppercase mt-0.5">Wafer Yield</div>
+          <div class="font-mono text-[10px] text-neutral-400 uppercase mt-0.5">Wafer Yield</div>
         </div>
         <div class="p-3.5">
-          <div class="text-[11px] font-semibold text-slate-600">
+          <div class="text-[11px] font-semibold text-neutral-600">
             <button type="button" onclick="openGlossary('gross_good')" class="glossary-cue">Working Chips</button>
           </div>
-          <div id="m-good" class="font-mono text-lg font-bold text-[#0F172A] mt-1">450</div>
-          <div class="font-mono text-[10px] text-slate-400 uppercase mt-0.5">Ready to Ship</div>
+          <div id="m-good" class="font-mono text-lg font-bold text-[#262626] mt-1">450</div>
+          <div class="font-mono text-[10px] text-neutral-400 uppercase mt-0.5">Ready to Ship</div>
         </div>
         <div class="p-3.5">
-          <div class="text-[11px] font-semibold text-slate-600">Cost per Chip</div>
-          <div id="m-cost" class="font-mono text-lg font-bold text-[#0F172A] mt-1">$25.56</div>
-          <div class="font-mono text-[10px] text-slate-400 uppercase mt-0.5">Est. Unit Cost</div>
+          <div class="text-[11px] font-semibold text-neutral-600">Cost per Chip</div>
+          <div id="m-cost" class="font-mono text-lg font-bold text-[#262626] mt-1">$25.56</div>
+          <div class="font-mono text-[10px] text-neutral-400 uppercase mt-0.5">Est. Unit Cost</div>
         </div>
         <div class="p-3.5">
-          <div class="text-[11px] font-semibold text-slate-600">Power Used</div>
-          <div id="m-power" class="font-mono text-lg font-bold text-[#B45309] mt-1">2.4 W</div>
-          <div class="font-mono text-[10px] text-slate-400 uppercase mt-0.5">Heat &amp; Battery</div>
+          <div class="text-[11px] font-semibold text-neutral-600">Power Used</div>
+          <div id="m-power" class="font-mono text-lg font-bold text-[#E04840] mt-1">2.4 W</div>
+          <div class="font-mono text-[10px] text-neutral-400 uppercase mt-0.5">Heat &amp; Battery</div>
         </div>
         <div class="p-3.5">
-          <div class="text-[11px] font-semibold text-slate-600">Top Speed</div>
-          <div id="m-freq" class="font-mono text-lg font-bold text-[#1D4ED8] mt-1">2.10 GHz</div>
-          <div id="m-eff" class="font-mono text-[10px] text-slate-400 uppercase mt-0.5">0.88 GHz/W</div>
+          <div class="text-[11px] font-semibold text-neutral-600">Top Speed</div>
+          <div id="m-freq" class="font-mono text-lg font-bold text-[#262626] mt-1">2.10 GHz</div>
+          <div id="m-eff" class="font-mono text-[10px] text-neutral-400 uppercase mt-0.5">0.88 GHz/W</div>
         </div>
       </div>
 
@@ -461,54 +461,54 @@
           <!-- Control 1: Process Node -->
           <div>
             <div class="flex items-center justify-between mb-1.5">
-              <label class="text-sm font-bold text-[#0F172A]">
+              <label class="text-sm font-bold text-[#262626]">
                 1. <button type="button" onclick="openGlossary('node')" class="glossary-cue">Transistor Size</button> (Node)
               </label>
-              <span id="lbl-node" class="font-mono text-xs font-semibold px-2 py-0.5 bg-[#0F172A] text-white">7nm</span>
+              <span id="lbl-node" class="font-mono text-xs font-semibold px-2 py-0.5 bg-[#262626] text-white">7nm</span>
             </div>
-            <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+            <p class="text-xs text-neutral-600 mb-3 leading-relaxed">
               Smaller numbers (like 3nm) mean tinier switches—faster and better on battery, but much more expensive to make.
             </p>
             <div id="node-buttons" class="grid grid-cols-3 sm:grid-cols-6 gap-1.5">
               <!-- Populated by JS -->
             </div>
-            <p id="node-detail" class="text-xs text-slate-700 bg-[#F8FAFC] border-l-2 border-[#0F172A] px-3 py-2 mt-3 leading-relaxed">
+            <p id="node-detail" class="text-xs text-neutral-700 bg-[#FAFAFA] border-l-2 border-[#FF5A52] px-3 py-2 mt-3 leading-relaxed">
               <!-- Populated by JS -->
             </p>
           </div>
 
-          <hr class="border-slate-200" />
+          <hr class="border-neutral-200" />
 
           <!-- Control 2: Chip Size Slider -->
           <div>
             <div class="flex items-center justify-between mb-1.5">
-              <label for="slider-area" class="text-sm font-bold text-[#0F172A]">
+              <label for="slider-area" class="text-sm font-bold text-[#262626]">
                 2. <button type="button" onclick="openGlossary('die')" class="glossary-cue">Chip Size</button> (Die Area)
               </label>
               <span id="lbl-area" class="font-mono text-xs font-semibold px-2 py-0.5 blk-green border">100 mm²</span>
             </div>
-            <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+            <p class="text-xs text-neutral-600 mb-3 leading-relaxed">
               Slide to make your chip bigger or smaller. Bigger chips do more, but fewer fit on a wafer and dust ruins them more easily.
             </p>
             <input id="slider-area" type="range" min="25" max="225" step="5" value="100" class="lab-slider" />
-            <div class="flex justify-between font-mono text-[10px] text-slate-500 mt-2">
+            <div class="flex justify-between font-mono text-[10px] text-neutral-500 mt-2">
               <span>25 mm² (Tiny)</span>
               <span>125 mm²</span>
               <span>225 mm² (Large)</span>
             </div>
           </div>
 
-          <hr class="border-slate-200" />
+          <hr class="border-neutral-200" />
 
           <!-- Control 3: Main Goal (PPA) -->
           <div>
             <div class="flex items-center justify-between mb-1.5">
-              <label class="text-sm font-bold text-[#0F172A]">
+              <label class="text-sm font-bold text-[#262626]">
                 3. <button type="button" onclick="openGlossary('ppa')" class="glossary-cue">Main Goal</button> (PPA)
               </label>
               <span id="lbl-ppa" class="font-mono text-xs font-semibold px-2 py-0.5 blk-purple border">Low Power</span>
             </div>
-            <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+            <p class="text-xs text-neutral-600 mb-3 leading-relaxed">
               In chip design, you always trade one thing for another. Pick what matters most here:
             </p>
             <div id="ppa-buttons" class="grid grid-cols-3 gap-2">
@@ -516,18 +516,18 @@
             </div>
           </div>
 
-          <hr class="border-slate-200" />
+          <hr class="border-neutral-200" />
 
           <!-- Run Wafer Probe Test + Navigation -->
           <div class="space-y-3">
-            <div class="text-xs text-slate-500 flex items-center justify-between">
+            <div class="text-xs text-neutral-500 flex items-center justify-between">
               <span>Ready to scan every chip?</span>
-              <button type="button" onclick="openGlossary('murphy')" class="glossary-cue font-mono text-[10px] text-slate-500">How yield is calculated</button>
+              <button type="button" onclick="openGlossary('murphy')" class="glossary-cue font-mono text-[10px] text-neutral-500">How yield is calculated</button>
             </div>
             <button
               id="btn-probe"
               type="button"
-              class="w-full py-3 px-4 bg-[#0F172A] hover:bg-slate-800 text-white font-mono text-xs uppercase tracking-wider font-semibold transition flex items-center justify-center gap-2 cursor-pointer"
+              class="w-full py-3 px-4 bg-[#FF5A52] hover:bg-[#E04840] text-white font-mono text-xs uppercase tracking-wider font-semibold transition flex items-center justify-center gap-2 cursor-pointer"
             >
               <span id="btn-probe-icon">▶</span>
               <span id="btn-probe-text">Run Wafer Probe Test</span>
@@ -537,7 +537,7 @@
               <button
                 type="button"
                 onclick="navToStep(1)"
-                class="px-3.5 py-2.5 border border-[#CBD5E1] bg-white hover:bg-slate-50 text-slate-700 font-mono text-xs font-medium transition cursor-pointer"
+                class="px-3.5 py-2.5 border border-[#D4D4D4] bg-white hover:bg-neutral-50 text-neutral-700 font-mono text-xs font-medium transition cursor-pointer"
               >
                 ← Back
               </button>
@@ -545,7 +545,7 @@
                 id="btn-step2-next"
                 type="button"
                 disabled
-                class="flex-1 py-2.5 px-4 font-mono text-xs uppercase tracking-wider font-semibold border transition flex items-center justify-center gap-1.5 bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
+                class="flex-1 py-2.5 px-4 font-mono text-xs uppercase tracking-wider font-semibold border transition flex items-center justify-center gap-1.5 bg-neutral-100 text-neutral-400 border-neutral-200 cursor-not-allowed"
               >
                 <span>Next: Fix a Problem</span>
                 <span>→</span>
@@ -560,10 +560,10 @@
           <!-- 300mm Silicon Wafer SVG Die-Map -->
           <div class="lab-panel p-5 flex flex-col">
             <div class="flex items-center justify-between gap-2 mb-1">
-              <h3 class="text-sm font-bold text-[#0F172A]">300mm Silicon Wafer</h3>
-              <span id="probe-badge" class="font-mono text-[10px] px-2 py-0.5 bg-slate-100 text-slate-600 border border-[#CBD5E1]">NOT TESTED</span>
+              <h3 class="text-sm font-bold text-[#262626]">300mm Silicon Wafer</h3>
+              <span id="probe-badge" class="font-mono text-[10px] px-2 py-0.5 bg-neutral-100 text-neutral-600 border border-[#D4D4D4]">NOT TESTED</span>
             </div>
-            <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+            <p class="text-xs text-neutral-600 mb-3 leading-relaxed">
               Hover over any small square to inspect it. Press <strong>Run Wafer Probe Test</strong> to check them row by row.
             </p>
 
@@ -576,46 +576,46 @@
                   </clipPath>
                   <radialGradient id="silicon-sheen" cx="35%" cy="30%" r="70%">
                     <stop offset="0%" stop-color="#FFFFFF" />
-                    <stop offset="100%" stop-color="#E2E8F0" />
+                    <stop offset="100%" stop-color="#E5E5E5" />
                   </radialGradient>
                 </defs>
                 <!-- Outer Measurement Ring -->
-                <circle cx="150" cy="150" r="146" fill="none" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="2 4" />
+                <circle cx="150" cy="150" r="146" fill="none" stroke="#D4D4D4" stroke-width="1" stroke-dasharray="2 4" />
                 <!-- Silicon Wafer Disk -->
-                <circle cx="150" cy="150" r="140" fill="url(#silicon-sheen)" stroke="#64748B" stroke-width="1.5" />
-                <circle cx="150" cy="150" r="134" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" />
+                <circle cx="150" cy="150" r="140" fill="url(#silicon-sheen)" stroke="#737373" stroke-width="1.5" />
+                <circle cx="150" cy="150" r="134" fill="#FFFFFF" stroke="#D4D4D4" stroke-width="1" />
 
                 <!-- Dynamically packed rectangular dies -->
                 <g id="wafer-dies-layer" clip-path="url(#wafer-clip)"></g>
 
                 <!-- Alignment Notch at bottom -->
-                <path d="M 145 290 L 150 283 L 155 290 Z" fill="#475569" />
+                <path d="M 145 290 L 150 283 L 155 290 Z" fill="#525252" />
 
                 <!-- Probe-card sweep beam -->
                 <g id="probe-beam" clip-path="url(#wafer-clip)" style="display: none;">
-                  <rect id="probe-beam-rect" x="10" y="14" width="280" height="8" fill="#B45309" fill-opacity="0.18" />
-                  <line id="probe-beam-line" x1="10" y1="22" x2="290" y2="22" stroke="#B45309" stroke-width="2" />
+                  <rect id="probe-beam-rect" x="10" y="14" width="280" height="8" fill="#FF5A52" fill-opacity="0.2" />
+                  <line id="probe-beam-line" x1="10" y1="22" x2="290" y2="22" stroke="#FF5A52" stroke-width="2" />
                 </g>
               </svg>
 
               <!-- Crisp Die Hover Tooltip -->
-              <div id="die-tooltip" class="hidden absolute top-2 left-2 right-2 bg-[#0F172A] text-white font-mono text-[10px] px-2.5 py-1.5 shadow-md pointer-events-none text-center border border-slate-700">
+              <div id="die-tooltip" class="hidden absolute top-2 left-2 right-2 bg-[#262626] text-white font-mono text-[10px] px-2.5 py-1.5 shadow-md pointer-events-none text-center border border-neutral-700">
                 Chip (0, 0) · Good
               </div>
             </div>
 
             <!-- Live Probe Pass/Fail Counter -->
-            <div class="mt-3 pt-3 border-t border-slate-200 flex items-center justify-between font-mono text-[11px]">
-              <span class="text-slate-600">Pass: <strong id="probe-pass" class="text-[#047857]">—</strong></span>
-              <span class="text-slate-600">Fail: <strong id="probe-fail" class="text-[#BE123C]">—</strong></span>
-              <span class="text-slate-500">
+            <div class="mt-3 pt-3 border-t border-neutral-200 flex items-center justify-between font-mono text-[11px]">
+              <span class="text-neutral-600">Pass: <strong id="probe-pass" class="text-[#047857]">—</strong></span>
+              <span class="text-neutral-600">Fail: <strong id="probe-fail" class="text-[#E04840]">—</strong></span>
+              <span class="text-neutral-500">
                 <button type="button" onclick="openGlossary('edge_die')" class="glossary-cue">Edge</button>:
-                <strong id="probe-edge" class="text-[#B45309]">—</strong>
+                <strong id="probe-edge" class="text-amber-700">—</strong>
               </span>
             </div>
 
             <!-- Legend -->
-            <div class="mt-2.5 flex flex-wrap items-center justify-center gap-3 font-mono text-[10px] text-slate-600">
+            <div class="mt-2.5 flex flex-wrap items-center justify-center gap-3 font-mono text-[10px] text-neutral-600">
               <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 bg-[#DCFCE7] border border-[#16A34A]"></span>Good</span>
               <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 bg-[#FFE4E6] border border-[#E11D48]"></span><button type="button" onclick="openGlossary('defect')" class="glossary-cue">Dust Hit</button></span>
               <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 bg-[#FEF9C3] border border-[#CA8A04]"></span>Edge</span>
@@ -625,10 +625,10 @@
           <!-- Zoomed-In Die Floorplan SVG -->
           <div class="lab-panel p-5 flex flex-col">
             <div class="flex items-center justify-between gap-2 mb-1">
-              <h3 class="text-sm font-bold text-[#0F172A]">Inside One Chip</h3>
-              <span id="floorplan-dims" class="font-mono text-[11px] text-slate-600 bg-[#F8FAFC] px-2 py-0.5 border border-[#CBD5E1]">10.0 × 10.0 mm</span>
+              <h3 class="text-sm font-bold text-[#262626]">Inside One Chip</h3>
+              <span id="floorplan-dims" class="font-mono text-[11px] text-neutral-600 bg-[#FAFAFA] px-2 py-0.5 border border-[#D4D4D4]">10.0 × 10.0 mm</span>
             </div>
-            <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+            <p class="text-xs text-neutral-600 mb-3 leading-relaxed">
               A close-up map of one chip. Watch the sections shift as you change your settings.
             </p>
 
@@ -639,7 +639,7 @@
             </div>
 
             <!-- Floorplan Legend -->
-            <div class="mt-3 pt-3 border-t border-slate-200 grid grid-cols-2 gap-1.5 text-[11px] text-slate-600">
+            <div class="mt-3 pt-3 border-t border-neutral-200 grid grid-cols-2 gap-1.5 text-[11px] text-neutral-600">
               <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-[#ECFDF5] border border-[#6EE7B7]"></span>Main Brain</span>
               <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-[#F5F3FF] border border-[#C4B5FD]"></span><button type="button" onclick="openGlossary('sram')" class="glossary-cue">Fast Memory</button></span>
               <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-[#FFFBEB] border border-[#FCD34D]"></span>Power / Signal</span>
@@ -655,42 +655,42 @@
     <!-- STEP 3: FIX A PROBLEM                                                 -->
     <!-- ===================================================================== -->
     <section id="step-3" class="step-panel hidden">
-      <div class="mb-6 pb-4 border-b border-[#CBD5E1]">
-        <div class="font-mono text-[11px] font-semibold uppercase tracking-widest text-[#BE123C] mb-1">
-          STEP 03 OF 04 // LAB TROUBLESHOOTING
+      <div class="mb-6 pb-4 border-b border-[#D4D4D4]">
+        <div class="font-mono text-[11px] font-semibold uppercase tracking-widest text-[#E04840] mb-1">
+          STEP 03 OF 04 · LAB TROUBLESHOOTING
         </div>
-        <h2 class="text-2xl sm:text-3xl font-bold text-[#0F172A] tracking-tight">Something went wrong on your first test wafers.</h2>
-        <p class="text-slate-600 text-sm mt-1">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[#262626] tracking-tight">Something went wrong on your first test wafers.</h2>
+        <p class="text-neutral-600 text-sm mt-1">
           This happens in almost every real chip project. Read what the lab found and pick how you want to fix it.
         </p>
       </div>
 
       <!-- Tailored Problem Report -->
-      <div class="lab-panel p-5 sm:p-6 mb-6 border-l-4 border-l-[#BE123C]">
+      <div class="lab-panel p-5 sm:p-6 mb-6 border-l-4 border-l-[#FF5A52]">
         <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
-          <span class="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold px-2.5 py-0.5 bg-[#FFF1F2] text-[#BE123C] border border-rose-200">
+          <span class="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold px-2.5 py-0.5 bg-[#FFF1F0] text-[#E04840] border border-[#FF5A52]/40">
             <span>●</span>
             <span>LAB REPORT</span>
           </span>
-          <span id="crisis-specs" class="font-mono text-xs text-slate-600 bg-[#F8FAFC] px-3 py-1 border border-[#CBD5E1]"></span>
+          <span id="crisis-specs" class="font-mono text-xs text-neutral-600 bg-[#FAFAFA] px-3 py-1 border border-[#D4D4D4]"></span>
         </div>
-        <h3 id="crisis-title" class="text-lg sm:text-xl font-bold text-[#0F172A]"></h3>
-        <p id="crisis-body" class="text-sm sm:text-base text-slate-700 mt-2 leading-relaxed max-w-3xl"></p>
+        <h3 id="crisis-title" class="text-lg sm:text-xl font-bold text-[#262626]"></h3>
+        <p id="crisis-body" class="text-sm sm:text-base text-neutral-700 mt-2 leading-relaxed max-w-3xl"></p>
       </div>
 
       <!-- 3 Engineering Decisions -->
-      <div class="font-mono text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">How do you fix it? Pick one:</div>
+      <div class="font-mono text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-3">How do you fix it? Pick one:</div>
       <div id="triage-options" class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <!-- Populated by JS -->
       </div>
 
       <!-- Immediate Impact Readout -->
-      <div id="triage-impact-box" class="hidden mt-6 bg-white border-2 border-[#0F172A] p-5 sm:p-6 shadow-md step-enter">
+      <div id="triage-impact-box" class="hidden mt-6 bg-white border-2 border-[#262626] p-5 sm:p-6 shadow-md step-enter">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div class="space-y-1.5">
-            <div class="font-mono text-[11px] uppercase font-semibold text-[#047857]">✓ Fix Applied // Updated Numbers</div>
-            <h4 id="impact-headline" class="text-base sm:text-lg font-bold text-[#0F172A]"></h4>
-            <p id="impact-detail" class="text-sm text-slate-600 leading-relaxed"></p>
+            <div class="font-mono text-[11px] uppercase font-semibold text-[#047857]">✓ Fix Applied · Updated Numbers</div>
+            <h4 id="impact-headline" class="text-base sm:text-lg font-bold text-[#262626]"></h4>
+            <p id="impact-detail" class="text-sm text-neutral-600 leading-relaxed"></p>
             <div id="impact-deltas" class="flex flex-wrap gap-2 pt-1.5 font-mono text-xs"></div>
           </div>
           <div class="flex-shrink-0">
@@ -698,7 +698,7 @@
               id="btn-step3-next"
               type="button"
               onclick="navToStep(4)"
-              class="w-full md:w-auto px-5 py-3.5 bg-[#0F172A] hover:bg-slate-800 text-white font-mono text-xs uppercase tracking-wider font-semibold transition cursor-pointer"
+              class="w-full md:w-auto px-5 py-3.5 bg-[#FF5A52] hover:bg-[#E04840] text-white font-mono text-xs uppercase tracking-wider font-semibold transition cursor-pointer"
             >
               View Chip Passport →
             </button>
@@ -710,7 +710,7 @@
         <button
           type="button"
           onclick="navToStep(2)"
-          class="px-4 py-2 border border-[#CBD5E1] bg-white hover:bg-slate-50 text-slate-700 font-mono text-xs font-medium transition cursor-pointer"
+          class="px-4 py-2 border border-[#D4D4D4] bg-white hover:bg-neutral-50 text-neutral-700 font-mono text-xs font-medium transition cursor-pointer"
         >
           ← Back to Wafer Lab
         </button>
@@ -721,13 +721,13 @@
     <!-- STEP 4: CHIP PASSPORT & MATCHED WAFER BLOCKS                          -->
     <!-- ===================================================================== -->
     <section id="step-4" class="step-panel hidden">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 pb-4 border-b border-[#CBD5E1]">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 pb-4 border-b border-[#D4D4D4]">
         <div>
           <div class="font-mono text-[11px] font-semibold uppercase tracking-widest text-[#047857] mb-1">
-            STEP 04 OF 04 // COMPLETE
+            STEP 04 OF 04 · COMPLETE
           </div>
-          <h2 class="text-2xl sm:text-3xl font-bold text-[#0F172A] tracking-tight">Your Silicon Chip Passport</h2>
-          <p class="text-slate-600 text-sm mt-1">
+          <h2 class="text-2xl sm:text-3xl font-bold text-[#262626] tracking-tight">Your Silicon Chip Passport</h2>
+          <p class="text-neutral-600 text-sm mt-1">
             Here is your finished chip summary, plus the two wafer areas that fit the way you solved problems.
           </p>
         </div>
@@ -735,14 +735,14 @@
           <button
             id="btn-copy-passport"
             type="button"
-            class="px-4 py-2 border border-[#CBD5E1] bg-white hover:bg-slate-50 text-[#0F172A] font-mono text-xs font-semibold transition cursor-pointer"
+            class="px-4 py-2 border border-[#D4D4D4] bg-white hover:bg-neutral-50 text-[#262626] font-mono text-xs font-semibold transition cursor-pointer"
           >
             Copy Summary
           </button>
           <button
             type="button"
             onclick="window.print()"
-            class="px-4 py-2 bg-[#0F172A] hover:bg-slate-800 text-white font-mono text-xs font-semibold transition cursor-pointer"
+            class="px-4 py-2 bg-[#262626] hover:bg-neutral-800 text-white font-mono text-xs font-semibold transition cursor-pointer"
           >
             Print Passport
           </button>
@@ -756,46 +756,46 @@
 
           <!-- Printable Silicon Die Passport Card -->
           <div class="lab-panel fiducial overflow-hidden">
-            <div class="bg-[#0F172A] text-white px-5 py-4 flex items-center justify-between gap-2 border-b-2 border-[#B45309]">
+            <div class="bg-[#262626] text-white px-5 py-4 flex items-center justify-between gap-2 border-b-2 border-[#FF5A52]">
               <div>
-                <div class="font-mono text-[10px] uppercase tracking-widest text-amber-400">Chip Passport</div>
+                <div class="font-mono text-[10px] uppercase tracking-widest text-[#FF5A52]">Chip Passport</div>
                 <h3 id="pass-archetype" class="text-lg font-bold mt-0.5">Chip Designer</h3>
               </div>
-              <span id="pass-serial" class="font-mono text-[11px] px-2.5 py-1 bg-slate-800 border border-slate-700 text-slate-200">
+              <span id="pass-serial" class="font-mono text-[11px] px-2.5 py-1 bg-neutral-800 border border-neutral-600 text-neutral-200">
                 LOT-300
               </span>
             </div>
 
             <div class="p-5 space-y-4">
               <div class="flex items-center gap-4">
-                <div class="w-20 h-20 flex-shrink-0 border border-[#CBD5E1] bg-[#F8FAFC] p-1">
+                <div class="w-20 h-20 flex-shrink-0 border border-[#D4D4D4] bg-[#FAFAFA] p-1">
                   <svg id="passport-die-svg" viewBox="0 0 260 260" class="w-full h-full"></svg>
                 </div>
                 <div class="min-w-0">
-                  <div class="font-mono text-[10px] uppercase text-slate-400">Chip Built</div>
-                  <div id="pass-mission" class="text-sm font-bold text-[#0F172A] truncate"></div>
-                  <div class="font-mono text-[10px] uppercase text-slate-400 mt-1.5">How You Fixed It</div>
-                  <div id="pass-triage" class="text-xs text-slate-600 leading-snug"></div>
+                  <div class="font-mono text-[10px] uppercase text-neutral-400">Chip Built</div>
+                  <div id="pass-mission" class="text-sm font-bold text-[#262626] truncate"></div>
+                  <div class="font-mono text-[10px] uppercase text-neutral-400 mt-1.5">How You Fixed It</div>
+                  <div id="pass-triage" class="text-xs text-neutral-600 leading-snug"></div>
                 </div>
               </div>
 
               <!-- Key Specs Grid -->
               <div class="grid grid-cols-2 gap-2 font-mono">
-                <div class="bg-[#F8FAFC] p-3 border border-[#CBD5E1]">
-                  <div class="text-[10px] text-slate-500 uppercase">Transistor Size</div>
-                  <div id="pass-node" class="text-sm font-bold text-[#0F172A] mt-0.5">7nm</div>
+                <div class="bg-[#FAFAFA] p-3 border border-[#D4D4D4]">
+                  <div class="text-[10px] text-neutral-500 uppercase">Transistor Size</div>
+                  <div id="pass-node" class="text-sm font-bold text-[#262626] mt-0.5">7nm</div>
                 </div>
-                <div class="bg-[#F8FAFC] p-3 border border-[#CBD5E1]">
-                  <div class="text-[10px] text-slate-500 uppercase">Chip Size</div>
-                  <div id="pass-area" class="text-sm font-bold text-[#0F172A] mt-0.5">100 mm²</div>
+                <div class="bg-[#FAFAFA] p-3 border border-[#D4D4D4]">
+                  <div class="text-[10px] text-neutral-500 uppercase">Chip Size</div>
+                  <div id="pass-area" class="text-sm font-bold text-[#262626] mt-0.5">100 mm²</div>
                 </div>
-                <div class="bg-[#F8FAFC] p-3 border border-[#CBD5E1]">
-                  <div class="text-[10px] text-slate-500 uppercase">Working Rate</div>
+                <div class="bg-[#FAFAFA] p-3 border border-[#D4D4D4]">
+                  <div class="text-[10px] text-neutral-500 uppercase">Working Rate</div>
                   <div id="pass-yield" class="text-sm font-bold text-[#047857] mt-0.5">82.1%</div>
                 </div>
-                <div class="bg-[#F8FAFC] p-3 border border-[#CBD5E1]">
-                  <div class="text-[10px] text-slate-500 uppercase">Working Chips</div>
-                  <div id="pass-good" class="text-sm font-bold text-[#0F172A] mt-0.5">450</div>
+                <div class="bg-[#FAFAFA] p-3 border border-[#D4D4D4]">
+                  <div class="text-[10px] text-neutral-500 uppercase">Working Chips</div>
+                  <div id="pass-good" class="text-sm font-bold text-[#262626] mt-0.5">450</div>
                 </div>
               </div>
             </div>
@@ -803,7 +803,7 @@
 
           <!-- Top 2 Recommended Wafer Blocks -->
           <div class="lab-panel p-5 space-y-3.5">
-            <div class="text-sm font-bold text-[#0F172A]">Your Top 2 Wafer Matches</div>
+            <div class="text-sm font-bold text-[#262626]">Your Top 2 Wafer Matches</div>
             <div id="top-matches-list" class="space-y-3">
               <!-- Populated by JS -->
             </div>
@@ -818,10 +818,10 @@
           <div class="lab-panel p-5 sm:p-6">
             <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
               <div>
-                <h3 class="text-base font-bold text-[#0F172A]">Explore the Full Wafer</h3>
-                <p class="text-xs text-slate-600 mt-0.5">Your Top 2 matches are outlined. Click any tile to see what that team does.</p>
+                <h3 class="text-base font-bold text-[#262626]">Explore the Full Wafer</h3>
+                <p class="text-xs text-neutral-600 mt-0.5">Your Top 2 matches are outlined. Click any tile to see what that team does.</p>
               </div>
-              <div class="flex flex-wrap gap-2 font-mono text-[10px] text-slate-600">
+              <div class="flex flex-wrap gap-2 font-mono text-[10px] text-neutral-600">
                 <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 blk-green border"></span>Design/Mat</span>
                 <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 blk-yellow border"></span>Games/School</span>
                 <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 blk-purple border"></span>Pkg/Test/R&amp;D</span>
@@ -830,8 +830,8 @@
             </div>
 
             <!-- Circular Wafer Ring -->
-            <div class="relative mx-auto max-w-[490px] rounded-2xl sm:rounded-full border-2 border-[#CBD5E1] bg-[#F8FAFC] p-4 sm:p-9">
-              <div class="hidden sm:block absolute inset-2.5 rounded-full border border-dashed border-[#CBD5E1] pointer-events-none"></div>
+            <div class="relative mx-auto max-w-[490px] rounded-2xl sm:rounded-full border-2 border-[#D4D4D4] bg-[#FAFAFA] p-4 sm:p-9">
+              <div class="hidden sm:block absolute inset-2.5 rounded-full border border-dashed border-[#D4D4D4] pointer-events-none"></div>
 
               <div class="relative z-10 space-y-2">
                 <!-- Row 1: Design, Materials, Fab -->
@@ -850,16 +850,16 @@
               <div class="space-y-1.5">
                 <div class="flex flex-wrap items-center gap-2">
                   <span id="drawer-cat" class="font-mono text-[10px] font-semibold px-2 py-0.5 border">CATEGORY</span>
-                  <span id="drawer-rank" class="hidden font-mono text-[10px] font-semibold px-2 py-0.5 bg-[#0F172A] text-white">#1 MATCH</span>
+                  <span id="drawer-rank" class="hidden font-mono text-[10px] font-semibold px-2 py-0.5 bg-[#FF5A52] text-white">#1 MATCH</span>
                 </div>
-                <h4 id="drawer-title" class="text-lg font-bold text-[#0F172A]">Design — 8 roles</h4>
-                <p id="drawer-desc" class="text-sm text-slate-600 leading-relaxed"></p>
+                <h4 id="drawer-title" class="text-lg font-bold text-[#262626]">Design — 8 roles</h4>
+                <p id="drawer-desc" class="text-sm text-neutral-600 leading-relaxed"></p>
               </div>
               <div class="flex-shrink-0">
                 <a
                   id="drawer-link"
                   href="#design"
-                  class="inline-flex items-center justify-center gap-1.5 w-full sm:w-auto px-4 py-2.5 bg-[#0F172A] hover:bg-slate-800 text-white font-mono text-xs font-semibold transition"
+                  class="inline-flex items-center justify-center gap-1.5 w-full sm:w-auto px-4 py-2.5 bg-[#262626] hover:bg-[#FF5A52] text-white font-mono text-xs font-semibold transition"
                 >
                   <span id="drawer-link-text">Open Design Page</span>
                   <span>→</span>
@@ -1384,8 +1384,8 @@
             onclick="setGlossaryCat('${cat}')"
             class="px-2.5 py-1 font-mono text-[11px] font-medium transition cursor-pointer border ${
               active
-                ? 'bg-[#0F172A] text-white border-[#0F172A]'
-                : 'bg-white text-slate-600 border-[#CBD5E1] hover:border-slate-500'
+                ? 'bg-[#262626] text-white border-[#262626]'
+                : 'bg-white text-neutral-600 border-[#D4D4D4] hover:border-neutral-500'
             }"
           >${cat}</button>
         `;
@@ -1404,9 +1404,9 @@
 
       if (filtered.length === 0) {
         list.innerHTML = `
-          <div class="text-center py-10 px-4 bg-white border border-[#CBD5E1]">
-            <div class="text-sm font-semibold text-[#0F172A]">No matching words</div>
-            <p class="text-xs text-slate-500 mt-1">Try clearing your search or clicking "All".</p>
+          <div class="text-center py-10 px-4 bg-white border border-[#D4D4D4]">
+            <div class="text-sm font-semibold text-[#262626]">No matching words</div>
+            <p class="text-xs text-neutral-500 mt-1">Try clearing your search or clicking "All".</p>
           </div>
         `;
         return;
@@ -1414,7 +1414,7 @@
 
       const catBadgeColors = {
         Basics: 'bg-emerald-50 text-emerald-800 border-emerald-200',
-        Factory: 'bg-amber-50 text-amber-800 border-amber-200',
+        Factory: 'bg-rose-50 text-rose-800 border-rose-200',
         Design: 'bg-blue-50 text-blue-800 border-blue-200',
         Testing: 'bg-purple-50 text-purple-800 border-purple-200',
       };
@@ -1422,15 +1422,15 @@
       list.innerHTML = filtered.map((item) => `
         <div
           id="gloss-term-${item.id}"
-          class="bg-white border border-[#CBD5E1] p-4 transition ${highlightId === item.id ? 'glossary-highlight' : ''}"
+          class="bg-white border border-[#D4D4D4] p-4 transition ${highlightId === item.id ? 'glossary-highlight' : ''}"
         >
           <div class="flex items-start justify-between gap-2 mb-1.5">
-            <h3 class="text-sm font-bold text-[#0F172A]">${item.term}</h3>
-            <span class="font-mono text-[10px] font-medium px-2 py-0.5 border flex-shrink-0 ${catBadgeColors[item.cat] || 'bg-slate-100 text-slate-600 border-slate-200'}">
+            <h3 class="text-sm font-bold text-[#262626]">${item.term}</h3>
+            <span class="font-mono text-[10px] font-medium px-2 py-0.5 border flex-shrink-0 ${catBadgeColors[item.cat] || 'bg-neutral-100 text-neutral-600 border-neutral-200'}">
               ${item.cat}
             </span>
           </div>
-          <p class="text-xs text-slate-600 leading-relaxed">${item.def}</p>
+          <p class="text-xs text-neutral-600 leading-relaxed">${item.def}</p>
         </div>
       `).join('');
     }
@@ -1533,14 +1533,14 @@
     function updateHeaderProgress() {
       for (let i = 1; i <= 4; i++) {
         const pill = document.getElementById(`prog-${i}`);
-        const borderR = i < 4 ? 'border-r border-slate-700 ' : '';
+        const borderR = i < 4 ? 'border-r border-neutral-700 ' : '';
         pill.className = `step-pill px-3 py-1.5 font-mono text-[11px] transition cursor-pointer whitespace-nowrap ${borderR}`;
         if (i === state.step) {
-          pill.className += 'bg-[#B45309] text-white font-semibold';
+          pill.className += 'bg-[#FF5A52] text-white font-semibold';
         } else if (i < state.step) {
-          pill.className += 'bg-slate-800 text-emerald-400 font-medium hover:bg-slate-700';
+          pill.className += 'bg-neutral-800 text-emerald-400 font-medium hover:bg-neutral-700';
         } else {
-          pill.className += 'text-slate-400 hover:text-white';
+          pill.className += 'text-neutral-400 hover:text-white';
         }
       }
     }
@@ -1558,26 +1558,26 @@
             onclick="selectMission('${m.id}')"
             class="text-left lab-panel p-5 sm:p-6 transition-all cursor-pointer flex flex-col justify-between ${
               selected
-                ? '!border-[#0F172A] ring-2 ring-[#0F172A] bg-[#F8FAFC]'
-                : 'hover:border-slate-500'
+                ? '!border-[#FF5A52] ring-2 ring-[#FF5A52] bg-[#FAFAFA]'
+                : 'hover:border-neutral-500'
             }"
           >
             <div>
               <div class="flex items-center justify-between gap-2 mb-3">
                 <span class="font-mono text-[10px] uppercase font-semibold px-2 py-0.5 border ${m.tagCls}">${m.tag}</span>
-                <span class="font-mono text-xs font-semibold ${selected ? 'text-[#047857]' : 'text-slate-400'}">
+                <span class="font-mono text-xs font-semibold ${selected ? 'text-[#E04840]' : 'text-neutral-400'}">
                   ${selected ? '[✓] SELECTED' : '[ ] SELECT'}
                 </span>
               </div>
-              <h2 class="text-lg font-bold text-[#0F172A]">${m.title}</h2>
-              <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                <strong class="text-[#0F172A] font-semibold">Used in:</strong> ${m.use}
+              <h2 class="text-lg font-bold text-[#262626]">${m.title}</h2>
+              <p class="text-sm text-neutral-600 mt-2 leading-relaxed">
+                <strong class="text-[#262626] font-semibold">Used in:</strong> ${m.use}
               </p>
-              <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                <strong class="text-[#0F172A] font-semibold">The challenge:</strong> ${m.hard}
+              <p class="text-sm text-neutral-600 mt-2 leading-relaxed">
+                <strong class="text-[#262626] font-semibold">The challenge:</strong> ${m.hard}
               </p>
             </div>
-            <div class="mt-4 pt-3 border-t border-slate-200 font-mono text-[11px] text-slate-500">
+            <div class="mt-4 pt-3 border-t border-neutral-200 font-mono text-[11px] text-neutral-500">
               ${m.specs}
             </div>
           </button>
@@ -1587,10 +1587,10 @@
       const btnNext = document.getElementById('btn-step1-continue');
       if (state.missionId) {
         btnNext.disabled = false;
-        btnNext.className = 'px-5 py-3 font-mono text-xs uppercase tracking-wider font-semibold transition border flex items-center justify-center gap-2 self-start md:self-auto bg-[#0F172A] hover:bg-slate-800 text-white border-[#0F172A] cursor-pointer';
+        btnNext.className = 'px-5 py-3 font-mono text-xs uppercase tracking-wider font-semibold transition border flex items-center justify-center gap-2 self-start md:self-auto bg-[#FF5A52] hover:bg-[#E04840] text-white border-[#FF5A52] cursor-pointer';
       } else {
         btnNext.disabled = true;
-        btnNext.className = 'px-5 py-3 font-mono text-xs uppercase tracking-wider font-semibold transition border flex items-center justify-center gap-2 self-start md:self-auto bg-slate-200 text-slate-400 border-slate-300 cursor-not-allowed';
+        btnNext.className = 'px-5 py-3 font-mono text-xs uppercase tracking-wider font-semibold transition border flex items-center justify-center gap-2 self-start md:self-auto bg-neutral-200 text-neutral-400 border-neutral-300 cursor-not-allowed';
       }
     }
 
@@ -1616,9 +1616,9 @@
     function renderStep2ControlsAndSim() {
       const mission = MISSIONS.find((m) => m.id === state.missionId) || MISSIONS[0];
       document.getElementById('sim-mission-badge').innerHTML = `
-        <span class="w-2 h-2 bg-[#047857]"></span>
-        <span class="text-slate-500">CHIP:</span>
-        <strong class="font-semibold text-[#0F172A]">${mission.title}</strong>
+        <span class="w-2 h-2 bg-[#FF5A52]"></span>
+        <span class="text-neutral-500">CHIP:</span>
+        <strong class="font-semibold text-[#262626]">${mission.title}</strong>
       `;
 
       // Process Node Buttons
@@ -1629,8 +1629,8 @@
           onclick="setNode('${n}')"
           class="py-2 font-mono text-xs font-semibold border transition cursor-pointer ${
             state.node === n
-              ? 'bg-[#0F172A] text-white border-[#0F172A]'
-              : 'bg-white text-slate-700 border-[#CBD5E1] hover:border-slate-500'
+              ? 'bg-[#262626] text-white border-[#262626]'
+              : 'bg-white text-neutral-700 border-[#D4D4D4] hover:border-neutral-500'
           }"
         >${n}</button>
       `).join('');
@@ -1643,8 +1643,8 @@
           onclick="setPPA('${p.id}')"
           class="px-2 py-2.5 border text-center transition cursor-pointer ${
             state.ppa === p.id
-              ? 'bg-[#0F172A] text-white border-[#0F172A]'
-              : 'bg-white text-slate-700 border-[#CBD5E1] hover:border-slate-500'
+              ? 'bg-[#262626] text-white border-[#262626]'
+              : 'bg-white text-neutral-700 border-[#D4D4D4] hover:border-neutral-500'
           }"
         >
           <div class="text-xs font-semibold leading-tight">${p.id}</div>
@@ -1773,7 +1773,7 @@
       const layer = document.getElementById('wafer-dies-layer');
       layer.innerHTML = state.dies.map((d) => {
         const tested = d.y <= testedUpToY;
-        let fill = '#F1F5F9', stroke = '#CBD5E1';
+        let fill = '#F5F5F5', stroke = '#D4D4D4';
         if (tested) {
           if (d.status === 'good')   { fill = '#DCFCE7'; stroke = '#16A34A'; }
           if (d.status === 'defect') { fill = '#FFE4E6'; stroke = '#E11D48'; }
@@ -1825,7 +1825,7 @@
       const sramH = 166 - coreH;
 
       svgEl.innerHTML = `
-        <rect x="6" y="6" width="248" height="248" fill="#F8FAFC" stroke="#0F172A" stroke-width="1.5" />
+        <rect x="6" y="6" width="248" height="248" fill="#FAFAFA" stroke="#262626" stroke-width="1.5" />
         <!-- Outer Pins / I/O Ring -->
         <rect x="16" y="16" width="228" height="228" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.2" stroke-dasharray="4 3" />
         <text x="130" y="29" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" font-weight="600" fill="#1D4ED8">OUTER PINS &amp; WIRING</text>
@@ -1861,16 +1861,16 @@
         badge.className = 'font-mono text-[10px] px-2 py-0.5 blk-green border font-semibold';
         probeText.textContent = 'Run Wafer Probe Test Again';
         nextBtn.disabled = false;
-        nextBtn.className = 'flex-1 py-2.5 px-4 font-mono text-xs uppercase tracking-wider font-semibold border transition flex items-center justify-center gap-1.5 bg-[#0F172A] hover:bg-slate-800 text-white border-[#0F172A] cursor-pointer';
+        nextBtn.className = 'flex-1 py-2.5 px-4 font-mono text-xs uppercase tracking-wider font-semibold border transition flex items-center justify-center gap-1.5 bg-[#262626] hover:bg-neutral-800 text-white border-[#262626] cursor-pointer';
       } else {
         document.getElementById('probe-pass').textContent = '—';
         document.getElementById('probe-fail').textContent = '—';
         document.getElementById('probe-edge').textContent = '—';
         badge.textContent = 'NOT TESTED';
-        badge.className = 'font-mono text-[10px] px-2 py-0.5 bg-slate-100 text-slate-600 border border-[#CBD5E1]';
+        badge.className = 'font-mono text-[10px] px-2 py-0.5 bg-neutral-100 text-neutral-600 border border-[#D4D4D4]';
         probeText.textContent = 'Run Wafer Probe Test';
         nextBtn.disabled = true;
-        nextBtn.className = 'flex-1 py-2.5 px-4 font-mono text-xs uppercase tracking-wider font-semibold border transition flex items-center justify-center gap-1.5 bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed';
+        nextBtn.className = 'flex-1 py-2.5 px-4 font-mono text-xs uppercase tracking-wider font-semibold border transition flex items-center justify-center gap-1.5 bg-neutral-100 text-neutral-400 border-neutral-200 cursor-not-allowed';
       }
     }
 
@@ -1941,7 +1941,7 @@
 
       document.getElementById('crisis-title').innerHTML = `
         <span>${crisis.title}</span>
-        <button type="button" onclick="openGlossary('${crisis.glossaryKey}')" class="glossary-cue font-sans text-xs font-medium text-slate-500 ml-2 align-middle">
+        <button type="button" onclick="openGlossary('${crisis.glossaryKey}')" class="glossary-cue font-sans text-xs font-medium text-neutral-500 ml-2 align-middle">
           ${crisis.glossaryLabel}
         </button>
       `;
@@ -1959,22 +1959,22 @@
             onclick="pickTriage('${d.id}')"
             class="text-left lab-panel p-5 transition-all cursor-pointer flex flex-col justify-between ${
               picked
-                ? '!border-[#0F172A] ring-2 ring-[#0F172A] bg-[#F8FAFC]'
-                : 'hover:border-slate-500'
+                ? '!border-[#FF5A52] ring-2 ring-[#FF5A52] bg-[#FAFAFA]'
+                : 'hover:border-neutral-500'
             }"
           >
             <div>
               <div class="flex items-center justify-between gap-2 mb-3">
                 <span class="font-mono text-[10px] uppercase font-semibold px-2 py-0.5 border ${d.tagCls}">${d.tag}</span>
-                <span class="font-mono text-xs font-semibold ${picked ? 'text-[#047857]' : 'text-slate-400'}">
+                <span class="font-mono text-xs font-semibold ${picked ? 'text-[#E04840]' : 'text-neutral-400'}">
                   ${picked ? '[✓] CHOSEN' : '[ ] PICK'}
                 </span>
               </div>
-              <h4 class="text-base font-bold text-[#0F172A]">${d.title}</h4>
-              <p class="text-sm text-slate-600 mt-2 leading-relaxed">${d.plain}</p>
+              <h4 class="text-base font-bold text-[#262626]">${d.title}</h4>
+              <p class="text-sm text-neutral-600 mt-2 leading-relaxed">${d.plain}</p>
             </div>
-            <div class="mt-4 pt-3 border-t border-slate-200 text-xs text-slate-600 leading-relaxed">
-              <strong class="text-[#0F172A] font-semibold">The catch:</strong> ${d.tradeoff}
+            <div class="mt-4 pt-3 border-t border-neutral-200 text-xs text-neutral-600 leading-relaxed">
+              <strong class="text-[#262626] font-semibold">The catch:</strong> ${d.tradeoff}
             </div>
           </button>
         `;
@@ -2029,13 +2029,13 @@
       document.getElementById('impact-headline').textContent = decision.title;
       document.getElementById('impact-detail').textContent = decision.scoreNote;
       document.getElementById('impact-deltas').innerHTML = `
-        <span class="px-2.5 py-1 border ${decision.yieldDelta >= 0 ? 'blk-green' : 'bg-[#FFF1F2] border-rose-200 text-[#BE123C]'}">
+        <span class="px-2.5 py-1 border ${decision.yieldDelta >= 0 ? 'blk-green' : 'bg-[#FFF1F0] border-[#FF5A52]/40 text-[#E04840]'}">
           Working Rate: ${state.finalYieldPct.toFixed(1)}% (${sign}${decision.yieldDelta.toFixed(1)}%)
         </span>
-        <span class="px-2.5 py-1 border border-[#CBD5E1] bg-[#F8FAFC] text-[#0F172A]">
+        <span class="px-2.5 py-1 border border-[#D4D4D4] bg-[#FAFAFA] text-[#262626]">
           Working Chips: ${state.finalGood} / wafer
         </span>
-        <span class="px-2.5 py-1 border border-[#CBD5E1] bg-[#F8FAFC] text-[#0F172A]">
+        <span class="px-2.5 py-1 border border-[#D4D4D4] bg-[#FAFAFA] text-[#262626]">
           New Power: ${newPower} W
         </span>
       `;
@@ -2077,7 +2077,7 @@
             <a
               href="${route}"
               data-route-key="${blk.key}"
-              class="top-match-link inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#0F172A] hover:bg-slate-800 text-white font-mono text-xs font-semibold transition"
+              class="top-match-link inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#262626] hover:bg-[#FF5A52] text-white font-mono text-xs font-semibold transition"
             >
               <span>Open ${blk.key} Page</span>
               <span>→</span>
@@ -2112,7 +2112,7 @@
         const rank = state.topMatches.indexOf(key);
         const isMatched = rank !== -1;
         const isSelected = state.selectedBlock === key;
-        const ring = isMatched ? 'matched-ring' : (isSelected ? 'ring-2 ring-slate-500' : '');
+        const ring = isMatched ? 'matched-ring' : (isSelected ? 'ring-2 ring-neutral-500' : '');
 
         return `
           <button
@@ -2120,7 +2120,7 @@
             onclick="selectMiniBlock('${key}')"
             class="relative ${blk.cls} ${ring} border p-2 text-center flex flex-col items-center justify-center min-h-[64px] transition hover:opacity-90 cursor-pointer focus:outline-none"
           >
-            ${isMatched ? `<span class="absolute -top-2 -right-1.5 px-1.5 py-0.5 bg-[#0F172A] text-white font-mono text-[8px] font-bold">#${rank + 1}</span>` : ''}
+            ${isMatched ? `<span class="absolute -top-2 -right-1.5 px-1.5 py-0.5 bg-[#FF5A52] text-white font-mono text-[8px] font-bold">#${rank + 1}</span>` : ''}
             <div class="font-mono text-[10px] sm:text-[11px] font-bold leading-tight">${blk.key}</div>
             <div class="font-mono text-[9px] opacity-80 mt-0.5">${blk.sub}</div>
           </button>
