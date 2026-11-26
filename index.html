@@ -3,32 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Inside the Wafer — Silicon Lab</title>
+  <title>Inside the Wafer: Silicon Lab</title>
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 
-  <!-- Classic Engineering Typography: IBM Plex Sans & IBM Plex Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            display: ['"IBM Plex Sans"', 'system-ui', 'sans-serif'],
-            sans: ['"IBM Plex Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+            serif: ['Newsreader', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
             mono: ['"IBM Plex Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
           },
           colors: {
-            canvas: '#F5F5F5',
-            charcoal: '#262626',
-            coral: '#FF5A52',
-            coraldark: '#E04840',
-            linegray: '#D4D4D4',
-            wafergreen: '#047857',
+            ink: '#141619',
+            muted: '#5C626D',
+            faint: '#F6F6F3',
+            rule: '#E4E4E0',
+            accent: '#1E5090',
+            accentsoft: '#F0F5FB',
           },
         },
       },
@@ -36,358 +34,244 @@
   </script>
 
   <style>
-    /* Classic Semiconductor Drafting & Cleanroom Grid Base */
     body {
-      background-color: #F5F5F5;
-      background-image:
-        linear-gradient(to right, rgba(38, 38, 38, 0.045) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(38, 38, 38, 0.045) 1px, transparent 1px);
-      background-size: 28px 28px;
-      color: #262626;
-      font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+      background-color: #FFFFFF;
+      color: #141619;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       overflow-x: hidden;
     }
 
-    /* Crisp step transition */
-    @keyframes fadeSlideIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to   { opacity: 1; transform: translateY(0); }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
     }
     .step-enter {
-      animation: fadeSlideIn 0.22s ease-out forwards;
+      animation: fadeIn 0.18s ease-out forwards;
     }
 
-    /* Classic Datasheet / Hardware Instrument Panel */
-    .lab-panel {
-      background-color: #FFFFFF;
-      border: 1px solid #D4D4D4;
-      box-shadow: 0 1px 2px rgba(38, 38, 38, 0.05);
-      position: relative;
-    }
-
-    /* Subtle photomask corner fiducials for key hardware panels */
-    .fiducial::before,
-    .fiducial::after {
-      content: '';
-      position: absolute;
-      width: 7px;
-      height: 7px;
-      pointer-events: none;
-    }
-    .fiducial::before {
-      top: -1px;
-      left: -1px;
-      border-top: 2px solid #262626;
-      border-left: 2px solid #262626;
-    }
-    .fiducial::after {
-      bottom: -1px;
-      right: -1px;
-      border-bottom: 2px solid #262626;
-      border-right: 2px solid #262626;
-    }
-
-    /* Precision Vernier-Style Range Slider */
+    /* Simple range slider */
     input[type='range'].lab-slider {
       -webkit-appearance: none;
       appearance: none;
       width: 100%;
-      height: 6px;
-      background: #E5E5E5;
-      border: 1px solid #D4D4D4;
-      border-radius: 2px;
+      height: 4px;
+      background: #E4E4E0;
+      border-radius: 999px;
       outline: none;
     }
     input[type='range'].lab-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 18px;
-      height: 24px;
-      border-radius: 2px;
-      background: #262626;
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      background: #141619;
       border: 2px solid #FFFFFF;
-      box-shadow: 0 0 0 1px #262626, 0 2px 4px rgba(38, 38, 38, 0.25);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
       cursor: pointer;
-      transition: background-color 0.15s ease;
-    }
-    input[type='range'].lab-slider::-webkit-slider-thumb:hover {
-      background: #FF5A52;
     }
     input[type='range'].lab-slider::-moz-range-thumb {
-      width: 18px;
-      height: 24px;
-      border-radius: 2px;
-      background: #262626;
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      background: #141619;
       border: 2px solid #FFFFFF;
-      box-shadow: 0 0 0 1px #262626, 0 2px 4px rgba(38, 38, 38, 0.25);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
       cursor: pointer;
     }
 
-    /* Refined Wafer Widget Color Coding */
+    /* Muted Wafer Widget block colors (Step 4) */
     .blk-green {
-      background-color: #ECFDF5;
-      border-color: #6EE7B7;
-      color: #065F46;
+      background-color: #EEF6F1;
+      border-color: #C0DFCD;
+      color: #1B5439;
     }
     .blk-purple {
-      background-color: #F5F3FF;
-      border-color: #C4B5FD;
-      color: #5B21B6;
+      background-color: #F4F1FA;
+      border-color: #D6CBEF;
+      color: #4C3182;
     }
     .blk-yellow {
-      background-color: #FFFBEB;
-      border-color: #FCD34D;
-      color: #92400E;
+      background-color: #FBF6E7;
+      border-color: #E8D49E;
+      color: #745214;
     }
     .blk-blue {
-      background-color: #EFF6FF;
-      border-color: #93C5FD;
-      color: #1D4ED8;
+      background-color: #EEF4FB;
+      border-color: #C2D6F0;
+      color: #1E4682;
     }
     .blk-fab {
-      background-color: #262626;
-      border-color: #262626;
-      color: #FAFAFA;
+      background-color: #1F2328;
+      border-color: #1F2328;
+      color: #FFFFFF;
     }
     .blk-coming {
       background-color: #FAFAFA;
-      border-color: #D4D4D4;
+      border-color: #E0E0DC;
       border-style: dashed;
-      color: #A3A3A3;
+      color: #9A9FA8;
     }
 
-    /* Crisp highlight for Top 2 matched blocks */
     .matched-ring {
-      box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #FF5A52;
+      box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #1E5090;
     }
 
-    /* Clickable inline glossary word */
+    /* Inline glossary link */
     .glossary-cue {
-      border-bottom: 1.5px dashed #737373;
+      border-bottom: 1px dotted #8C929D;
       color: inherit;
       cursor: pointer;
-      display: inline-flex;
-      align-items: baseline;
-      gap: 2px;
-      padding: 0 2px;
-      margin: 0 -2px;
-      transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+      transition: color 0.15s ease, border-color 0.15s ease;
     }
     .glossary-cue:hover {
-      color: #E04840;
-      border-bottom-color: #FF5A52;
-      background-color: #FFF1F0;
-    }
-    .glossary-cue::after {
-      content: '?';
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.65em;
-      font-weight: 700;
-      color: #737373;
-      vertical-align: super;
-      line-height: 1;
-    }
-    .glossary-cue:hover::after {
-      color: #FF5A52;
+      color: #1E5090;
+      border-bottom-color: #1E5090;
     }
 
-    /* Glossary highlighted term pulse */
     @keyframes termPulse {
-      0%   { box-shadow: 0 0 0 0 rgba(255, 90, 82, 0.35); background-color: #FFF1F0; border-color: #FF5A52; }
-      70%  { box-shadow: 0 0 0 6px rgba(255, 90, 82, 0); background-color: #FFF1F0; border-color: #FF5A52; }
-      100% { box-shadow: 0 0 0 0 rgba(255, 90, 82, 0); background-color: #FFFFFF; border-color: #D4D4D4; }
+      0%   { background-color: #F0F5FB; }
+      70%  { background-color: #F0F5FB; }
+      100% { background-color: transparent; }
     }
     .glossary-highlight {
-      animation: termPulse 2.2s ease-out;
+      animation: termPulse 2s ease-out;
     }
 
-    /* Print styling for Silicon Die Passport */
     @media print {
       header, .no-print { display: none !important; }
-      body { background: #FFFFFF !important; background-image: none !important; }
-      .lab-panel { box-shadow: none !important; border-color: #A3A3A3 !important; }
+      body { background: #FFFFFF !important; }
     }
   </style>
 </head>
-<body class="min-h-screen antialiased selection:bg-[#FF5A52] selection:text-white pb-24">
+<body class="min-h-screen antialiased selection:bg-accent selection:text-white pb-16">
 
-  <!-- ======================================================================= -->
-  <!-- NON-BLOCKING TOAST NOTIFICATION (Bottom-Left)                           -->
-  <!-- ======================================================================= -->
+  <!-- Toast -->
   <div id="toast" class="fixed bottom-5 left-5 z-50 translate-y-16 opacity-0 transition-all duration-200 pointer-events-none no-print max-w-xs sm:max-w-sm">
-    <div class="bg-[#262626] text-neutral-100 text-xs sm:text-sm px-4 py-3 border border-neutral-700 shadow-lg flex items-center gap-2.5">
-      <span class="w-2 h-2 bg-[#FF5A52] flex-shrink-0"></span>
+    <div class="bg-ink text-white text-xs sm:text-sm px-4 py-2.5 rounded-md shadow-lg">
       <span id="toast-msg" class="leading-snug">Updated</span>
     </div>
   </div>
 
-  <!-- ======================================================================= -->
-  <!-- FLOATING CORNER GLOSSARY BUTTON (Bottom-Right)                          -->
-  <!-- ======================================================================= -->
-  <button
-    id="btn-open-glossary"
-    type="button"
-    onclick="openGlossary()"
-    aria-label="Open Word Guide"
-    class="no-print fixed bottom-5 right-5 z-40 inline-flex items-center gap-2.5 px-4 py-3 bg-[#262626] hover:bg-neutral-800 text-white shadow-lg transition-colors cursor-pointer border border-neutral-700 group"
-  >
-    <span class="font-mono text-xs text-[#FF5A52] font-bold">[?]</span>
-    <span class="text-xs sm:text-sm font-semibold tracking-tight">Word Guide</span>
-    <span class="hidden sm:inline-flex items-center justify-center px-1.5 py-0.5 bg-neutral-700 text-neutral-200 font-mono text-[10px] font-semibold group-hover:bg-[#FF5A52] group-hover:text-white transition">18</span>
-  </button>
-
-  <!-- ======================================================================= -->
-  <!-- CORNER SLIDE-OVER GLOSSARY DRAWER                                       -->
-  <!-- ======================================================================= -->
-  <div id="glossary-backdrop" onclick="closeGlossary()" class="no-print fixed inset-0 z-50 bg-[#262626]/35 backdrop-blur-[1px] opacity-0 pointer-events-none transition-opacity duration-200"></div>
+  <!-- Glossary Drawer -->
+  <div id="glossary-backdrop" onclick="closeGlossary()" class="no-print fixed inset-0 z-50 bg-ink/20 opacity-0 pointer-events-none transition-opacity duration-200"></div>
 
   <aside
     id="glossary-drawer"
-    aria-label="Word Guide — Simple Chip Dictionary"
-    class="no-print fixed top-0 right-0 z-50 h-full w-full max-w-md bg-[#F5F5F5] border-l border-[#D4D4D4] shadow-2xl transform translate-x-full transition-transform duration-300 ease-out flex flex-col"
+    aria-label="Glossary"
+    class="no-print fixed top-0 right-0 z-50 h-full w-full max-w-md bg-white border-l border-rule shadow-xl transform translate-x-full transition-transform duration-250 ease-out flex flex-col"
   >
-    <!-- Drawer Header -->
-    <div class="bg-[#262626] text-white px-5 py-4 flex items-start justify-between gap-3 border-b-2 border-[#FF5A52]">
-      <div>
-        <div class="font-mono text-[10px] uppercase tracking-widest text-[#FF5A52] font-semibold">
-          LAB REFERENCE · 18 TERMS
-        </div>
-        <h2 class="text-lg font-bold mt-0.5">Simple Chip Word Guide</h2>
-        <p class="text-xs text-neutral-300 mt-0.5">Plain, everyday explanations for every chip word used here.</p>
-      </div>
+    <div class="px-6 py-4 flex items-center justify-between border-b border-rule">
+      <h2 class="text-base font-semibold text-ink">Glossary</h2>
       <button
         type="button"
         onclick="closeGlossary()"
-        aria-label="Close Word Guide"
-        class="p-1.5 text-neutral-300 hover:text-white hover:bg-neutral-700 transition cursor-pointer"
+        aria-label="Close Glossary"
+        class="p-1 text-muted hover:text-ink transition cursor-pointer"
       >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
     </div>
 
-    <!-- Search & Category Filters -->
-    <div class="bg-white border-b border-[#D4D4D4] px-5 py-3.5 space-y-3">
-      <div class="relative">
-        <svg class="w-4 h-4 text-neutral-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.5 10.5a7.5 7.5 0 0013.15 6.15z" />
-        </svg>
-        <input
-          id="glossary-search"
-          type="text"
-          placeholder="Search a word (wafer, yield, nm, die)..."
-          class="w-full pl-9 pr-3 py-2 bg-[#FAFAFA] border border-[#D4D4D4] focus:border-[#262626] focus:bg-white outline-none text-sm text-[#262626] placeholder:text-neutral-400 transition"
-        />
-      </div>
-      <div id="glossary-cats" class="flex flex-wrap gap-1.5">
-        <!-- Populated by JS -->
-      </div>
+    <div class="px-6 py-3 border-b border-rule space-y-2.5 bg-faint/60">
+      <input
+        id="glossary-search"
+        type="text"
+        placeholder="Search terms..."
+        class="w-full px-3 py-1.5 bg-white border border-rule rounded-md focus:border-ink outline-none text-sm text-ink placeholder:text-muted/70"
+      />
+      <div id="glossary-cats" class="flex flex-wrap gap-3 text-xs"></div>
     </div>
 
-    <!-- Scrollable Terms List -->
-    <div id="glossary-list" class="flex-1 overflow-y-auto px-5 py-4 space-y-2.5">
-      <!-- Populated by JS -->
-    </div>
-
-    <!-- Drawer Footer -->
-    <div class="bg-white border-t border-[#D4D4D4] px-5 py-3 text-[11px] text-neutral-600 flex items-center justify-between">
-      <span>Tip: Click any <span class="border-b border-dashed border-neutral-500 font-medium text-neutral-800">underlined word?</span> anytime.</span>
-      <span class="font-mono text-[10px] text-neutral-400">ESC to close</span>
-    </div>
+    <div id="glossary-list" class="flex-1 overflow-y-auto divide-y divide-rule px-6"></div>
   </aside>
 
-  <!-- ======================================================================= -->
-  <!-- TOP INSTRUMENT BAR: BACK LINK · 4-STEP TRACK · RESET                    -->
-  <!-- ======================================================================= -->
-  <header class="sticky top-0 z-30 bg-[#262626] text-white border-b-2 border-[#FF5A52]">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-3">
+  <!-- Minimal Top Bar -->
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-sm border-b border-rule">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-wrap items-center justify-between gap-4">
 
-      <!-- Left: Back to Wafer Link -->
       <a
         id="link-back-wafer"
-        href="/"
-        class="inline-flex items-center gap-1.5 px-3 py-1.5 border border-neutral-600 bg-neutral-800 hover:bg-neutral-700 text-neutral-100 font-mono text-xs font-medium transition"
+        href="#wafer-home"
+        class="py-3.5 inline-flex items-center gap-1 text-xs font-medium text-muted hover:text-ink transition"
       >
         <span>←</span>
         <span>Back to Wafer</span>
       </a>
 
-      <!-- Center: 4-Step Hardware Track -->
-      <nav aria-label="Lab steps" class="order-3 lg:order-2 w-full lg:w-auto flex justify-center pt-1 lg:pt-0 overflow-x-auto">
-        <div class="inline-flex items-center border border-neutral-600 bg-neutral-900">
-          <button type="button" onclick="navToStep(1)" id="prog-1" class="step-pill px-3 py-1.5 font-mono text-[11px] transition cursor-pointer whitespace-nowrap border-r border-neutral-700">
-            01. Pick a Chip
-          </button>
-          <button type="button" onclick="navToStep(2)" id="prog-2" class="step-pill px-3 py-1.5 font-mono text-[11px] transition cursor-pointer whitespace-nowrap border-r border-neutral-700">
-            02. Wafer Lab
-          </button>
-          <button type="button" onclick="navToStep(3)" id="prog-3" class="step-pill px-3 py-1.5 font-mono text-[11px] transition cursor-pointer whitespace-nowrap border-r border-neutral-700">
-            03. Fix a Problem
-          </button>
-          <button type="button" onclick="navToStep(4)" id="prog-4" class="step-pill px-3 py-1.5 font-mono text-[11px] transition cursor-pointer whitespace-nowrap">
-            04. Chip Passport
-          </button>
-        </div>
+      <nav aria-label="Lab steps" class="order-3 md:order-2 w-full md:w-auto flex items-center gap-5 overflow-x-auto border-t md:border-t-0 border-rule">
+        <button type="button" onclick="navToStep(1)" id="prog-1" class="step-pill py-3.5 text-xs font-medium border-b-2 transition cursor-pointer whitespace-nowrap">
+          1. Pick a chip
+        </button>
+        <button type="button" onclick="navToStep(2)" id="prog-2" class="step-pill py-3.5 text-xs font-medium border-b-2 transition cursor-pointer whitespace-nowrap">
+          2. Wafer lab
+        </button>
+        <button type="button" onclick="navToStep(3)" id="prog-3" class="step-pill py-3.5 text-xs font-medium border-b-2 transition cursor-pointer whitespace-nowrap">
+          3. Fix a problem
+        </button>
+        <button type="button" onclick="navToStep(4)" id="prog-4" class="step-pill py-3.5 text-xs font-medium border-b-2 transition cursor-pointer whitespace-nowrap">
+          4. Passport
+        </button>
       </nav>
 
-      <!-- Right: Reset Button -->
-      <button
-        id="btn-reset"
-        type="button"
-        class="order-2 lg:order-3 inline-flex items-center gap-1.5 px-3 py-1.5 border border-neutral-600 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 hover:text-white font-mono text-xs font-medium transition cursor-pointer"
-      >
-        <span>↻</span>
-        <span>Reset</span>
-      </button>
+      <div class="order-2 md:order-3 flex items-center gap-4 py-3.5">
+        <button
+          id="btn-open-glossary"
+          type="button"
+          onclick="openGlossary()"
+          class="text-xs font-medium text-muted hover:text-ink transition cursor-pointer"
+        >
+          Glossary
+        </button>
+        <button
+          id="btn-reset"
+          type="button"
+          class="text-xs font-medium text-muted hover:text-ink transition cursor-pointer"
+        >
+          Reset
+        </button>
+      </div>
 
     </div>
   </header>
 
-  <!-- ======================================================================= -->
-  <!-- MAIN CONTENT CONTAINER                                                  -->
-  <!-- ======================================================================= -->
-  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-7 sm:py-10">
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
 
     <!-- ===================================================================== -->
-    <!-- STEP 1: PICK A CHIP                                                   -->
+    <!-- STEP 1: PICK A CHIP (Clean list + live die schematic preview)         -->
     <!-- ===================================================================== -->
     <section id="step-1" class="step-panel step-enter">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 pb-5 border-b border-[#D4D4D4]">
-        <div class="max-w-2xl">
-          <div class="font-mono text-[11px] font-semibold uppercase tracking-widest text-[#E04840] mb-1.5">
-            STEP 01 OF 04 · SILICON LAB
-          </div>
-          <h1 class="text-2xl sm:text-3xl font-bold text-[#262626] tracking-tight">
-            Pick a microchip to build.
-          </h1>
-          <p class="text-neutral-600 text-sm sm:text-base mt-2 leading-relaxed">
-            Different gadgets need very different chips. Choose one below, place it onto a
-            <button type="button" onclick="openGlossary('wafer')" class="glossary-cue font-medium text-[#262626]">300mm silicon wafer</button>,
-            test how many chips survive, and fix a real factory problem.
-          </p>
+      <div class="max-w-xl mb-8">
+        <h1 class="font-serif text-3xl sm:text-4xl font-semibold text-ink tracking-tight">
+          Choose a chip to build
+        </h1>
+        <p class="text-muted text-sm sm:text-base mt-2 leading-relaxed">
+          Select a chip below to map onto a
+          <button type="button" onclick="openGlossary('wafer')" class="glossary-cue text-ink">300mm wafer</button>,
+          test how many survive, and troubleshoot a factory issue.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+        <!-- Left: Clean row selector (no 2x2 AI card grid) -->
+        <div id="mission-grid" class="lg:col-span-7 border-t border-b border-rule divide-y divide-rule"></div>
+
+        <!-- Right: Live Schematic & Spec Preview -->
+        <div class="lg:col-span-5 bg-faint rounded-lg border border-rule p-5 sm:p-6">
+          <div id="step1-preview"></div>
+          <button
+            id="btn-step1-continue"
+            type="button"
+            disabled
+            class="mt-5 w-full py-2.5 px-4 rounded-md text-sm font-medium transition bg-rule text-muted cursor-not-allowed"
+          >
+            Open Wafer Lab →
+          </button>
         </div>
 
-        <button
-          id="btn-step1-continue"
-          type="button"
-          disabled
-          class="px-5 py-3 font-mono text-xs uppercase tracking-wider font-semibold transition border flex items-center justify-center gap-2 self-start md:self-auto bg-neutral-200 text-neutral-400 border-neutral-300 cursor-not-allowed"
-        >
-          <span>Open Wafer Lab</span>
-          <span>→</span>
-        </button>
-      </div>
-
-      <!-- 4 Chip Mission Cards -->
-      <div id="mission-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-        <!-- Populated by JS -->
-      </div>
-
-      <!-- Friendly Beginner Bar -->
-      <div class="mt-6 flex flex-wrap items-center justify-between gap-3 px-4 py-3 bg-white border border-[#D4D4D4] text-xs text-neutral-600">
-        <span>First time learning about chips? Click any <button type="button" onclick="openGlossary('die')" class="glossary-cue font-medium text-[#262626]">underlined word</button> or open the <strong>Word Guide</strong> in the bottom-right corner.</span>
-        <span class="font-mono text-[11px] text-neutral-500">EST. TIME: ~3 MIN</span>
       </div>
     </section>
 
@@ -395,149 +279,102 @@
     <!-- STEP 2: WAFER LAB                                                     -->
     <!-- ===================================================================== -->
     <section id="step-2" class="step-panel hidden">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6 pb-4 border-b border-[#D4D4D4]">
+      <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-6">
         <div>
-          <div class="font-mono text-[11px] font-semibold uppercase tracking-widest text-[#E04840] mb-1">
-            STEP 02 OF 04 · WAFER SIMULATOR
-          </div>
-          <h2 class="text-2xl sm:text-3xl font-bold text-[#262626] tracking-tight">Build &amp; Test Your Wafer</h2>
-          <p class="text-neutral-600 text-sm mt-1">
-            Adjust the chip size and settings below, then run a
-            <button type="button" onclick="openGlossary('probe')" class="glossary-cue font-medium text-[#262626]">wafer test</button>
-            to see how many working chips you get.
+          <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-ink tracking-tight">Wafer lab</h2>
+          <p class="text-muted text-sm mt-1">
+            Adjust the settings, then run a
+            <button type="button" onclick="openGlossary('probe')" class="glossary-cue text-ink">wafer probe test</button>
+            to check yield.
           </p>
         </div>
-        <div id="sim-mission-badge" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white border border-[#D4D4D4] font-mono text-xs text-[#262626] self-start md:self-auto">
-          <!-- Populated by JS -->
+        <div id="sim-mission-badge" class="text-xs font-medium text-muted"></div>
+      </div>
+
+      <!-- Compact metrics bar -->
+      <div class="grid grid-cols-3 sm:grid-cols-6 gap-4 py-4 border-t border-b border-rule mb-7">
+        <div>
+          <div class="text-xs text-muted"><button type="button" onclick="openGlossary('gross_good')" class="glossary-cue">Printed</button></div>
+          <div id="m-gross" class="font-mono tabular-nums text-lg font-semibold text-ink mt-0.5">548</div>
+        </div>
+        <div>
+          <div class="text-xs text-muted"><button type="button" onclick="openGlossary('yield')" class="glossary-cue">Yield</button></div>
+          <div id="m-yield" class="font-mono tabular-nums text-lg font-semibold text-emerald-700 mt-0.5">82.1%</div>
+        </div>
+        <div>
+          <div class="text-xs text-muted"><button type="button" onclick="openGlossary('gross_good')" class="glossary-cue">Good dies</button></div>
+          <div id="m-good" class="font-mono tabular-nums text-lg font-semibold text-ink mt-0.5">450</div>
+        </div>
+        <div>
+          <div class="text-xs text-muted">Cost / die</div>
+          <div id="m-cost" class="font-mono tabular-nums text-lg font-semibold text-ink mt-0.5">$25.56</div>
+        </div>
+        <div>
+          <div class="text-xs text-muted">Power</div>
+          <div id="m-power" class="font-mono tabular-nums text-lg font-semibold text-ink mt-0.5">2.40 W</div>
+        </div>
+        <div>
+          <div class="text-xs text-muted">Speed</div>
+          <div id="m-freq" class="font-mono tabular-nums text-lg font-semibold text-ink mt-0.5">2.10 GHz</div>
+          <div id="m-eff" class="font-mono tabular-nums text-[11px] text-muted">0.88 GHz/W</div>
         </div>
       </div>
 
-      <!-- Datasheet Readout Strip (6 Live Numbers) -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 bg-white border border-[#D4D4D4] divide-y sm:divide-y-0 sm:divide-x divide-[#D4D4D4] mb-6">
-        <div class="p-3.5">
-          <div class="text-[11px] font-semibold text-neutral-600">
-            <button type="button" onclick="openGlossary('gross_good')" class="glossary-cue">Chips on Wafer</button>
-          </div>
-          <div id="m-gross" class="font-mono text-lg font-bold text-[#262626] mt-1">548</div>
-          <div class="font-mono text-[10px] text-neutral-400 uppercase mt-0.5">Total Printed</div>
-        </div>
-        <div class="p-3.5">
-          <div class="text-[11px] font-semibold text-neutral-600">
-            <button type="button" onclick="openGlossary('yield')" class="glossary-cue">Working Rate</button>
-          </div>
-          <div id="m-yield" class="font-mono text-lg font-bold text-[#047857] mt-1">82.1%</div>
-          <div class="font-mono text-[10px] text-neutral-400 uppercase mt-0.5">Wafer Yield</div>
-        </div>
-        <div class="p-3.5">
-          <div class="text-[11px] font-semibold text-neutral-600">
-            <button type="button" onclick="openGlossary('gross_good')" class="glossary-cue">Working Chips</button>
-          </div>
-          <div id="m-good" class="font-mono text-lg font-bold text-[#262626] mt-1">450</div>
-          <div class="font-mono text-[10px] text-neutral-400 uppercase mt-0.5">Ready to Ship</div>
-        </div>
-        <div class="p-3.5">
-          <div class="text-[11px] font-semibold text-neutral-600">Cost per Chip</div>
-          <div id="m-cost" class="font-mono text-lg font-bold text-[#262626] mt-1">$25.56</div>
-          <div class="font-mono text-[10px] text-neutral-400 uppercase mt-0.5">Est. Unit Cost</div>
-        </div>
-        <div class="p-3.5">
-          <div class="text-[11px] font-semibold text-neutral-600">Power Used</div>
-          <div id="m-power" class="font-mono text-lg font-bold text-[#E04840] mt-1">2.4 W</div>
-          <div class="font-mono text-[10px] text-neutral-400 uppercase mt-0.5">Heat &amp; Battery</div>
-        </div>
-        <div class="p-3.5">
-          <div class="text-[11px] font-semibold text-neutral-600">Top Speed</div>
-          <div id="m-freq" class="font-mono text-lg font-bold text-[#262626] mt-1">2.10 GHz</div>
-          <div id="m-eff" class="font-mono text-[10px] text-neutral-400 uppercase mt-0.5">0.88 GHz/W</div>
-        </div>
-      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-      <!-- Main Simulator Split -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+        <!-- Left: Controls -->
+        <div class="lg:col-span-5 space-y-6">
 
-        <!-- Left Column: Instrument Controls -->
-        <div class="lg:col-span-5 lab-panel fiducial p-5 sm:p-6 space-y-5">
-
-          <!-- Control 1: Process Node -->
           <div>
-            <div class="flex items-center justify-between mb-1.5">
-              <label class="text-sm font-bold text-[#262626]">
-                1. <button type="button" onclick="openGlossary('node')" class="glossary-cue">Transistor Size</button> (Node)
+            <div class="flex items-center justify-between mb-2">
+              <label class="text-sm font-medium text-ink">
+                <button type="button" onclick="openGlossary('node')" class="glossary-cue">Process node</button>
               </label>
-              <span id="lbl-node" class="font-mono text-xs font-semibold px-2 py-0.5 bg-[#262626] text-white">7nm</span>
+              <span id="lbl-node" class="font-mono text-xs font-semibold text-accent">7nm</span>
             </div>
-            <p class="text-xs text-neutral-600 mb-3 leading-relaxed">
-              Smaller numbers (like 3nm) mean tinier switches—faster and better on battery, but much more expensive to make.
-            </p>
-            <div id="node-buttons" class="grid grid-cols-3 sm:grid-cols-6 gap-1.5">
-              <!-- Populated by JS -->
-            </div>
-            <p id="node-detail" class="text-xs text-neutral-700 bg-[#FAFAFA] border-l-2 border-[#FF5A52] px-3 py-2 mt-3 leading-relaxed">
-              <!-- Populated by JS -->
-            </p>
+            <div id="node-buttons" class="grid grid-cols-3 sm:grid-cols-6 gap-1.5"></div>
+            <p id="node-detail" class="text-xs text-muted mt-2.5 leading-relaxed"></p>
           </div>
 
-          <hr class="border-neutral-200" />
-
-          <!-- Control 2: Chip Size Slider -->
-          <div>
-            <div class="flex items-center justify-between mb-1.5">
-              <label for="slider-area" class="text-sm font-bold text-[#262626]">
-                2. <button type="button" onclick="openGlossary('die')" class="glossary-cue">Chip Size</button> (Die Area)
+          <div class="pt-5 border-t border-rule">
+            <div class="flex items-center justify-between mb-2">
+              <label for="slider-area" class="text-sm font-medium text-ink">
+                <button type="button" onclick="openGlossary('die')" class="glossary-cue">Die area</button>
               </label>
-              <span id="lbl-area" class="font-mono text-xs font-semibold px-2 py-0.5 blk-green border">100 mm²</span>
+              <span id="lbl-area" class="font-mono text-xs font-semibold text-ink">100 mm²</span>
             </div>
-            <p class="text-xs text-neutral-600 mb-3 leading-relaxed">
-              Slide to make your chip bigger or smaller. Bigger chips do more, but fewer fit on a wafer and dust ruins them more easily.
-            </p>
             <input id="slider-area" type="range" min="25" max="225" step="5" value="100" class="lab-slider" />
-            <div class="flex justify-between font-mono text-[10px] text-neutral-500 mt-2">
-              <span>25 mm² (Tiny)</span>
+            <div class="flex justify-between font-mono text-[11px] text-muted mt-1.5">
+              <span>25 mm²</span>
               <span>125 mm²</span>
-              <span>225 mm² (Large)</span>
+              <span>225 mm²</span>
             </div>
           </div>
 
-          <hr class="border-neutral-200" />
-
-          <!-- Control 3: Main Goal (PPA) -->
-          <div>
-            <div class="flex items-center justify-between mb-1.5">
-              <label class="text-sm font-bold text-[#262626]">
-                3. <button type="button" onclick="openGlossary('ppa')" class="glossary-cue">Main Goal</button> (PPA)
+          <div class="pt-5 border-t border-rule">
+            <div class="flex items-center justify-between mb-2">
+              <label class="text-sm font-medium text-ink">
+                <button type="button" onclick="openGlossary('ppa')" class="glossary-cue">Priority</button>
               </label>
-              <span id="lbl-ppa" class="font-mono text-xs font-semibold px-2 py-0.5 blk-purple border">Low Power</span>
+              <span id="lbl-ppa" class="text-xs text-muted">Low Power</span>
             </div>
-            <p class="text-xs text-neutral-600 mb-3 leading-relaxed">
-              In chip design, you always trade one thing for another. Pick what matters most here:
-            </p>
-            <div id="ppa-buttons" class="grid grid-cols-3 gap-2">
-              <!-- Populated by JS -->
-            </div>
+            <div id="ppa-buttons" class="grid grid-cols-3 gap-2"></div>
           </div>
 
-          <hr class="border-neutral-200" />
-
-          <!-- Run Wafer Probe Test + Navigation -->
-          <div class="space-y-3">
-            <div class="text-xs text-neutral-500 flex items-center justify-between">
-              <span>Ready to scan every chip?</span>
-              <button type="button" onclick="openGlossary('murphy')" class="glossary-cue font-mono text-[10px] text-neutral-500">How yield is calculated</button>
-            </div>
+          <div class="pt-5 border-t border-rule space-y-2.5">
             <button
               id="btn-probe"
               type="button"
-              class="w-full py-3 px-4 bg-[#FF5A52] hover:bg-[#E04840] text-white font-mono text-xs uppercase tracking-wider font-semibold transition flex items-center justify-center gap-2 cursor-pointer"
+              class="w-full py-2.5 px-4 rounded-md bg-ink hover:bg-neutral-800 text-white text-sm font-medium transition cursor-pointer"
             >
-              <span id="btn-probe-icon">▶</span>
               <span id="btn-probe-text">Run Wafer Probe Test</span>
             </button>
 
-            <div class="flex items-center justify-between gap-2.5 pt-1">
+            <div class="flex items-center justify-between gap-2">
               <button
                 type="button"
                 onclick="navToStep(1)"
-                class="px-3.5 py-2.5 border border-[#D4D4D4] bg-white hover:bg-neutral-50 text-neutral-700 font-mono text-xs font-medium transition cursor-pointer"
+                class="px-3.5 py-2 rounded-md border border-rule bg-white hover:bg-faint text-ink text-xs font-medium transition cursor-pointer"
               >
                 ← Back
               </button>
@@ -545,30 +382,28 @@
                 id="btn-step2-next"
                 type="button"
                 disabled
-                class="flex-1 py-2.5 px-4 font-mono text-xs uppercase tracking-wider font-semibold border transition flex items-center justify-center gap-1.5 bg-neutral-100 text-neutral-400 border-neutral-200 cursor-not-allowed"
+                class="flex-1 py-2 px-4 rounded-md text-xs font-medium border transition bg-faint text-muted border-rule cursor-not-allowed"
               >
-                <span>Next: Fix a Problem</span>
-                <span>→</span>
+                Next: Fix a problem →
               </button>
+            </div>
+
+            <div class="text-right">
+              <button type="button" onclick="openGlossary('murphy')" class="glossary-cue text-[11px] text-muted">How yield is modeled</button>
             </div>
           </div>
         </div>
 
-        <!-- Right Column: Interactive 300mm Wafer Map + Zoomed Die Floorplan -->
-        <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-5">
+        <!-- Right: Wafer SVG + Die Floorplan SVG -->
+        <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
 
-          <!-- 300mm Silicon Wafer SVG Die-Map -->
-          <div class="lab-panel p-5 flex flex-col">
-            <div class="flex items-center justify-between gap-2 mb-1">
-              <h3 class="text-sm font-bold text-[#262626]">300mm Silicon Wafer</h3>
-              <span id="probe-badge" class="font-mono text-[10px] px-2 py-0.5 bg-neutral-100 text-neutral-600 border border-[#D4D4D4]">NOT TESTED</span>
+          <div class="border border-rule rounded-lg p-5 flex flex-col">
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <h3 class="text-sm font-medium text-ink">300mm wafer</h3>
+              <span id="probe-badge" class="text-[11px] text-muted">Untested</span>
             </div>
-            <p class="text-xs text-neutral-600 mb-3 leading-relaxed">
-              Hover over any small square to inspect it. Press <strong>Run Wafer Probe Test</strong> to check them row by row.
-            </p>
 
-            <!-- Wafer SVG Container -->
-            <div class="relative w-full max-w-[280px] mx-auto aspect-square flex items-center justify-center">
+            <div class="relative w-full max-w-[265px] mx-auto aspect-square flex items-center justify-center">
               <svg id="wafer-svg" viewBox="0 0 300 300" class="w-full h-full">
                 <defs>
                   <clipPath id="wafer-clip">
@@ -576,74 +411,55 @@
                   </clipPath>
                   <radialGradient id="silicon-sheen" cx="35%" cy="30%" r="70%">
                     <stop offset="0%" stop-color="#FFFFFF" />
-                    <stop offset="100%" stop-color="#E5E5E5" />
+                    <stop offset="100%" stop-color="#ECECE8" />
                   </radialGradient>
                 </defs>
-                <!-- Outer Measurement Ring -->
-                <circle cx="150" cy="150" r="146" fill="none" stroke="#D4D4D4" stroke-width="1" stroke-dasharray="2 4" />
-                <!-- Silicon Wafer Disk -->
-                <circle cx="150" cy="150" r="140" fill="url(#silicon-sheen)" stroke="#737373" stroke-width="1.5" />
-                <circle cx="150" cy="150" r="134" fill="#FFFFFF" stroke="#D4D4D4" stroke-width="1" />
+                <circle cx="150" cy="150" r="140" fill="url(#silicon-sheen)" stroke="#A3A8B0" stroke-width="1.2" />
+                <circle cx="150" cy="150" r="134" fill="#FFFFFF" stroke="#E0E0DC" stroke-width="1" />
 
-                <!-- Dynamically packed rectangular dies -->
                 <g id="wafer-dies-layer" clip-path="url(#wafer-clip)"></g>
 
-                <!-- Alignment Notch at bottom -->
-                <path d="M 145 290 L 150 283 L 155 290 Z" fill="#525252" />
+                <path d="M 145 290 L 150 283 L 155 290 Z" fill="#6B7280" />
 
-                <!-- Probe-card sweep beam -->
                 <g id="probe-beam" clip-path="url(#wafer-clip)" style="display: none;">
-                  <rect id="probe-beam-rect" x="10" y="14" width="280" height="8" fill="#FF5A52" fill-opacity="0.2" />
-                  <line id="probe-beam-line" x1="10" y1="22" x2="290" y2="22" stroke="#FF5A52" stroke-width="2" />
+                  <rect id="probe-beam-rect" x="10" y="14" width="280" height="7" fill="#1E5090" fill-opacity="0.16" />
+                  <line id="probe-beam-line" x1="10" y1="21" x2="290" y2="21" stroke="#1E5090" stroke-width="1.8" />
                 </g>
               </svg>
 
-              <!-- Crisp Die Hover Tooltip -->
-              <div id="die-tooltip" class="hidden absolute top-2 left-2 right-2 bg-[#262626] text-white font-mono text-[10px] px-2.5 py-1.5 shadow-md pointer-events-none text-center border border-neutral-700">
-                Chip (0, 0) · Good
+              <div id="die-tooltip" class="hidden absolute top-2 left-2 right-2 bg-ink text-white font-mono text-[11px] px-2.5 py-1 rounded shadow pointer-events-none text-center">
+                Die (0, 0)
               </div>
             </div>
 
-            <!-- Live Probe Pass/Fail Counter -->
-            <div class="mt-3 pt-3 border-t border-neutral-200 flex items-center justify-between font-mono text-[11px]">
-              <span class="text-neutral-600">Pass: <strong id="probe-pass" class="text-[#047857]">—</strong></span>
-              <span class="text-neutral-600">Fail: <strong id="probe-fail" class="text-[#E04840]">—</strong></span>
-              <span class="text-neutral-500">
-                <button type="button" onclick="openGlossary('edge_die')" class="glossary-cue">Edge</button>:
-                <strong id="probe-edge" class="text-amber-700">—</strong>
-              </span>
+            <div class="mt-4 pt-3 border-t border-rule flex items-center justify-between text-xs">
+              <span class="text-muted">Pass <strong id="probe-pass" class="font-mono text-emerald-700 ml-1">—</strong></span>
+              <span class="text-muted">Fail <strong id="probe-fail" class="font-mono text-rose-700 ml-1">—</strong></span>
+              <span class="text-muted"><button type="button" onclick="openGlossary('edge_die')" class="glossary-cue">Edge</button> <strong id="probe-edge" class="font-mono text-amber-700 ml-1">—</strong></span>
             </div>
 
-            <!-- Legend -->
-            <div class="mt-2.5 flex flex-wrap items-center justify-center gap-3 font-mono text-[10px] text-neutral-600">
-              <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 bg-[#DCFCE7] border border-[#16A34A]"></span>Good</span>
-              <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 bg-[#FFE4E6] border border-[#E11D48]"></span><button type="button" onclick="openGlossary('defect')" class="glossary-cue">Dust Hit</button></span>
-              <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 bg-[#FEF9C3] border border-[#CA8A04]"></span>Edge</span>
+            <div class="mt-2.5 flex flex-wrap items-center justify-center gap-3 text-[11px] text-muted">
+              <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-[2px] bg-[#D8F3E4] border border-[#2D8A5B]"></span>Good</span>
+              <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-[2px] bg-[#FCE2E5] border border-[#C93B4B]"></span><button type="button" onclick="openGlossary('defect')" class="glossary-cue">Defect</button></span>
+              <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-[2px] bg-[#FBF0CC] border border-[#B8861B]"></span>Edge</span>
             </div>
           </div>
 
-          <!-- Zoomed-In Die Floorplan SVG -->
-          <div class="lab-panel p-5 flex flex-col">
-            <div class="flex items-center justify-between gap-2 mb-1">
-              <h3 class="text-sm font-bold text-[#262626]">Inside One Chip</h3>
-              <span id="floorplan-dims" class="font-mono text-[11px] text-neutral-600 bg-[#FAFAFA] px-2 py-0.5 border border-[#D4D4D4]">10.0 × 10.0 mm</span>
-            </div>
-            <p class="text-xs text-neutral-600 mb-3 leading-relaxed">
-              A close-up map of one chip. Watch the sections shift as you change your settings.
-            </p>
-
-            <div class="w-full max-w-[280px] mx-auto aspect-square flex items-center justify-center">
-              <svg id="floorplan-svg" viewBox="0 0 260 260" class="w-full h-full">
-                <!-- Populated dynamically by JS -->
-              </svg>
+          <div class="border border-rule rounded-lg p-5 flex flex-col">
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <h3 class="text-sm font-medium text-ink">Die floorplan</h3>
+              <span id="floorplan-dims" class="font-mono text-xs text-muted">10.0 × 10.0 mm</span>
             </div>
 
-            <!-- Floorplan Legend -->
-            <div class="mt-3 pt-3 border-t border-neutral-200 grid grid-cols-2 gap-1.5 text-[11px] text-neutral-600">
-              <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-[#ECFDF5] border border-[#6EE7B7]"></span>Main Brain</span>
-              <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-[#F5F3FF] border border-[#C4B5FD]"></span><button type="button" onclick="openGlossary('sram')" class="glossary-cue">Fast Memory</button></span>
-              <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-[#FFFBEB] border border-[#FCD34D]"></span>Power / Signal</span>
-              <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-[#EFF6FF] border border-[#93C5FD]"></span><button type="button" onclick="openGlossary('io_ring')" class="glossary-cue">Outer Pins</button></span>
+            <div class="w-full max-w-[265px] mx-auto aspect-square flex items-center justify-center">
+              <svg id="floorplan-svg" viewBox="0 0 260 260" class="w-full h-full"></svg>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-rule grid grid-cols-2 gap-1.5 text-[11px] text-muted">
+              <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-[2px] bg-[#E8F3EC] border border-[#6BA884]"></span>Core logic</span>
+              <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-[2px] bg-[#EFEBF7] border border-[#9683BF]"></span><button type="button" onclick="openGlossary('sram')" class="glossary-cue">SRAM</button></span>
+              <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-[2px] bg-[#FAF2DC] border border-[#CCA349]"></span>Power / analog</span>
+              <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-[2px] bg-[#EBF2FA] border border-[#7BA3D6]"></span><button type="button" onclick="openGlossary('io_ring')" class="glossary-cue">I/O pins</button></span>
             </div>
           </div>
 
@@ -655,54 +471,33 @@
     <!-- STEP 3: FIX A PROBLEM                                                 -->
     <!-- ===================================================================== -->
     <section id="step-3" class="step-panel hidden">
-      <div class="mb-6 pb-4 border-b border-[#D4D4D4]">
-        <div class="font-mono text-[11px] font-semibold uppercase tracking-widest text-[#E04840] mb-1">
-          STEP 03 OF 04 · LAB TROUBLESHOOTING
-        </div>
-        <h2 class="text-2xl sm:text-3xl font-bold text-[#262626] tracking-tight">Something went wrong on your first test wafers.</h2>
-        <p class="text-neutral-600 text-sm mt-1">
-          This happens in almost every real chip project. Read what the lab found and pick how you want to fix it.
-        </p>
+      <div class="max-w-2xl mb-6">
+        <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-ink tracking-tight">Troubleshoot the test lot</h2>
+        <p id="crisis-specs" class="font-mono text-xs text-muted mt-1.5"></p>
       </div>
 
-      <!-- Tailored Problem Report -->
-      <div class="lab-panel p-5 sm:p-6 mb-6 border-l-4 border-l-[#FF5A52]">
-        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
-          <span class="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold px-2.5 py-0.5 bg-[#FFF1F0] text-[#E04840] border border-[#FF5A52]/40">
-            <span>●</span>
-            <span>LAB REPORT</span>
-          </span>
-          <span id="crisis-specs" class="font-mono text-xs text-neutral-600 bg-[#FAFAFA] px-3 py-1 border border-[#D4D4D4]"></span>
-        </div>
-        <h3 id="crisis-title" class="text-lg sm:text-xl font-bold text-[#262626]"></h3>
-        <p id="crisis-body" class="text-sm sm:text-base text-neutral-700 mt-2 leading-relaxed max-w-3xl"></p>
+      <div class="bg-faint border-l-2 border-ink px-5 py-4 mb-7 max-w-3xl">
+        <h3 id="crisis-title" class="text-base sm:text-lg font-semibold text-ink"></h3>
+        <p id="crisis-body" class="text-sm text-muted mt-1.5 leading-relaxed"></p>
       </div>
 
-      <!-- 3 Engineering Decisions -->
-      <div class="font-mono text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-3">How do you fix it? Pick one:</div>
-      <div id="triage-options" class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <!-- Populated by JS -->
-      </div>
+      <div id="triage-options" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
 
-      <!-- Immediate Impact Readout -->
-      <div id="triage-impact-box" class="hidden mt-6 bg-white border-2 border-[#262626] p-5 sm:p-6 shadow-md step-enter">
+      <div id="triage-impact-box" class="hidden mt-6 border border-rule rounded-lg bg-faint p-5 step-enter">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div class="space-y-1.5">
-            <div class="font-mono text-[11px] uppercase font-semibold text-[#047857]">✓ Fix Applied · Updated Numbers</div>
-            <h4 id="impact-headline" class="text-base sm:text-lg font-bold text-[#262626]"></h4>
-            <p id="impact-detail" class="text-sm text-neutral-600 leading-relaxed"></p>
-            <div id="impact-deltas" class="flex flex-wrap gap-2 pt-1.5 font-mono text-xs"></div>
+            <h4 id="impact-headline" class="text-sm sm:text-base font-semibold text-ink"></h4>
+            <p id="impact-detail" class="text-xs sm:text-sm text-muted"></p>
+            <div id="impact-deltas" class="flex flex-wrap gap-2 pt-1 font-mono text-xs"></div>
           </div>
-          <div class="flex-shrink-0">
-            <button
-              id="btn-step3-next"
-              type="button"
-              onclick="navToStep(4)"
-              class="w-full md:w-auto px-5 py-3.5 bg-[#FF5A52] hover:bg-[#E04840] text-white font-mono text-xs uppercase tracking-wider font-semibold transition cursor-pointer"
-            >
-              View Chip Passport →
-            </button>
-          </div>
+          <button
+            id="btn-step3-next"
+            type="button"
+            onclick="navToStep(4)"
+            class="flex-shrink-0 px-5 py-2.5 rounded-md bg-ink hover:bg-neutral-800 text-white text-sm font-medium transition cursor-pointer"
+          >
+            View Passport →
+          </button>
         </div>
       </div>
 
@@ -710,7 +505,7 @@
         <button
           type="button"
           onclick="navToStep(2)"
-          class="px-4 py-2 border border-[#D4D4D4] bg-white hover:bg-neutral-50 text-neutral-700 font-mono text-xs font-medium transition cursor-pointer"
+          class="text-xs font-medium text-muted hover:text-ink transition cursor-pointer"
         >
           ← Back to Wafer Lab
         </button>
@@ -718,154 +513,122 @@
     </section>
 
     <!-- ===================================================================== -->
-    <!-- STEP 4: CHIP PASSPORT & MATCHED WAFER BLOCKS                          -->
+    <!-- STEP 4: CHIP PASSPORT & MINI-WAFER                                    -->
     <!-- ===================================================================== -->
     <section id="step-4" class="step-panel hidden">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 pb-4 border-b border-[#D4D4D4]">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-7 pb-5 border-b border-rule">
         <div>
-          <div class="font-mono text-[11px] font-semibold uppercase tracking-widest text-[#047857] mb-1">
-            STEP 04 OF 04 · COMPLETE
-          </div>
-          <h2 class="text-2xl sm:text-3xl font-bold text-[#262626] tracking-tight">Your Silicon Chip Passport</h2>
-          <p class="text-neutral-600 text-sm mt-1">
-            Here is your finished chip summary, plus the two wafer areas that fit the way you solved problems.
-          </p>
+          <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-ink tracking-tight">Chip passport</h2>
+          <p class="text-muted text-sm mt-1">Summary of your silicon run and the wafer areas that fit your decisions.</p>
         </div>
-        <div class="flex flex-wrap items-center gap-2 no-print">
+        <div class="flex items-center gap-2 no-print">
           <button
             id="btn-copy-passport"
             type="button"
-            class="px-4 py-2 border border-[#D4D4D4] bg-white hover:bg-neutral-50 text-[#262626] font-mono text-xs font-semibold transition cursor-pointer"
+            class="px-3.5 py-2 rounded-md border border-rule bg-white hover:bg-faint text-ink text-xs font-medium transition cursor-pointer"
           >
-            Copy Summary
+            Copy summary
           </button>
           <button
             type="button"
             onclick="window.print()"
-            class="px-4 py-2 bg-[#262626] hover:bg-neutral-800 text-white font-mono text-xs font-semibold transition cursor-pointer"
+            class="px-3.5 py-2 rounded-md bg-ink hover:bg-neutral-800 text-white text-xs font-medium transition cursor-pointer"
           >
-            Print Passport
+            Print
           </button>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-        <!-- Left Column: Printable Chip Passport + Top 2 Matches -->
-        <div class="lg:col-span-5 space-y-5">
+        <!-- Left: Passport Sheet + Top 2 Matches -->
+        <div class="lg:col-span-5 space-y-6">
 
-          <!-- Printable Silicon Die Passport Card -->
-          <div class="lab-panel fiducial overflow-hidden">
-            <div class="bg-[#262626] text-white px-5 py-4 flex items-center justify-between gap-2 border-b-2 border-[#FF5A52]">
+          <div class="border border-rule rounded-lg p-5 space-y-4">
+            <div class="flex items-baseline justify-between gap-2 pb-3 border-b border-rule">
+              <h3 id="pass-archetype" class="text-base font-semibold text-ink">Chip Designer</h3>
+              <span id="pass-serial" class="font-mono text-[11px] text-muted">W300-7NM-100</span>
+            </div>
+
+            <div class="flex items-center gap-4">
+              <div class="w-20 h-20 flex-shrink-0 rounded border border-rule bg-faint p-1">
+                <svg id="passport-die-svg" viewBox="0 0 260 260" class="w-full h-full"></svg>
+              </div>
+              <div class="min-w-0 space-y-1">
+                <div id="pass-mission" class="text-sm font-semibold text-ink truncate"></div>
+                <div id="pass-triage" class="text-xs text-muted leading-snug"></div>
+              </div>
+            </div>
+
+            <dl class="grid grid-cols-2 gap-3 pt-3 border-t border-rule text-xs">
               <div>
-                <div class="font-mono text-[10px] uppercase tracking-widest text-[#FF5A52]">Chip Passport</div>
-                <h3 id="pass-archetype" class="text-lg font-bold mt-0.5">Chip Designer</h3>
+                <dt class="text-muted">Node</dt>
+                <dd id="pass-node" class="font-mono text-sm font-semibold text-ink mt-0.5">7nm</dd>
               </div>
-              <span id="pass-serial" class="font-mono text-[11px] px-2.5 py-1 bg-neutral-800 border border-neutral-600 text-neutral-200">
-                LOT-300
-              </span>
-            </div>
-
-            <div class="p-5 space-y-4">
-              <div class="flex items-center gap-4">
-                <div class="w-20 h-20 flex-shrink-0 border border-[#D4D4D4] bg-[#FAFAFA] p-1">
-                  <svg id="passport-die-svg" viewBox="0 0 260 260" class="w-full h-full"></svg>
-                </div>
-                <div class="min-w-0">
-                  <div class="font-mono text-[10px] uppercase text-neutral-400">Chip Built</div>
-                  <div id="pass-mission" class="text-sm font-bold text-[#262626] truncate"></div>
-                  <div class="font-mono text-[10px] uppercase text-neutral-400 mt-1.5">How You Fixed It</div>
-                  <div id="pass-triage" class="text-xs text-neutral-600 leading-snug"></div>
-                </div>
+              <div>
+                <dt class="text-muted">Die area</dt>
+                <dd id="pass-area" class="font-mono text-sm font-semibold text-ink mt-0.5">100 mm²</dd>
               </div>
-
-              <!-- Key Specs Grid -->
-              <div class="grid grid-cols-2 gap-2 font-mono">
-                <div class="bg-[#FAFAFA] p-3 border border-[#D4D4D4]">
-                  <div class="text-[10px] text-neutral-500 uppercase">Transistor Size</div>
-                  <div id="pass-node" class="text-sm font-bold text-[#262626] mt-0.5">7nm</div>
-                </div>
-                <div class="bg-[#FAFAFA] p-3 border border-[#D4D4D4]">
-                  <div class="text-[10px] text-neutral-500 uppercase">Chip Size</div>
-                  <div id="pass-area" class="text-sm font-bold text-[#262626] mt-0.5">100 mm²</div>
-                </div>
-                <div class="bg-[#FAFAFA] p-3 border border-[#D4D4D4]">
-                  <div class="text-[10px] text-neutral-500 uppercase">Working Rate</div>
-                  <div id="pass-yield" class="text-sm font-bold text-[#047857] mt-0.5">82.1%</div>
-                </div>
-                <div class="bg-[#FAFAFA] p-3 border border-[#D4D4D4]">
-                  <div class="text-[10px] text-neutral-500 uppercase">Working Chips</div>
-                  <div id="pass-good" class="text-sm font-bold text-[#262626] mt-0.5">450</div>
-                </div>
+              <div>
+                <dt class="text-muted">Final yield</dt>
+                <dd id="pass-yield" class="font-mono text-sm font-semibold text-emerald-700 mt-0.5">82.1%</dd>
               </div>
-            </div>
+              <div>
+                <dt class="text-muted">Good dies</dt>
+                <dd id="pass-good" class="font-mono text-sm font-semibold text-ink mt-0.5">450</dd>
+              </div>
+            </dl>
           </div>
 
-          <!-- Top 2 Recommended Wafer Blocks -->
-          <div class="lab-panel p-5 space-y-3.5">
-            <div class="text-sm font-bold text-[#262626]">Your Top 2 Wafer Matches</div>
-            <div id="top-matches-list" class="space-y-3">
-              <!-- Populated by JS -->
-            </div>
+          <div class="space-y-3">
+            <h3 class="text-sm font-semibold text-ink">Matched wafer areas</h3>
+            <div id="top-matches-list" class="space-y-3"></div>
           </div>
 
         </div>
 
-        <!-- Right Column: Interactive Mini-Wafer Map + Selected Block Preview -->
+        <!-- Right: Interactive Mini-Wafer + Selected Block -->
         <div class="lg:col-span-7 space-y-5">
 
-          <!-- Circular Mini-Wafer matching the exact Wafer Widget layout -->
-          <div class="lab-panel p-5 sm:p-6">
+          <div class="border border-rule rounded-lg p-5 sm:p-6">
             <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
-              <div>
-                <h3 class="text-base font-bold text-[#262626]">Explore the Full Wafer</h3>
-                <p class="text-xs text-neutral-600 mt-0.5">Your Top 2 matches are outlined. Click any tile to see what that team does.</p>
-              </div>
-              <div class="flex flex-wrap gap-2 font-mono text-[10px] text-neutral-600">
-                <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 blk-green border"></span>Design/Mat</span>
-                <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 blk-yellow border"></span>Games/School</span>
-                <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 blk-purple border"></span>Pkg/Test/R&amp;D</span>
-                <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 blk-blue border"></span>Live Stories</span>
+              <h3 class="text-sm font-semibold text-ink">Full wafer map</h3>
+              <div class="flex flex-wrap gap-3 text-[11px] text-muted">
+                <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-[2px] blk-green border"></span>Design / Mat</span>
+                <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-[2px] blk-yellow border"></span>Games / School</span>
+                <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-[2px] blk-purple border"></span>Pkg / Test / R&amp;D</span>
+                <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-[2px] blk-blue border"></span>Stories</span>
               </div>
             </div>
 
-            <!-- Circular Wafer Ring -->
-            <div class="relative mx-auto max-w-[490px] rounded-2xl sm:rounded-full border-2 border-[#D4D4D4] bg-[#FAFAFA] p-4 sm:p-9">
-              <div class="hidden sm:block absolute inset-2.5 rounded-full border border-dashed border-[#D4D4D4] pointer-events-none"></div>
+            <div class="relative mx-auto max-w-[490px] rounded-2xl sm:rounded-full border border-rule bg-faint p-4 sm:p-9">
+              <div class="hidden sm:block absolute inset-2.5 rounded-full border border-dashed border-rule pointer-events-none"></div>
 
               <div class="relative z-10 space-y-2">
-                <!-- Row 1: Design, Materials, Fab -->
                 <div id="mini-row-1" class="grid grid-cols-3 gap-2 max-w-[270px] mx-auto"></div>
-                <!-- Row 2: Packaging, Urban Miner, Grades 10-12, Testing, Equipment -->
                 <div id="mini-row-2" class="grid grid-cols-3 sm:grid-cols-5 gap-2"></div>
-                <!-- Row 3: Apps, Sales, Research, Coming Soon, Coming Soon -->
                 <div id="mini-row-3" class="grid grid-cols-3 sm:grid-cols-5 gap-2"></div>
               </div>
             </div>
           </div>
 
-          <!-- Selected Block Preview Drawer -->
-          <div class="lab-panel p-5">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div class="space-y-1.5">
-                <div class="flex flex-wrap items-center gap-2">
-                  <span id="drawer-cat" class="font-mono text-[10px] font-semibold px-2 py-0.5 border">CATEGORY</span>
-                  <span id="drawer-rank" class="hidden font-mono text-[10px] font-semibold px-2 py-0.5 bg-[#FF5A52] text-white">#1 MATCH</span>
-                </div>
-                <h4 id="drawer-title" class="text-lg font-bold text-[#262626]">Design — 8 roles</h4>
-                <p id="drawer-desc" class="text-sm text-neutral-600 leading-relaxed"></p>
+          <div class="border border-rule rounded-lg p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2 text-xs text-muted">
+                <span id="drawer-cat">Category</span>
+                <span id="drawer-rank" class="hidden font-semibold text-accent">Top match</span>
               </div>
-              <div class="flex-shrink-0">
-                <a
-                  id="drawer-link"
-                  href="#design"
-                  class="inline-flex items-center justify-center gap-1.5 w-full sm:w-auto px-4 py-2.5 bg-[#262626] hover:bg-[#FF5A52] text-white font-mono text-xs font-semibold transition"
-                >
-                  <span id="drawer-link-text">Open Design Page</span>
-                  <span>→</span>
-                </a>
-              </div>
+              <h4 id="drawer-title" class="text-base font-semibold text-ink">Design (8 roles)</h4>
+              <p id="drawer-desc" class="text-sm text-muted leading-relaxed"></p>
             </div>
+            <a
+              id="drawer-link"
+              href="#design"
+              class="flex-shrink-0 inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-md bg-ink hover:bg-neutral-800 text-white text-xs font-medium transition"
+            >
+              <span id="drawer-link-text">Open Design</span>
+              <span>→</span>
+            </a>
           </div>
 
         </div>
@@ -874,19 +637,13 @@
 
   </main>
 
-  <!-- ======================================================================= -->
-  <!-- INTERACTIVE SEMICONDUCTOR LAB LOGIC                                     -->
-  <!-- ======================================================================= -->
   <script>
     /**
-     * =========================================================================
-     * WAFER_ROUTES: Paste your live website URLs below to wire up
-     * "Back to Wafer" and every "Open [Block] Page ->" button across the lab.
-     * Example: home: 'https://yourdomain.com/wafer',
-     * =========================================================================
+     * WAFER_ROUTES: Replace hash values with live URLs to connect
+     * "Back to Wafer" and each wafer block page.
      */
     const WAFER_ROUTES = {
-      home: '/',
+      home: '#wafer-home',
       Design: '#design',
       Materials: '#materials',
       Fab: '#fab',
@@ -900,222 +657,118 @@
       Research: '#research',
     };
 
-    /**
-     * 18 Simple, Everyday Chip Terms
-     */
+    /* 18 concise, plain-English terms (no em-dashes) */
     const GLOSSARY_TERMS = [
-      {
-        id: 'wafer',
-        term: 'Silicon Wafer (300mm)',
-        cat: 'Basics',
-        def: 'A thin, shiny round disc made of super-pure silicon—about the size of a dinner plate (300 mm wide). Factories print hundreds of identical chips onto one wafer at the same time.',
-      },
-      {
-        id: 'die',
-        term: 'Die (One Chip)',
-        cat: 'Basics',
-        def: 'A single small rectangle cut out of a silicon wafer. Bigger chips can do more things, but fewer of them fit on one plate.',
-      },
-      {
-        id: 'node',
-        term: 'Transistor Size (nm)',
-        cat: 'Factory',
-        def: 'A short label (like 3nm, 7nm, or 65nm) that tells you how tiny the switches inside a chip are. Smaller numbers mean faster, lower-power chips—but the factory costs a lot more to run.',
-      },
-      {
-        id: 'yield',
-        term: 'Wafer Yield (Working Rate)',
-        cat: 'Factory',
-        def: 'The percentage of chips on a wafer that actually work when tested. Higher yield means less wasted silicon and cheaper chips.',
-      },
-      {
-        id: 'murphy',
-        term: 'Yield Math (Murphy Model)',
-        cat: 'Factory',
-        def: 'A standard formula engineers use to guess how many chips will survive: Y = ((1 − e^(−D₀·A)) / (D₀·A))². Simply put, bigger chips are bigger targets for tiny specks of dust.',
-      },
-      {
-        id: 'ppa',
-        term: 'Main Goal (PPA)',
-        cat: 'Design',
-        def: 'Stands for Power, Performance (speed), and Area (size & cost). You can’t max out all three at once—making a chip faster usually makes it hotter or pricier.',
-      },
-      {
-        id: 'gross_good',
-        term: 'Total Printed vs. Working Chips',
-        cat: 'Factory',
-        def: 'Total Printed (Gross Dies) is how many rectangles fit on the round wafer. Working Chips (Good Dies) is how many actually pass testing and can be sold.',
-      },
-      {
-        id: 'probe',
-        term: 'Wafer Probe Test',
-        cat: 'Testing',
-        def: 'Before slicing the wafer apart, a machine with tiny metal needles taps every single chip to send electricity through it and mark which ones work.',
-      },
-      {
-        id: 'edge_die',
-        term: 'Edge Chip',
-        cat: 'Factory',
-        def: 'A chip sitting right near the outer rim of the round wafer. Heat and chemical coatings are harder to keep even at the very edge, so these fail more often.',
-      },
-      {
-        id: 'defect',
-        term: 'Dust Hit (Defect)',
-        cat: 'Factory',
-        def: 'A microscopic speck of dust or tiny flaw that lands on the wafer during building. Even something 1,000× thinner than a human hair can break a chip.',
-      },
-      {
-        id: 'sram',
-        term: 'Fast Memory (SRAM)',
-        cat: 'Design',
-        def: 'Super-quick memory built right next to the chip’s brain so it doesn’t waste time waiting for data. It takes up a lot of room on the chip.',
-      },
-      {
-        id: 'io_ring',
-        term: 'Outer Pins (I/O Ring)',
-        cat: 'Design',
-        def: 'The border of tiny metal pads around the edge of a chip. Power comes in here, and data goes out to the rest of your phone or computer.',
-      },
-      {
-        id: 'ir_drop',
-        term: 'Voltage Dip (IR-Drop)',
-        cat: 'Design',
-        def: 'When a chip suddenly works really hard, its tiny power wires struggle to keep up and the voltage dips—just like house lights flickering when an AC turns on.',
-      },
-      {
-        id: 'phase_noise',
-        term: 'Fuzzy Signal (Phase Noise)',
-        cat: 'Testing',
-        def: 'Tiny timing wobbles in fast wireless signals (like 5G or car radar). Heat makes it worse, which blurs the signal and cuts down wireless range.',
-      },
-      {
-        id: 'flip_chip',
-        term: 'Flip-Chip Packaging',
-        cat: 'Factory',
-        def: 'Flipping a chip upside-down and connecting it with tiny metal bumps instead of long thin wires. It keeps signals cleaner and pulls heat away faster.',
-      },
-      {
-        id: 'burn_in',
-        term: 'Heat Stress Test (Burn-In)',
-        cat: 'Testing',
-        def: 'Running finished chips at high heat and high power for hours on purpose. Any weak chips break in the factory instead of inside someone’s car.',
-      },
-      {
-        id: 'chiplet',
-        term: 'Mini-Chips (Chiplets)',
-        cat: 'Design',
-        def: 'Instead of making one huge, fragile chip, engineers split it into smaller pieces and connect them side-by-side on a flat silicon base.',
-      },
-      {
-        id: 'photonics',
-        term: 'Light Channels (Photonics)',
-        cat: 'Basics',
-        def: 'Using pulses of laser light—guided through tiny silicon tunnels—instead of electricity to move huge amounts of data without overheating.',
-      },
+      { id: 'wafer', term: 'Silicon wafer (300mm)', cat: 'Basics', def: 'A thin, polished disc of pure silicon about 300 mm across. Hundreds of identical chips are printed onto one disc at once.' },
+      { id: 'die', term: 'Die', cat: 'Basics', def: 'One individual rectangular chip cut from a wafer. Larger dies hold more circuitry, so fewer fit per wafer.' },
+      { id: 'node', term: 'Process node (nm)', cat: 'Factory', def: 'A label like 3nm, 7nm, or 65nm naming a manufacturing generation. Smaller numbers allow denser, lower-power transistors at higher wafer cost.' },
+      { id: 'yield', term: 'Wafer yield', cat: 'Factory', def: 'The share of dies on a wafer that pass electrical testing. Higher yield lowers the cost of each working chip.' },
+      { id: 'murphy', term: 'Murphy yield model', cat: 'Factory', def: 'Formula used to estimate surviving dies: Y = ((1 - e^(-D0 * A)) / (D0 * A))^2. Larger dies have a higher chance of catching a random defect.' },
+      { id: 'ppa', term: 'PPA (Power, Performance, Area)', cat: 'Design', def: 'The three core trade-offs in chip design. Pushing for higher speed usually raises power draw or die cost.' },
+      { id: 'gross_good', term: 'Gross vs. good dies', cat: 'Factory', def: 'Gross dies are all full rectangles printed on the wafer. Good dies are the ones that pass testing.' },
+      { id: 'probe', term: 'Wafer probe test', cat: 'Testing', def: 'An automated test where microscopic needles contact each die before slicing to check which chips work.' },
+      { id: 'edge_die', term: 'Edge die', cat: 'Factory', def: 'A chip printed near the outer rim of the wafer, where heat and coatings are harder to keep uniform.' },
+      { id: 'defect', term: 'Defect (dust hit)', cat: 'Factory', def: 'A microscopic particle or crystal flaw on the silicon that shorts or breaks a circuit.' },
+      { id: 'sram', term: 'SRAM', cat: 'Design', def: 'Fast on-chip memory placed right next to the processor core so it does not stall waiting for data.' },
+      { id: 'io_ring', term: 'I/O ring', cat: 'Design', def: 'The border of metal pads around the edge of a die that brings power in and sends signals out.' },
+      { id: 'ir_drop', term: 'Voltage dip (IR-drop)', cat: 'Design', def: 'A sudden drop in supply voltage across tiny on-chip power wires when current spikes.' },
+      { id: 'phase_noise', term: 'Phase noise', cat: 'Testing', def: 'Small timing jitter in high-frequency wireless signals. Heat makes it worse and reduces signal range.' },
+      { id: 'flip_chip', term: 'Flip-chip packaging', cat: 'Factory', def: 'Mounting a die face-down on tiny solder bumps instead of long wire bonds to shorten signal paths and improve cooling.' },
+      { id: 'burn_in', term: 'Burn-in test', cat: 'Testing', def: 'Running finished chips at high heat and voltage for hours so weak units fail in the factory instead of in the field.' },
+      { id: 'chiplet', term: 'Chiplets', cat: 'Design', def: 'Splitting one large die into smaller pieces connected side-by-side on a shared silicon base.' },
+      { id: 'photonics', term: 'Silicon photonics', cat: 'Basics', def: 'Using laser light guided through microscopic silicon waveguides instead of copper wires to move high-speed data.' },
     ];
 
-    /**
-     * Wafer Widget Blocks (Humanized descriptions)
-     */
     const WAFER_BLOCKS = {
-      Design: {
-        key: 'Design', sub: '8 roles', cls: 'blk-green', category: 'Design & Materials',
-        desc: 'Draw the blueprint for how billions of tiny switches connect to run apps, save battery, and fit on a fingernail-sized chip.',
-      },
-      Materials: {
-        key: 'Materials', sub: '5 roles', cls: 'blk-green', category: 'Design & Materials',
-        desc: 'Make the ultra-pure silicon discs, special coatings, and tough materials that keep chips running reliably.',
-      },
-      Fab: {
-        key: 'Fab', sub: 'Live story', cls: 'blk-fab', category: 'Live Stories · Cleanroom',
-        desc: 'Read real stories from people who work inside spotless chip factories printing circuits onto 300mm wafers.',
-      },
-      Packaging: {
-        key: 'Packaging', sub: '5 roles', cls: 'blk-purple', category: 'Packaging, Test & R&D',
-        desc: 'Put delicate silicon chips into protective cases, pull heat away, and wire multiple chips together so they talk fast.',
-      },
-      'Urban Miner': {
-        key: 'Urban Miner', sub: 'Game lab', cls: 'blk-yellow', category: 'Games & School',
-        desc: 'Play a hands-on game about recovering valuable metals and silicon from old phones and electronics.',
-      },
-      'Grades 10-12': {
-        key: 'Grades 10-12', sub: 'School', cls: 'blk-yellow', category: 'Games & School',
-        desc: 'Easy-to-follow school labs and projects to see how microchips are made—no engineering background needed.',
-      },
-      Testing: {
-        key: 'Testing', sub: '6 roles', cls: 'blk-purple', category: 'Packaging, Test & R&D',
-        desc: 'Build automated tests and stress checks to catch broken chips before they ever end up in a real product.',
-      },
-      Equipment: {
-        key: 'Equipment', sub: '5 roles', cls: 'blk-purple', category: 'Packaging, Test & R&D',
-        desc: 'Build the giant lasers, vacuum chambers, and microscopic cameras that chip factories use every day.',
-      },
-      Apps: {
-        key: 'Apps', sub: '5 roles', cls: 'blk-purple', category: 'Packaging, Test & R&D',
-        desc: 'Mount new chips onto real circuit boards, write starter code, and help companies get them working in real gadgets.',
-      },
-      Sales: {
-        key: 'Sales', sub: 'Live story', cls: 'blk-blue', category: 'Live Stories',
-        desc: 'Meet technical guides who help phone, car, and device makers pick the right chips for their products.',
-      },
-      Research: {
-        key: 'Research', sub: '6 roles', cls: 'blk-purple', category: 'Packaging, Test & R&D',
-        desc: 'Invent what comes next—from chips that use laser light to brand-new ways of storing memory.',
-      },
+      Design:        { key: 'Design',        sub: '8 roles',    cls: 'blk-green',  category: 'Design & Materials',     desc: 'Architect how billions of transistors hit speed, power, and area targets on a single die.' },
+      Materials:     { key: 'Materials',     sub: '5 roles',    cls: 'blk-green',  category: 'Design & Materials',     desc: 'Develop ultra-pure silicon wafers, dielectric coatings, and compounds built for long-term reliability.' },
+      Fab:           { key: 'Fab',           sub: 'Live story', cls: 'blk-fab',    category: 'Cleanroom',              desc: 'Stories from engineers running lithography, etch, and deposition lines on 300mm wafers.' },
+      Packaging:     { key: 'Packaging',     sub: '5 roles',    cls: 'blk-purple', category: 'Packaging, Test & R&D',  desc: 'Protect silicon dies, pull heat out, and connect chiplets together at high bandwidth.' },
+      'Urban Miner': { key: 'Urban Miner',   sub: 'Game lab',   cls: 'blk-yellow', category: 'Games & School',         desc: 'Hands-on game about recovering metals and silicon from retired electronics.' },
+      'Grades 10-12':{ key: 'Grades 10-12',  sub: 'School',     cls: 'blk-yellow', category: 'Games & School',         desc: 'Classroom labs and guided projects showing how chips are built.' },
+      Testing:       { key: 'Testing',       sub: '6 roles',    cls: 'blk-purple', category: 'Packaging, Test & R&D',  desc: 'Write automated test programs and stress screens to catch weak dies before shipment.' },
+      Equipment:     { key: 'Equipment',     sub: '5 roles',    cls: 'blk-purple', category: 'Packaging, Test & R&D',  desc: 'Build the lithography scanners, vacuum chambers, and optical inspection tools used inside fabs.' },
+      Apps:          { key: 'Apps',          sub: '5 roles',    cls: 'blk-purple', category: 'Packaging, Test & R&D',  desc: 'Bring up new silicon on circuit boards, write firmware, and help teams integrate the chip.' },
+      Sales:         { key: 'Sales',         sub: 'Live story', cls: 'blk-blue',   category: 'Live Stories',           desc: 'Technical engineers who help product teams match the right silicon to their hardware.' },
+      Research:      { key: 'Research',      sub: '6 roles',    cls: 'blk-purple', category: 'Packaging, Test & R&D',  desc: 'Explore next-generation computing, from optical interconnects to new memory materials.' },
     };
 
-    /**
-     * Step 1: 4 Real-World Chip Missions (Plain, human language)
-     */
+    const CHIP_SVGS = {
+      edge_ai: `
+        <svg viewBox="0 0 48 48" class="w-10 h-10 flex-shrink-0" fill="none" aria-hidden="true">
+          <rect x="10" y="10" width="28" height="28" rx="3" fill="#F6F6F3" stroke="#5C626D" stroke-width="1.4"/>
+          <rect x="16" y="16" width="16" height="16" rx="1.5" fill="#F0F5FB" stroke="#1E5090" stroke-width="1.4"/>
+          <path d="M17 10V6M24 10V6M31 10V6M17 42V38M24 42V38M31 42V38M10 17H6M10 24H6M10 31H6M42 17H38M42 24H38M42 31H38" stroke="#9A9FA8" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>`,
+      mmwave_5g: `
+        <svg viewBox="0 0 48 48" class="w-10 h-10 flex-shrink-0" fill="none" aria-hidden="true">
+          <rect x="8" y="12" width="32" height="24" rx="2.5" fill="#F6F6F3" stroke="#5C626D" stroke-width="1.4"/>
+          <rect x="13" y="17" width="11" height="14" rx="1" fill="#F0F5FB" stroke="#1E5090" stroke-width="1.4"/>
+          <path d="M28 19C31 21 31 27 28 29M32 16.5C36 20 36 28 32 31.5" stroke="#1E5090" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M15 12V8M24 12V8M33 12V8M15 40V36M24 40V36M33 40V36" stroke="#9A9FA8" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>`,
+      ev_power: `
+        <svg viewBox="0 0 48 48" class="w-10 h-10 flex-shrink-0" fill="none" aria-hidden="true">
+          <rect x="7" y="10" width="34" height="23" rx="2.5" fill="#F6F6F3" stroke="#5C626D" stroke-width="1.4"/>
+          <rect x="12" y="15" width="24" height="13" rx="1" fill="#F0F5FB" stroke="#1E5090" stroke-width="1.4"/>
+          <path d="M25 17.5L21 22.5H24.5L23 26L27 21H23.5L25 17.5Z" fill="#1E5090"/>
+          <path d="M15 33V41M24 33V41M33 33V41" stroke="#5C626D" stroke-width="2" stroke-linecap="round"/>
+        </svg>`,
+      photonics: `
+        <svg viewBox="0 0 48 48" class="w-10 h-10 flex-shrink-0" fill="none" aria-hidden="true">
+          <rect x="13" y="9" width="28" height="30" rx="2.5" fill="#F6F6F3" stroke="#5C626D" stroke-width="1.4"/>
+          <rect x="19" y="14" width="17" height="20" rx="1" fill="#F0F5FB" stroke="#1E5090" stroke-width="1.4"/>
+          <path d="M5 19H19M5 24H19M5 29H19" stroke="#1E5090" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="19" cy="19" r="1.6" fill="#1E5090"/>
+          <circle cx="19" cy="24" r="1.6" fill="#1E5090"/>
+          <circle cx="19" cy="29" r="1.6" fill="#1E5090"/>
+        </svg>`,
+    };
+
     const MISSIONS = [
       {
         id: 'edge_ai',
-        title: 'Smart Wearable AI Chip',
-        tag: 'Low-Power AI',
-        tagCls: 'blk-green',
-        use: 'Smart glasses, fitness watches, and voice assistants that work offline.',
-        specs: 'Goal: Under 1.5 W · Small size · Lots of built-in memory',
-        hard: 'Running smart features on a tiny battery without draining it or getting hot against your skin.',
+        title: 'Smart Wearable AI',
+        summary: 'Runs local voice and vision models in glasses or fitness watches.',
+        constraint: 'Must stay under 1.5 W so the battery lasts all day without warming up against skin.',
+        targetLabel: 'Under 1.5 W',
         defaults: { node: '7nm', area: 65, ppa: 'Low Power' },
-        coreName: 'AI BRAIN',
-        analogName: 'BATTERY & SENSORS',
+        coreName: 'AI CORE',
+        analogName: 'PMIC & SENSORS',
         boosts: { Design: 2, Apps: 1, 'Urban Miner': 1 },
         crisis: {
-          title: 'The battery drains too fast and power dips during heavy tasks',
+          title: 'Battery drains 2.5× too fast under full load',
           glossaryKey: 'ir_drop',
-          glossaryLabel: 'What is a voltage dip?',
-          body: 'Your first {node} test wafers ({yield}% working) turn on fine, but whenever the AI brain wakes up at full speed, the power lines sag and the battery drains 2.5× faster than planned.',
+          glossaryLabel: 'What is IR-drop?',
+          body: 'Your {node} test wafers ({yield}% yield) boot cleanly, but when the AI core runs at peak load, the power grid sags and battery draw spikes.',
           decisions: [
             {
               id: 'ai_power_gate',
-              title: 'Put unused parts to sleep & thicken power wires',
-              tag: 'Design Fix',
-              tagCls: 'blk-green',
-              plain: 'Shut off parts of the chip when they aren’t needed, and make the internal power wires wider.',
-              tradeoff: 'Cuts power by 30%, but makes the chip slightly bigger (+5 mm²), so fewer fit on a wafer.',
-              yieldDelta: -1.8, powerMult: 0.72, scoreNote: 'Great battery savings with only a tiny drop in wafer yield.',
+              title: 'Add power gating and wider power rails',
+              tag: 'Design',
+              plain: 'Turn off idle blocks and widen the on-chip power grid so voltage holds steady.',
+              tradeoff: 'Cuts power by 28%, adds 5 mm² to die area.',
+              yieldDelta: -1.8, powerMult: 0.72, scoreNote: 'Strong battery savings with a small yield drop.',
               archetype: 'Low-Power Chip Designer',
               boosts: { Design: 4, Apps: 2 },
             },
             {
               id: 'ai_screen_ate',
-              title: 'Sort the best chips during factory testing',
-              tag: 'Testing Fix',
-              tagCls: 'blk-purple',
-              plain: 'Test every chip and put the best battery-saving ones into watches. Sell the rest for plugged-in cameras.',
-              tradeoff: 'Ships right on time, but only 85% of working chips make the cut for wearables.',
-              yieldDelta: -4.2, powerMult: 0.90, scoreNote: 'Fastest way to ship without waiting for a redesign.',
+              title: 'Bin the lowest-power dies at test',
+              tag: 'Testing',
+              plain: 'Send the lowest-leakage dies to watches and sell the rest for plugged-in cameras.',
+              tradeoff: 'Ships on time, but 15% of good dies miss the watch spec.',
+              yieldDelta: -4.2, powerMult: 0.90, scoreNote: 'Fastest way to ship without waiting for a respin.',
               archetype: 'Chip Test & Yield Engineer',
               boosts: { Testing: 4, Sales: 3 },
             },
             {
               id: 'ai_fab_tune',
-              title: 'Adjust the factory recipe for the next batch',
-              tag: 'Factory Fix',
-              tagCls: 'blk-fab',
-              plain: 'Work with the chip factory to tweak how the switches are built so they leak less electricity.',
-              tradeoff: 'Raises working rate by +3.5% and saves battery, but delays launch by 4 weeks.',
-              yieldDelta: 3.5, powerMult: 0.82, scoreNote: 'Best long-term fix for both battery life and factory yield.',
+              title: 'Retune transistor implants at the fab',
+              tag: 'Fab',
+              plain: 'Adjust the foundry recipe on the next lot so idle transistors leak less current.',
+              tradeoff: 'Adds +3.5% yield and cuts leakage, delays launch 4 weeks.',
+              yieldDelta: 3.5, powerMult: 0.82, scoreNote: 'Best long-term gain for both battery life and yield.',
               archetype: 'Factory Process Engineer',
               boosts: { Fab: 4, Materials: 3 },
             },
@@ -1124,52 +777,47 @@
       },
       {
         id: 'mmwave_5g',
-        title: '5G & Radar Wireless Chip',
-        tag: 'Fast Wireless',
-        tagCls: 'blk-blue',
-        use: '5G cell towers, satellite internet, and car collision radar.',
-        specs: 'Goal: 28 GHz · Clean signal · Stays cool',
-        hard: 'Super-fast radio signals get fuzzy easily if the chip heats up or the wires are too long.',
+        title: '5G & Radar Wireless',
+        summary: 'Handles 28 GHz radio links for base stations and car collision radar.',
+        constraint: 'High-frequency signals pick up noise quickly if the die runs hot or wires are too long.',
+        targetLabel: '28 GHz clean link',
         defaults: { node: '28nm', area: 80, ppa: 'Performance' },
-        coreName: 'RADIO CORE',
-        analogName: '28GHz ANTENNA',
+        coreName: 'RF CORE',
+        analogName: '28 GHz FRONT-END',
         boosts: { Design: 2, Packaging: 2, Testing: 1 },
         crisis: {
-          title: 'The wireless signal gets fuzzy as the chip heats up',
+          title: 'Wireless signal drifts as the RF stage heats up',
           glossaryKey: 'phase_noise',
-          glossaryLabel: 'Why does heat blur signals?',
-          body: 'In the lab, your {node} chips ({yield}% working) start out strong, but after 3 minutes the area near the antenna pins gets too hot and the radio signal gets noisy.',
+          glossaryLabel: 'What is phase noise?',
+          body: 'On the bench, your {node} dies ({yield}% yield) start clean, but after three minutes at full transmit power the antenna pins overheat and phase noise climbs.',
           decisions: [
             {
               id: 'rf_pkg_spread',
-              title: 'Upgrade the chip case to pull heat out faster',
-              tag: 'Packaging Fix',
-              tagCls: 'blk-purple',
-              plain: 'Use a copper heat spreader and shorter flip-chip connections so heat escapes quickly.',
-              tradeoff: 'Clears up the signal and boosts usable yield by +2.8%, though the package costs a little more.',
-              yieldDelta: 2.8, powerMult: 0.94, scoreNote: 'Clean wireless signal and much better cooling.',
+              title: 'Switch to flip-chip with a copper spreader',
+              tag: 'Packaging',
+              plain: 'Shorten RF connections with solder bumps and pull heat out the back of the die.',
+              tradeoff: 'Clears up the signal and adds +2.8% yield, slightly higher package cost.',
+              yieldDelta: 2.8, powerMult: 0.94, scoreNote: 'Fixes both signal integrity and heat.',
               archetype: 'Chip Packaging & Cooling Specialist',
               boosts: { Packaging: 4, Testing: 2 },
             },
             {
               id: 'rf_circuit_rebalance',
-              title: 'Spread out the hot parts on the chip layout',
-              tag: 'Design Fix',
-              tagCls: 'blk-green',
-              plain: 'Move the hot radio amplifiers farther apart on the silicon and add metal shields between them.',
-              tradeoff: 'Gives the cleanest signal possible, but means paying for a new printing mask.',
-              yieldDelta: 1.5, powerMult: 0.88, scoreNote: 'Classic silicon layout fix that solves the heat pocket.',
+              title: 'Spread out the amplifiers on the layout',
+              tag: 'Design',
+              plain: 'Separate hot RF blocks across the floorplan and add grounded guard rings.',
+              tradeoff: 'Cleanest RF performance, requires a new mask set.',
+              yieldDelta: 1.5, powerMult: 0.88, scoreNote: 'Removes the hot spot directly in silicon.',
               archetype: 'Wireless & RF Chip Designer',
               boosts: { Design: 4, Research: 2 },
             },
             {
               id: 'rf_apps_calib',
-              title: 'Add smart software to retune the signal live',
-              tag: 'Software & Board Fix',
-              tagCls: 'blk-blue',
-              plain: 'Write a quick software routine that watches the chip’s temperature and adjusts the radio automatically.',
-              tradeoff: 'Launches on time using the wafers you already have, with a tiny 6% drop in max range.',
-              yieldDelta: 0.5, powerMult: 0.96, scoreNote: 'Clever software workaround that keeps the launch on schedule.',
+              title: 'Add live thermal calibration in firmware',
+              tag: 'Applications',
+              plain: 'Read the on-die temperature sensor and adjust radio bias as the chip warms.',
+              tradeoff: 'Ships on schedule with existing wafers, ~6% less peak range.',
+              yieldDelta: 0.5, powerMult: 0.96, scoreNote: 'Practical firmware fix that protects the launch date.',
               archetype: 'Hardware & Applications Engineer',
               boosts: { Apps: 4, Sales: 3 },
             },
@@ -1178,52 +826,47 @@
       },
       {
         id: 'ev_power',
-        title: 'Electric Car Power Chip',
-        tag: 'Cars & Safety',
-        tagCls: 'blk-yellow',
-        use: 'Electric car battery control, motor drives, and safety sensors.',
-        specs: 'Goal: -40°C to 150°C · High voltage · Zero failures',
-        hard: 'Car chips have to survive freezing winters, scorching summers, and 15 years on the road without failing.',
+        title: 'Electric Car Power',
+        summary: 'Controls EV battery packs, motor drives, and safety monitors.',
+        constraint: 'Must handle -40°C to 150°C swings and 15 years on the road without failing.',
+        targetLabel: '-40°C to 150°C',
         defaults: { node: '65nm', area: 120, ppa: 'Low Cost / Area' },
-        coreName: 'SAFETY BRAIN',
+        coreName: 'SAFETY MCU',
         analogName: 'HIGH-VOLT DRIVE',
         boosts: { Materials: 2, Fab: 2, Testing: 1 },
         crisis: {
-          title: 'Chips near the wafer edge crack during 150°C heat tests',
+          title: 'Outer-ring dies crack during 150°C heat tests',
           glossaryKey: 'edge_die',
-          glossaryLabel: 'Why do edge chips fail?',
-          body: 'Your {node} car chips ({yield}% working) look great in the middle of the wafer, but chips near the outer rim show tiny cracks after 500 hours of extreme heat testing.',
+          glossaryLabel: 'Why edge dies fail',
+          body: 'Your {node} dies ({yield}% yield) pass near the center of the wafer, but dies near the rim form micro-cracks after 500 hours of thermal stress.',
           decisions: [
             {
               id: 'ev_fab_etch',
-              title: 'Tune the factory polish & etch machines',
-              tag: 'Factory & Tools Fix',
-              tagCls: 'blk-fab',
-              plain: 'Adjust the factory machines so the outer rim of the wafer gets the exact same smooth finish as the center.',
-              tradeoff: 'Saves +4.5% more chips on every future wafer, taking 2 weeks of factory setup.',
-              yieldDelta: 4.5, powerMult: 0.98, scoreNote: 'Fixes the root cause right inside the cleanroom.',
+              title: 'Recalibrate edge polish and etch tools',
+              tag: 'Fab & Equipment',
+              plain: 'Tune cleanroom tools so film thickness at the wafer rim matches the center.',
+              tradeoff: 'Recovers +4.5% yield on future lots, takes 2 weeks of tool setup.',
+              yieldDelta: 4.5, powerMult: 0.98, scoreNote: 'Fixes the mechanical stress right inside the fab.',
               archetype: 'Factory Yield & Equipment Engineer',
               boosts: { Fab: 4, Equipment: 4 },
             },
             {
               id: 'ev_materials_oxide',
-              title: 'Use a tougher insulation layer',
-              tag: 'Materials Fix',
-              tagCls: 'blk-green',
-              plain: 'Switch to a thicker, tougher insulating material that handles high voltage and car heat with ease.',
-              tradeoff: 'Built to last 15+ years and adds +2.2% yield, with slightly slower switching.',
-              yieldDelta: 2.2, powerMult: 1.02, scoreNote: 'Super-reliable material choice for harsh car conditions.',
+              title: 'Switch to a tougher dielectric stack',
+              tag: 'Materials',
+              plain: 'Use a thicker, stress-tolerant oxide layer built for high voltage and heat.',
+              tradeoff: 'Adds +2.2% yield and durability, slightly slower switching.',
+              yieldDelta: 2.2, powerMult: 1.02, scoreNote: 'Built for 15-year automotive reliability.',
               archetype: 'Semiconductor Materials Specialist',
               boosts: { Materials: 4, Design: 2 },
             },
             {
               id: 'ev_ate_guardband',
-              title: 'Add an extra high-heat stress test',
-              tag: 'Testing & Safety Fix',
-              tagCls: 'blk-purple',
-              plain: 'Run every edge chip through an extra high-heat test and automatically throw out any weak ones.',
-              tradeoff: 'Guarantees safe chips right away, though your overall working rate drops by 3.0%.',
-              yieldDelta: -3.0, powerMult: 1.0, scoreNote: 'Puts driver safety first with zero compromises.',
+              title: 'Add a burn-in screen for edge dies',
+              tag: 'Testing',
+              plain: 'Stress every outer-ring chip at high heat and scrap marginal units automatically.',
+              tradeoff: 'Protects safety immediately, lowers overall yield by 3.0%.',
+              yieldDelta: -3.0, powerMult: 1.0, scoreNote: 'Puts safety margins first with zero delay.',
               archetype: 'Safety & Reliability Test Engineer',
               boosts: { Testing: 4, Packaging: 2 },
             },
@@ -1232,52 +875,47 @@
       },
       {
         id: 'photonics',
-        title: 'Laser Data-Center Chip',
-        tag: 'Light & Memory',
-        tagCls: 'blk-purple',
-        use: 'Huge AI data centers sending massive amounts of data using laser light.',
-        specs: 'Goal: Extreme speed · Low delay · Cutting-edge size',
-        hard: 'Regular copper wires get too hot at top speeds. Guiding tiny laser beams through silicon takes extreme precision.',
+        title: 'Laser Data-Center',
+        summary: 'Moves traffic between AI server racks with laser light instead of copper.',
+        constraint: 'Coupling laser beams into silicon waveguides requires sub-micron flatness across a large die.',
+        targetLabel: 'Optical I/O',
         defaults: { node: '3nm', area: 165, ppa: 'Performance' },
-        coreName: 'LIGHT ENGINE',
+        coreName: 'OPTICAL ENGINE',
         analogName: 'LASER PORTS',
         boosts: { Research: 3, Equipment: 2, Packaging: 1 },
         crisis: {
-          title: 'The large chip bends slightly, making the laser miss its target',
+          title: 'Large die warps during assembly, misaligning the lasers',
           glossaryKey: 'chiplet',
-          glossaryLabel: 'What are mini-chips (chiplets)?',
-          body: 'Because your {node} chip ({yield}% working) is so big, it warps by a hair’s width when heated during assembly—causing the laser light to miss the tiny silicon tunnels.',
+          glossaryLabel: 'What are chiplets?',
+          body: 'At {area} mm², your {node} die ({yield}% yield) bows slightly during solder reflow, causing laser beams to miss their silicon waveguides.',
           decisions: [
             {
               id: 'ph_chiplet_pkg',
-              title: 'Split it into two smaller mini-chips (chiplets)',
-              tag: 'Packaging Fix',
-              tagCls: 'blk-purple',
-              plain: 'Break the giant chip into two smaller ones mounted on a stiff silicon base so everything stays dead-flat.',
-              tradeoff: 'Boosts working rate by +5.0% and fixes alignment, though assembly takes extra steps.',
-              yieldDelta: 5.0, powerMult: 0.92, scoreNote: 'Splitting into chiplets fixes both bending and wafer yield.',
+              title: 'Split the design into two chiplets',
+              tag: 'Packaging',
+              plain: 'Divide the large die into two smaller pieces on a stiff silicon base so they stay flat.',
+              tradeoff: 'Adds +5.0% yield and stops warpage, adds assembly steps.',
+              yieldDelta: 5.0, powerMult: 0.92, scoreNote: 'Solves both optical alignment and large-die yield loss.',
               archetype: 'Advanced Packaging Architect',
               boosts: { Packaging: 4, Research: 3 },
             },
             {
               id: 'ph_rd_waveguide',
-              title: 'Invent wider funnel-shaped light tunnels',
-              tag: 'R&D Breakthrough',
-              tagCls: 'blk-purple',
-              plain: 'Design a wider, funnel-shaped light channel that catches the laser even if the chip shifts a tiny bit.',
-              tradeoff: 'Lifts yield by +3.0% and creates new tech, but takes extra lab research time.',
-              yieldDelta: 3.0, powerMult: 0.96, scoreNote: 'Creative next-generation optics breakthrough.',
+              title: 'Design wider tapered waveguide couplers',
+              tag: 'R&D',
+              plain: 'Build funnel-shaped optical inputs that catch the laser even with slight shift.',
+              tradeoff: 'Adds +3.0% yield, requires extra lab validation.',
+              yieldDelta: 3.0, powerMult: 0.96, scoreNote: 'Next-generation optics fix with lasting value.',
               archetype: 'Photonics & R&D Scientist',
               boosts: { Research: 5, Materials: 2 },
             },
             {
               id: 'ph_metrology',
-              title: 'Use precision laser cameras to line up every chip',
-              tag: 'Equipment Fix',
-              tagCls: 'blk-green',
-              plain: 'Add ultra-accurate optical inspection tools on the assembly line to align each chip before bonding.',
-              tradeoff: 'Adds +2.5% yield with no chip redesign needed, though assembly runs a bit slower.',
-              yieldDelta: 2.5, powerMult: 1.0, scoreNote: 'Precision factory tools keep production moving.',
+              title: 'Add active optical alignment on the line',
+              tag: 'Equipment',
+              plain: 'Use precision cameras to align each die to the fiber array right before bonding.',
+              tradeoff: 'Adds +2.5% yield with no redesign, slightly slower assembly.',
+              yieldDelta: 2.5, powerMult: 1.0, scoreNote: 'Keeps current silicon shipping with tighter metrology.',
               archetype: 'Lithography & Metrology Engineer',
               boosts: { Equipment: 4, Fab: 3 },
             },
@@ -1286,46 +924,33 @@
       },
     ];
 
-    /**
-     * Step 2: Process Nodes (Exact engineering math preserved, plain notes)
-     */
     const PROCESS_NODES = {
-      '3nm':  { d0: 0.24, waferCost: 19500, baseGHz: 3.4, mwPerMm2: 46, note: '3nm (Cutting-edge): Packs the most switches and runs fastest, but wafers cost a fortune and dust hits hard.' },
-      '5nm':  { d0: 0.19, waferCost: 15500, baseGHz: 3.0, mwPerMm2: 42, note: '5nm (Flagship): Used in top smartphones and AI chips—fast and efficient, with high factory costs.' },
-      '7nm':  { d0: 0.15, waferCost: 11500, baseGHz: 2.5, mwPerMm2: 36, note: '7nm (Balanced): Strong speed, good working rate, and much more affordable than 3nm.' },
-      '14nm': { d0: 0.11, waferCost: 6800,  baseGHz: 1.9, mwPerMm2: 28, note: '14nm (Proven): Reliable working rate and fair cost for everyday computers and smart devices.' },
-      '28nm': { d0: 0.08, waferCost: 4200,  baseGHz: 1.3, mwPerMm2: 20, note: '28nm (Wireless favorite): Very high working rate and low cost—popular for Wi-Fi, 5G, and sensors.' },
-      '65nm': { d0: 0.05, waferCost: 2200,  baseGHz: 0.6, mwPerMm2: 14, note: '65nm (Tough & Rugged): Almost every chip works, and it handles high voltage and car heat easily.' },
+      '3nm':  { d0: 0.24, waferCost: 19500, baseGHz: 3.4, mwPerMm2: 46, note: 'Highest density and speed, highest wafer cost and defect sensitivity.' },
+      '5nm':  { d0: 0.19, waferCost: 15500, baseGHz: 3.0, mwPerMm2: 42, note: 'Flagship mobile and AI node. Fast and efficient, expensive per wafer.' },
+      '7nm':  { d0: 0.15, waferCost: 11500, baseGHz: 2.5, mwPerMm2: 36, note: 'Strong balance of clock speed, yield, and wafer cost.' },
+      '14nm': { d0: 0.11, waferCost: 6800,  baseGHz: 1.9, mwPerMm2: 28, note: 'High yield and predictable cost for general-purpose processors.' },
+      '28nm': { d0: 0.08, waferCost: 4200,  baseGHz: 1.3, mwPerMm2: 20, note: 'Popular for 5G transceivers, Wi-Fi, and sensors.' },
+      '65nm': { d0: 0.05, waferCost: 2200,  baseGHz: 0.6, mwPerMm2: 14, note: 'Very high yield and rugged tolerances for automotive and power.' },
     };
 
     const PPA_OPTIONS = [
       { id: 'Performance',     freqMult: 1.28, powerMult: 1.42, yieldPen: 0.025, short: 'Max speed' },
-      { id: 'Low Power',       freqMult: 0.82, powerMult: 0.58, yieldPen: 0.0,   short: 'Long battery' },
+      { id: 'Low Power',       freqMult: 0.82, powerMult: 0.58, yieldPen: 0.0,   short: 'Save battery' },
       { id: 'Low Cost / Area', freqMult: 0.94, powerMult: 0.86, yieldPen: -0.02, short: 'Lowest cost' },
     ];
 
-    /**
-     * Global Lab State
-     */
     const state = {
       step: 1,
-      missionId: null,
+      missionId: 'edge_ai',
       node: '7nm',
-      area: 100,
+      area: 65,
       ppa: 'Low Power',
       probeTested: false,
       isProbing: false,
+      probeInterval: null,
       seed: 17,
       dies: [],
-      metrics: {
-        gross: 0,
-        yieldPct: 0,
-        good: 0,
-        cost: 0,
-        powerW: 0,
-        freqGHz: 0,
-        eff: 0,
-      },
+      metrics: { gross: 0, yieldPct: 0, good: 0, cost: 0, powerW: 0, freqGHz: 0, eff: 0 },
       triageId: null,
       finalYieldPct: 0,
       finalGood: 0,
@@ -1336,9 +961,7 @@
       glossaryQuery: '',
     };
 
-    /* ======================================================================= */
-    /* HELPERS: TOAST, ROUTE WIRING & SEEDED RANDOM                            */
-    /* ======================================================================= */
+    /* Helpers */
     let toastTimer = null;
     function showToast(message) {
       const t = document.getElementById('toast');
@@ -1349,7 +972,7 @@
       toastTimer = setTimeout(() => {
         t.classList.add('translate-y-16', 'opacity-0');
         t.classList.remove('translate-y-0', 'opacity-100');
-      }, 2800);
+      }, 2600);
     }
 
     function wireRouteLink(anchorEl, routeKey, label) {
@@ -1359,7 +982,7 @@
       anchorEl.onclick = (e) => {
         if (url.startsWith('#')) {
           e.preventDefault();
-          showToast(`Link "${url}" is ready — update WAFER_ROUTES.${routeKey} in the code to point to your live ${label} page.`);
+          showToast(`Update WAFER_ROUTES.${routeKey} in the code to link your live ${label} page.`);
         }
       };
     }
@@ -1369,9 +992,7 @@
       return x - Math.floor(x);
     }
 
-    /* ======================================================================= */
-    /* CORNER WORD GUIDE DRAWER                                                */
-    /* ======================================================================= */
+    /* Glossary Drawer */
     const GLOSSARY_CATS = ['All', 'Basics', 'Factory', 'Design', 'Testing'];
 
     function renderGlossaryCategories() {
@@ -1382,10 +1003,8 @@
           <button
             type="button"
             onclick="setGlossaryCat('${cat}')"
-            class="px-2.5 py-1 font-mono text-[11px] font-medium transition cursor-pointer border ${
-              active
-                ? 'bg-[#262626] text-white border-[#262626]'
-                : 'bg-white text-neutral-600 border-[#D4D4D4] hover:border-neutral-500'
+            class="cursor-pointer transition ${
+              active ? 'text-ink font-semibold underline underline-offset-4' : 'text-muted hover:text-ink'
             }"
           >${cat}</button>
         `;
@@ -1403,34 +1022,17 @@
       });
 
       if (filtered.length === 0) {
-        list.innerHTML = `
-          <div class="text-center py-10 px-4 bg-white border border-[#D4D4D4]">
-            <div class="text-sm font-semibold text-[#262626]">No matching words</div>
-            <p class="text-xs text-neutral-500 mt-1">Try clearing your search or clicking "All".</p>
-          </div>
-        `;
+        list.innerHTML = `<div class="py-10 text-center text-xs text-muted">No matching terms.</div>`;
         return;
       }
 
-      const catBadgeColors = {
-        Basics: 'bg-emerald-50 text-emerald-800 border-emerald-200',
-        Factory: 'bg-rose-50 text-rose-800 border-rose-200',
-        Design: 'bg-blue-50 text-blue-800 border-blue-200',
-        Testing: 'bg-purple-50 text-purple-800 border-purple-200',
-      };
-
       list.innerHTML = filtered.map((item) => `
-        <div
-          id="gloss-term-${item.id}"
-          class="bg-white border border-[#D4D4D4] p-4 transition ${highlightId === item.id ? 'glossary-highlight' : ''}"
-        >
-          <div class="flex items-start justify-between gap-2 mb-1.5">
-            <h3 class="text-sm font-bold text-[#262626]">${item.term}</h3>
-            <span class="font-mono text-[10px] font-medium px-2 py-0.5 border flex-shrink-0 ${catBadgeColors[item.cat] || 'bg-neutral-100 text-neutral-600 border-neutral-200'}">
-              ${item.cat}
-            </span>
+        <div id="gloss-term-${item.id}" class="py-3.5 ${highlightId === item.id ? 'glossary-highlight' : ''}">
+          <div class="flex items-baseline justify-between gap-2">
+            <h3 class="text-sm font-semibold text-ink">${item.term}</h3>
+            <span class="text-[11px] text-muted">${item.cat}</span>
           </div>
-          <p class="text-xs text-neutral-600 leading-relaxed">${item.def}</p>
+          <p class="text-xs text-muted mt-1 leading-relaxed">${item.def}</p>
         </div>
       `).join('');
     }
@@ -1463,10 +1065,8 @@
       if (termId) {
         setTimeout(() => {
           const targetEl = document.getElementById(`gloss-term-${termId}`);
-          if (targetEl) {
-            targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-        }, 140);
+          if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 120);
       }
     }
 
@@ -1486,25 +1086,21 @@
     });
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && state.glossaryOpen) {
-        closeGlossary();
-      }
+      if (e.key === 'Escape' && state.glossaryOpen) closeGlossary();
     });
 
-    /* ======================================================================= */
-    /* NAVIGATION & PROGRESS TRACK                                             */
-    /* ======================================================================= */
+    /* Navigation */
     function navToStep(target) {
       if (target === 2 && !state.missionId) {
-        showToast('Pick a chip in Step 01 first to open the Wafer Lab.');
+        showToast('Pick a chip in Step 1 first.');
         return;
       }
       if (target === 3 && !state.probeTested) {
-        showToast('Run the Wafer Probe Test in Step 02 first.');
+        showToast('Run the Wafer Probe Test in Step 2 first.');
         return;
       }
       if (target === 4 && !state.triageId) {
-        showToast('Pick a fix in Step 03 first.');
+        showToast('Choose a fix in Step 3 first.');
         return;
       }
 
@@ -1533,21 +1129,18 @@
     function updateHeaderProgress() {
       for (let i = 1; i <= 4; i++) {
         const pill = document.getElementById(`prog-${i}`);
-        const borderR = i < 4 ? 'border-r border-neutral-700 ' : '';
-        pill.className = `step-pill px-3 py-1.5 font-mono text-[11px] transition cursor-pointer whitespace-nowrap ${borderR}`;
+        pill.className = 'step-pill py-3.5 text-xs font-medium border-b-2 transition cursor-pointer whitespace-nowrap ';
         if (i === state.step) {
-          pill.className += 'bg-[#FF5A52] text-white font-semibold';
+          pill.className += 'border-ink text-ink font-semibold';
         } else if (i < state.step) {
-          pill.className += 'bg-neutral-800 text-emerald-400 font-medium hover:bg-neutral-700';
+          pill.className += 'border-transparent text-accent hover:text-ink';
         } else {
-          pill.className += 'text-neutral-400 hover:text-white';
+          pill.className += 'border-transparent text-muted hover:text-ink';
         }
       }
     }
 
-    /* ======================================================================= */
-    /* STEP 1: PICK A CHIP                                                     */
-    /* ======================================================================= */
+    /* Step 1: List + Live Preview */
     function renderStep1() {
       const grid = document.getElementById('mission-grid');
       grid.innerHTML = MISSIONS.map((m) => {
@@ -1556,41 +1149,59 @@
           <button
             type="button"
             onclick="selectMission('${m.id}')"
-            class="text-left lab-panel p-5 sm:p-6 transition-all cursor-pointer flex flex-col justify-between ${
-              selected
-                ? '!border-[#FF5A52] ring-2 ring-[#FF5A52] bg-[#FAFAFA]'
-                : 'hover:border-neutral-500'
+            class="w-full text-left py-4 px-3.5 transition cursor-pointer flex items-center gap-4 ${
+              selected ? 'bg-accentsoft/80' : 'hover:bg-faint'
             }"
           >
-            <div>
-              <div class="flex items-center justify-between gap-2 mb-3">
-                <span class="font-mono text-[10px] uppercase font-semibold px-2 py-0.5 border ${m.tagCls}">${m.tag}</span>
-                <span class="font-mono text-xs font-semibold ${selected ? 'text-[#E04840]' : 'text-neutral-400'}">
-                  ${selected ? '[✓] SELECTED' : '[ ] SELECT'}
-                </span>
+            ${CHIP_SVGS[m.id]}
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-2">
+                <h2 class="text-sm sm:text-base font-semibold text-ink">${m.title}</h2>
+                <span class="font-mono text-[11px] text-muted flex-shrink-0">${m.defaults.node}, ${m.defaults.area} mm²</span>
               </div>
-              <h2 class="text-lg font-bold text-[#262626]">${m.title}</h2>
-              <p class="text-sm text-neutral-600 mt-2 leading-relaxed">
-                <strong class="text-[#262626] font-semibold">Used in:</strong> ${m.use}
-              </p>
-              <p class="text-sm text-neutral-600 mt-2 leading-relaxed">
-                <strong class="text-[#262626] font-semibold">The challenge:</strong> ${m.hard}
-              </p>
-            </div>
-            <div class="mt-4 pt-3 border-t border-neutral-200 font-mono text-[11px] text-neutral-500">
-              ${m.specs}
+              <p class="text-xs sm:text-sm text-muted mt-0.5 leading-snug">${m.summary}</p>
             </div>
           </button>
         `;
       }).join('');
 
+      const preview = document.getElementById('step1-preview');
+      const m = MISSIONS.find((x) => x.id === state.missionId);
       const btnNext = document.getElementById('btn-step1-continue');
-      if (state.missionId) {
+
+      if (m) {
+        const side = Math.sqrt(m.defaults.area).toFixed(1);
+        preview.innerHTML = `
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <h3 class="text-base font-semibold text-ink">${m.title}</h3>
+            <span class="font-mono text-xs text-muted">${side} × ${side} mm</span>
+          </div>
+          <div class="w-40 h-40 mx-auto my-3">
+            <svg id="preview-die-svg" viewBox="0 0 260 260" class="w-full h-full"></svg>
+          </div>
+          <p class="text-xs sm:text-sm text-muted leading-relaxed mt-3">${m.constraint}</p>
+          <dl class="mt-4 pt-3 border-t border-rule grid grid-cols-3 gap-2 text-xs">
+            <div>
+              <dt class="text-muted">Node</dt>
+              <dd class="font-mono font-semibold text-ink mt-0.5">${m.defaults.node}</dd>
+            </div>
+            <div>
+              <dt class="text-muted">Die area</dt>
+              <dd class="font-mono font-semibold text-ink mt-0.5">${m.defaults.area} mm²</dd>
+            </div>
+            <div>
+              <dt class="text-muted">Target</dt>
+              <dd class="font-medium text-ink mt-0.5">${m.targetLabel}</dd>
+            </div>
+          </dl>
+        `;
+        drawDieFloorplan(document.getElementById('preview-die-svg'), m, m.defaults.node, m.defaults.ppa, PROCESS_NODES[m.defaults.node].baseGHz);
         btnNext.disabled = false;
-        btnNext.className = 'px-5 py-3 font-mono text-xs uppercase tracking-wider font-semibold transition border flex items-center justify-center gap-2 self-start md:self-auto bg-[#FF5A52] hover:bg-[#E04840] text-white border-[#FF5A52] cursor-pointer';
+        btnNext.className = 'mt-5 w-full py-2.5 px-4 rounded-md text-sm font-medium transition bg-ink hover:bg-neutral-800 text-white cursor-pointer';
       } else {
+        preview.innerHTML = `<p class="text-sm text-muted py-12 text-center">Select a chip on the left to inspect its starting specs.</p>`;
         btnNext.disabled = true;
-        btnNext.className = 'px-5 py-3 font-mono text-xs uppercase tracking-wider font-semibold transition border flex items-center justify-center gap-2 self-start md:self-auto bg-neutral-200 text-neutral-400 border-neutral-300 cursor-not-allowed';
+        btnNext.className = 'mt-5 w-full py-2.5 px-4 rounded-md text-sm font-medium transition bg-rule text-muted cursor-not-allowed';
       }
     }
 
@@ -1610,45 +1221,37 @@
       if (state.missionId) navToStep(2);
     });
 
-    /* ======================================================================= */
-    /* STEP 2: WAFER LAB                                                       */
-    /* ======================================================================= */
+    /* Step 2: Wafer Lab */
     function renderStep2ControlsAndSim() {
       const mission = MISSIONS.find((m) => m.id === state.missionId) || MISSIONS[0];
-      document.getElementById('sim-mission-badge').innerHTML = `
-        <span class="w-2 h-2 bg-[#FF5A52]"></span>
-        <span class="text-neutral-500">CHIP:</span>
-        <strong class="font-semibold text-[#262626]">${mission.title}</strong>
-      `;
+      document.getElementById('sim-mission-badge').textContent = mission.title;
 
-      // Process Node Buttons
       const nodeWrap = document.getElementById('node-buttons');
       nodeWrap.innerHTML = Object.keys(PROCESS_NODES).map((n) => `
         <button
           type="button"
           onclick="setNode('${n}')"
-          class="py-2 font-mono text-xs font-semibold border transition cursor-pointer ${
+          class="py-1.5 rounded-md font-mono text-xs font-medium border transition cursor-pointer ${
             state.node === n
-              ? 'bg-[#262626] text-white border-[#262626]'
-              : 'bg-white text-neutral-700 border-[#D4D4D4] hover:border-neutral-500'
+              ? 'bg-ink text-white border-ink'
+              : 'bg-white text-ink border-rule hover:border-muted'
           }"
         >${n}</button>
       `).join('');
 
-      // PPA Priority Buttons
       const ppaWrap = document.getElementById('ppa-buttons');
       ppaWrap.innerHTML = PPA_OPTIONS.map((p) => `
         <button
           type="button"
           onclick="setPPA('${p.id}')"
-          class="px-2 py-2.5 border text-center transition cursor-pointer ${
+          class="px-2 py-2 rounded-md border text-center transition cursor-pointer ${
             state.ppa === p.id
-              ? 'bg-[#262626] text-white border-[#262626]'
-              : 'bg-white text-neutral-700 border-[#D4D4D4] hover:border-neutral-500'
+              ? 'bg-ink text-white border-ink'
+              : 'bg-white text-ink border-rule hover:border-muted'
           }"
         >
-          <div class="text-xs font-semibold leading-tight">${p.id}</div>
-          <div class="font-mono text-[10px] opacity-75 mt-0.5">${p.short}</div>
+          <div class="text-xs font-medium leading-tight">${p.id}</div>
+          <div class="text-[11px] opacity-70 mt-0.5">${p.short}</div>
         </button>
       `).join('');
 
@@ -1684,7 +1287,6 @@
       const ppaSpec = PPA_OPTIONS.find((p) => p.id === state.ppa) || PPA_OPTIONS[1];
       const areaCm2 = state.area / 100;
 
-      // Murphy Yield Model: Y = ((1 - exp(-D0 * A)) / (D0 * A))^2
       const d0A = nodeSpec.d0 * areaCm2;
       const murphy = d0A > 0 ? Math.pow((1 - Math.exp(-d0A)) / d0A, 2) : 0.99;
       const effectiveYield = Math.max(0.15, Math.min(0.985, murphy - ppaSpec.yieldPen));
@@ -1701,7 +1303,6 @@
 
       state.metrics = { gross, yieldPct, good, cost, powerW, freqGHz, eff };
 
-      // Update labels & metrics strip
       document.getElementById('lbl-node').textContent = state.node;
       document.getElementById('node-detail').textContent = nodeSpec.note;
       document.getElementById('lbl-area').textContent = `${state.area} mm²`;
@@ -1720,9 +1321,6 @@
       drawDieFloorplan(document.getElementById('floorplan-svg'));
     }
 
-    /**
-     * Dynamically packs rectangular dies inside the 300mm circular wafer SVG
-     */
     function buildWaferDieMap(areaMm2, yieldFrac) {
       const cx = 150, cy = 150;
       const usableR = 130;
@@ -1773,11 +1371,11 @@
       const layer = document.getElementById('wafer-dies-layer');
       layer.innerHTML = state.dies.map((d) => {
         const tested = d.y <= testedUpToY;
-        let fill = '#F5F5F5', stroke = '#D4D4D4';
+        let fill = '#F6F6F3', stroke = '#DCDCD6';
         if (tested) {
-          if (d.status === 'good')   { fill = '#DCFCE7'; stroke = '#16A34A'; }
-          if (d.status === 'defect') { fill = '#FFE4E6'; stroke = '#E11D48'; }
-          if (d.status === 'edge')   { fill = '#FEF9C3'; stroke = '#CA8A04'; }
+          if (d.status === 'good')   { fill = '#D8F3E4'; stroke = '#2D8A5B'; }
+          if (d.status === 'defect') { fill = '#FCE2E5'; stroke = '#C93B4B'; }
+          if (d.status === 'edge')   { fill = '#FBF0CC'; stroke = '#B8861B'; }
         }
         return `<rect
           data-idx="${d.id}"
@@ -1792,7 +1390,6 @@
       }).join('');
     }
 
-    // Hover tooltip on wafer SVG
     const waferLayer = document.getElementById('wafer-dies-layer');
     const dieTooltip = document.getElementById('die-tooltip');
     waferLayer.addEventListener('mouseover', (e) => {
@@ -1800,48 +1397,41 @@
       const gx = e.target.getAttribute('data-gx');
       const gy = e.target.getAttribute('data-gy');
       const st = e.target.getAttribute('data-status');
-      const labels = {
-        good: 'GOOD CHIP · Passed test',
-        defect: 'DUST HIT · Failed test',
-        edge: 'EDGE CHIP · Too close to rim',
-        untested: 'NOT TESTED · Press Run Wafer Probe Test',
-      };
-      dieTooltip.textContent = `Chip (${gx}, ${gy}) — ${labels[st] || st}`;
+      const labels = { good: 'Pass', defect: 'Defect', edge: 'Edge fail', untested: 'Untested' };
+      dieTooltip.textContent = `Die (${gx}, ${gy})  ${labels[st] || st}`;
       dieTooltip.classList.remove('hidden');
     });
     waferLayer.addEventListener('mouseout', () => {
       dieTooltip.classList.add('hidden');
     });
 
-    /**
-     * Zoomed-In Die Floorplan SVG
-     */
-    function drawDieFloorplan(svgEl) {
-      const mission = MISSIONS.find((m) => m.id === state.missionId) || MISSIONS[0];
+    function drawDieFloorplan(svgEl, missionOverride = null, nodeOverride = null, ppaOverride = null, freqOverride = null) {
+      if (!svgEl) return;
+      const mission = missionOverride || MISSIONS.find((m) => m.id === state.missionId) || MISSIONS[0];
+      const nodeVal = nodeOverride || state.node;
+      const ppaVal = ppaOverride || state.ppa;
+      const freqVal = freqOverride !== null ? freqOverride : state.metrics.freqGHz;
+
       let coreH = 92;
-      if (state.ppa === 'Performance') coreH = 114;
-      if (state.ppa === 'Low Power') coreH = 82;
-      if (state.ppa === 'Low Cost / Area') coreH = 74;
+      if (ppaVal === 'Performance') coreH = 114;
+      if (ppaVal === 'Low Power') coreH = 82;
+      if (ppaVal === 'Low Cost / Area') coreH = 74;
       const sramH = 166 - coreH;
 
       svgEl.innerHTML = `
-        <rect x="6" y="6" width="248" height="248" fill="#FAFAFA" stroke="#262626" stroke-width="1.5" />
-        <!-- Outer Pins / I/O Ring -->
-        <rect x="16" y="16" width="228" height="228" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.2" stroke-dasharray="4 3" />
-        <text x="130" y="29" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" font-weight="600" fill="#1D4ED8">OUTER PINS &amp; WIRING</text>
+        <rect x="6" y="6" width="248" height="248" rx="4" fill="#FAFAFA" stroke="#5C626D" stroke-width="1.4" />
+        <rect x="16" y="16" width="228" height="228" rx="3" fill="#EBF2FA" stroke="#7BA3D6" stroke-width="1.1" stroke-dasharray="4 3" />
+        <text x="130" y="29" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" font-weight="600" fill="#1E4682">I/O RING</text>
 
-        <!-- Power / Signal Block -->
-        <rect x="28" y="38" width="44" height="174" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.4" />
-        <text x="50" y="125" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.5" font-weight="700" fill="#92400E" transform="rotate(-90 50 125)">${mission.analogName}</text>
+        <rect x="28" y="38" width="44" height="174" rx="2.5" fill="#FAF2DC" stroke="#CCA349" stroke-width="1.2" />
+        <text x="50" y="125" text-anchor="middle" font-family="Inter, sans-serif" font-size="7.5" font-weight="600" fill="#775313" transform="rotate(-90 50 125)">${mission.analogName}</text>
 
-        <!-- Main Brain Block -->
-        <rect x="80" y="38" width="152" height="${coreH}" fill="#ECFDF5" stroke="#6EE7B7" stroke-width="1.5" />
-        <text x="156" y="${38 + coreH / 2 - 4}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700" fill="#065F46">${mission.coreName}</text>
-        <text x="156" y="${38 + coreH / 2 + 11}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" fill="#065F46">${state.node} · ${state.metrics.freqGHz.toFixed(2)} GHz</text>
+        <rect x="80" y="38" width="152" height="${coreH}" rx="2.5" fill="#E8F3EC" stroke="#6BA884" stroke-width="1.3" />
+        <text x="156" y="${38 + coreH / 2 - 4}" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#1A563B">${mission.coreName}</text>
+        <text x="156" y="${38 + coreH / 2 + 11}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#1A563B">${nodeVal}, ${freqVal.toFixed(1)} GHz</text>
 
-        <!-- Fast Memory Block -->
-        <rect x="80" y="${46 + coreH}" width="152" height="${sramH}" fill="#F5F3FF" stroke="#C4B5FD" stroke-width="1.5" />
-        <text x="156" y="${46 + coreH + sramH / 2 + 3}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="700" fill="#5B21B6">FAST MEMORY (SRAM)</text>
+        <rect x="80" y="${46 + coreH}" width="152" height="${sramH}" rx="2.5" fill="#EFEBF7" stroke="#9683BF" stroke-width="1.3" />
+        <text x="156" y="${46 + coreH + sramH / 2 + 3}" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#4C2F85">SRAM</text>
       `;
     }
 
@@ -1857,26 +1447,26 @@
         document.getElementById('probe-pass').textContent = good;
         document.getElementById('probe-fail').textContent = fail;
         document.getElementById('probe-edge').textContent = edge;
-        badge.textContent = `TESTED · ${state.metrics.yieldPct.toFixed(1)}%`;
-        badge.className = 'font-mono text-[10px] px-2 py-0.5 blk-green border font-semibold';
-        probeText.textContent = 'Run Wafer Probe Test Again';
+        badge.textContent = `${state.metrics.yieldPct.toFixed(1)}% yield`;
+        badge.className = 'font-mono text-[11px] font-medium text-emerald-700';
+        probeText.textContent = 'Run Probe Test Again';
         nextBtn.disabled = false;
-        nextBtn.className = 'flex-1 py-2.5 px-4 font-mono text-xs uppercase tracking-wider font-semibold border transition flex items-center justify-center gap-1.5 bg-[#262626] hover:bg-neutral-800 text-white border-[#262626] cursor-pointer';
+        nextBtn.className = 'flex-1 py-2 px-4 rounded-md text-xs font-medium border transition bg-accent hover:bg-blue-900 text-white border-accent cursor-pointer';
       } else {
         document.getElementById('probe-pass').textContent = '—';
         document.getElementById('probe-fail').textContent = '—';
         document.getElementById('probe-edge').textContent = '—';
-        badge.textContent = 'NOT TESTED';
-        badge.className = 'font-mono text-[10px] px-2 py-0.5 bg-neutral-100 text-neutral-600 border border-[#D4D4D4]';
+        badge.textContent = 'Untested';
+        badge.className = 'text-[11px] text-muted';
         probeText.textContent = 'Run Wafer Probe Test';
         nextBtn.disabled = true;
-        nextBtn.className = 'flex-1 py-2.5 px-4 font-mono text-xs uppercase tracking-wider font-semibold border transition flex items-center justify-center gap-1.5 bg-neutral-100 text-neutral-400 border-neutral-200 cursor-not-allowed';
+        nextBtn.className = 'flex-1 py-2 px-4 rounded-md text-xs font-medium border transition bg-faint text-muted border-rule cursor-not-allowed';
       }
     }
 
-    // Animated Row-by-Row Wafer Probe Sweep
     document.getElementById('btn-probe').addEventListener('click', () => {
       if (state.isProbing) return;
+      if (state.probeInterval) clearInterval(state.probeInterval);
       state.isProbing = true;
       state.probeTested = false;
       state.seed = Math.floor(Math.random() * 900) + 10;
@@ -1889,23 +1479,24 @@
       const probeText = document.getElementById('btn-probe-text');
 
       beam.style.display = 'block';
-      badge.textContent = 'SCANNING...';
-      badge.className = 'font-mono text-[10px] px-2 py-0.5 blk-yellow border font-semibold';
-      probeText.textContent = 'Scanning 300mm Wafer...';
+      badge.textContent = 'Scanning...';
+      badge.className = 'text-[11px] font-medium text-accent';
+      probeText.textContent = 'Probing wafer...';
 
       const uniqueYs = [...new Set(state.dies.map((d) => Math.round(d.y)))].sort((a, b) => a - b);
       let rowIdx = 0;
       const stepMs = Math.max(45, Math.min(110, Math.floor(1400 / Math.max(1, uniqueYs.length))));
 
-      const interval = setInterval(() => {
+      state.probeInterval = setInterval(() => {
         if (rowIdx >= uniqueYs.length) {
-          clearInterval(interval);
+          clearInterval(state.probeInterval);
+          state.probeInterval = null;
           beam.style.display = 'none';
           state.isProbing = false;
           state.probeTested = true;
           renderWaferDiesSVG(Infinity);
           syncProbeUI();
-          showToast(`Test done: ${state.metrics.good} out of ${state.metrics.gross} chips work!`);
+          showToast(`Probe complete: ${state.metrics.good} of ${state.metrics.gross} dies passed.`);
           return;
         }
 
@@ -1929,25 +1520,24 @@
       if (state.probeTested) navToStep(3);
     });
 
-    /* ======================================================================= */
-    /* STEP 3: FIX A PROBLEM                                                   */
-    /* ======================================================================= */
+    /* Step 3: Fix a Problem */
     function renderStep3() {
       const mission = MISSIONS.find((m) => m.id === state.missionId) || MISSIONS[0];
       const crisis = mission.crisis;
 
       document.getElementById('crisis-specs').textContent =
-        `${state.node} · ${state.area} mm² · ${state.metrics.yieldPct.toFixed(1)}% Working · ${state.metrics.powerW.toFixed(2)} W`;
+        `${state.node}, ${state.area} mm², ${state.metrics.yieldPct.toFixed(1)}% yield, ${state.metrics.powerW.toFixed(2)} W`;
 
       document.getElementById('crisis-title').innerHTML = `
         <span>${crisis.title}</span>
-        <button type="button" onclick="openGlossary('${crisis.glossaryKey}')" class="glossary-cue font-sans text-xs font-medium text-neutral-500 ml-2 align-middle">
+        <button type="button" onclick="openGlossary('${crisis.glossaryKey}')" class="glossary-cue text-xs font-normal text-muted ml-2 align-middle">
           ${crisis.glossaryLabel}
         </button>
       `;
 
       document.getElementById('crisis-body').textContent = crisis.body
         .replace('{node}', state.node)
+        .replace('{area}', state.area)
         .replace('{yield}', state.metrics.yieldPct.toFixed(1));
 
       const wrap = document.getElementById('triage-options');
@@ -1957,24 +1547,19 @@
           <button
             type="button"
             onclick="pickTriage('${d.id}')"
-            class="text-left lab-panel p-5 transition-all cursor-pointer flex flex-col justify-between ${
+            class="text-left rounded-lg border p-5 transition cursor-pointer flex flex-col justify-between ${
               picked
-                ? '!border-[#FF5A52] ring-2 ring-[#FF5A52] bg-[#FAFAFA]'
-                : 'hover:border-neutral-500'
+                ? 'border-accent bg-accentsoft/60 ring-1 ring-accent'
+                : 'border-rule bg-white hover:border-muted/60'
             }"
           >
             <div>
-              <div class="flex items-center justify-between gap-2 mb-3">
-                <span class="font-mono text-[10px] uppercase font-semibold px-2 py-0.5 border ${d.tagCls}">${d.tag}</span>
-                <span class="font-mono text-xs font-semibold ${picked ? 'text-[#E04840]' : 'text-neutral-400'}">
-                  ${picked ? '[✓] CHOSEN' : '[ ] PICK'}
-                </span>
-              </div>
-              <h4 class="text-base font-bold text-[#262626]">${d.title}</h4>
-              <p class="text-sm text-neutral-600 mt-2 leading-relaxed">${d.plain}</p>
+              <div class="text-xs font-medium text-muted mb-1.5">${d.tag}</div>
+              <h4 class="text-sm sm:text-base font-semibold text-ink leading-snug">${d.title}</h4>
+              <p class="text-xs sm:text-sm text-muted mt-2 leading-relaxed">${d.plain}</p>
             </div>
-            <div class="mt-4 pt-3 border-t border-neutral-200 text-xs text-neutral-600 leading-relaxed">
-              <strong class="text-[#262626] font-semibold">The catch:</strong> ${d.tradeoff}
+            <div class="mt-4 pt-3 border-t border-rule text-xs text-muted leading-relaxed">
+              ${d.tradeoff}
             </div>
           </button>
         `;
@@ -2029,22 +1614,20 @@
       document.getElementById('impact-headline').textContent = decision.title;
       document.getElementById('impact-detail').textContent = decision.scoreNote;
       document.getElementById('impact-deltas').innerHTML = `
-        <span class="px-2.5 py-1 border ${decision.yieldDelta >= 0 ? 'blk-green' : 'bg-[#FFF1F0] border-[#FF5A52]/40 text-[#E04840]'}">
-          Working Rate: ${state.finalYieldPct.toFixed(1)}% (${sign}${decision.yieldDelta.toFixed(1)}%)
+        <span class="px-2 py-0.5 rounded border ${decision.yieldDelta >= 0 ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-rose-50 border-rose-200 text-rose-800'}">
+          Yield ${state.finalYieldPct.toFixed(1)}% (${sign}${decision.yieldDelta.toFixed(1)}%)
         </span>
-        <span class="px-2.5 py-1 border border-[#D4D4D4] bg-[#FAFAFA] text-[#262626]">
-          Working Chips: ${state.finalGood} / wafer
+        <span class="px-2 py-0.5 rounded border border-rule bg-white text-ink">
+          ${state.finalGood} good dies
         </span>
-        <span class="px-2.5 py-1 border border-[#D4D4D4] bg-[#FAFAFA] text-[#262626]">
-          New Power: ${newPower} W
+        <span class="px-2 py-0.5 rounded border border-rule bg-white text-ink">
+          ${newPower} W
         </span>
       `;
       box.classList.remove('hidden');
     }
 
-    /* ======================================================================= */
-    /* STEP 4: CHIP PASSPORT & INTERACTIVE MINI-WAFER                          */
-    /* ======================================================================= */
+    /* Step 4: Passport & Mini-Wafer */
     function renderStep4() {
       const mission = MISSIONS.find((m) => m.id === state.missionId) || MISSIONS[0];
       const decision = mission.crisis.decisions.find((d) => d.id === state.triageId) || mission.crisis.decisions[0];
@@ -2060,26 +1643,23 @@
 
       drawDieFloorplan(document.getElementById('passport-die-svg'));
 
-      // Top 2 Recommended Blocks list
       const listWrap = document.getElementById('top-matches-list');
       listWrap.innerHTML = state.topMatches.map((key, idx) => {
         const blk = WAFER_BLOCKS[key];
         const route = WAFER_ROUTES[key] || '#';
         const reason = idx === 0
-          ? `Choosing "${decision.title}" is the exact kind of call ${blk.key} teams make every day.`
-          : `Tuning your ${state.node} chip for ${state.ppa} fits right in with ${blk.key.toLowerCase()} work.`;
+          ? `Picking "${decision.title}" lines up with the decisions ${blk.key} teams make.`
+          : `Tuning a ${state.node} chip for ${state.ppa} overlaps closely with ${blk.key.toLowerCase()} work.`;
         return `
-          <div class="border p-4 ${blk.cls}">
-            <div class="flex items-center justify-between gap-2 mb-1">
-              <span class="font-mono text-xs font-bold">#${idx + 1} MATCH · ${blk.key} (${blk.sub})</span>
-            </div>
+          <div class="rounded-lg border p-4 ${blk.cls}">
+            <div class="text-xs font-semibold mb-1">#${idx + 1} ${blk.key} (${blk.sub})</div>
             <p class="text-xs leading-relaxed opacity-90 mb-3">${reason}</p>
             <a
               href="${route}"
               data-route-key="${blk.key}"
-              class="top-match-link inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#262626] hover:bg-[#FF5A52] text-white font-mono text-xs font-semibold transition"
+              class="top-match-link inline-flex items-center gap-1 text-xs font-semibold underline underline-offset-4 hover:opacity-80"
             >
-              <span>Open ${blk.key} Page</span>
+              <span>Open ${blk.key}</span>
               <span>→</span>
             </a>
           </div>
@@ -2103,8 +1683,8 @@
       const makeTile = (key) => {
         if (key.startsWith('__coming')) {
           return `
-            <div class="blk-coming border p-2 text-center flex flex-col items-center justify-center min-h-[64px] select-none">
-              <div class="font-mono text-[10px] leading-tight">Coming<br/>Soon</div>
+            <div class="blk-coming border rounded-md p-2 text-center flex flex-col items-center justify-center min-h-[60px] select-none">
+              <div class="text-[10px] leading-tight">Coming<br/>Soon</div>
             </div>
           `;
         }
@@ -2112,17 +1692,17 @@
         const rank = state.topMatches.indexOf(key);
         const isMatched = rank !== -1;
         const isSelected = state.selectedBlock === key;
-        const ring = isMatched ? 'matched-ring' : (isSelected ? 'ring-2 ring-neutral-500' : '');
+        const ring = isMatched ? 'matched-ring' : (isSelected ? 'ring-2 ring-ink/35' : '');
 
         return `
           <button
             type="button"
             onclick="selectMiniBlock('${key}')"
-            class="relative ${blk.cls} ${ring} border p-2 text-center flex flex-col items-center justify-center min-h-[64px] transition hover:opacity-90 cursor-pointer focus:outline-none"
+            class="relative ${blk.cls} ${ring} border rounded-md p-2 text-center flex flex-col items-center justify-center min-h-[60px] transition hover:opacity-90 cursor-pointer focus:outline-none"
           >
-            ${isMatched ? `<span class="absolute -top-2 -right-1.5 px-1.5 py-0.5 bg-[#FF5A52] text-white font-mono text-[8px] font-bold">#${rank + 1}</span>` : ''}
-            <div class="font-mono text-[10px] sm:text-[11px] font-bold leading-tight">${blk.key}</div>
-            <div class="font-mono text-[9px] opacity-80 mt-0.5">${blk.sub}</div>
+            ${isMatched ? `<span class="absolute -top-2 -right-1.5 px-1.5 py-0.5 rounded bg-accent text-white font-mono text-[9px] font-semibold">#${rank + 1}</span>` : ''}
+            <div class="text-[11px] font-semibold leading-tight">${blk.key}</div>
+            <div class="text-[10px] opacity-80 mt-0.5">${blk.sub}</div>
           </button>
         `;
       };
@@ -2139,37 +1719,33 @@
       renderMiniWafer();
 
       const rank = state.topMatches.indexOf(key);
-      const catEl = document.getElementById('drawer-cat');
-      catEl.textContent = blk.category.toUpperCase();
-      catEl.className = `font-mono text-[10px] font-semibold px-2 py-0.5 border ${blk.cls}`;
+      document.getElementById('drawer-cat').textContent = blk.category;
 
       const rankEl = document.getElementById('drawer-rank');
       if (rank !== -1) {
-        rankEl.textContent = `#${rank + 1} MATCH`;
+        rankEl.textContent = `#${rank + 1} match`;
         rankEl.classList.remove('hidden');
       } else {
         rankEl.classList.add('hidden');
       }
 
-      document.getElementById('drawer-title').textContent = `${blk.key} — ${blk.sub}`;
+      document.getElementById('drawer-title').textContent = `${blk.key} (${blk.sub})`;
       document.getElementById('drawer-desc').textContent = blk.desc;
-      document.getElementById('drawer-link-text').textContent = `Open ${blk.key} Page`;
+      document.getElementById('drawer-link-text').textContent = `Open ${blk.key}`;
       wireRouteLink(document.getElementById('drawer-link'), key, blk.key);
     }
 
-    /* ======================================================================= */
-    /* COPY PASSPORT SUMMARY & RESET                                           */
-    /* ======================================================================= */
+    /* Copy & Reset */
     document.getElementById('btn-copy-passport').addEventListener('click', () => {
       const mission = MISSIONS.find((m) => m.id === state.missionId) || MISSIONS[0];
       const decision = mission.crisis.decisions.find((d) => d.id === state.triageId) || mission.crisis.decisions[0];
       const summary = [
-        `Silicon Chip Passport — ${decision.archetype}`,
+        `Silicon Chip Passport: ${decision.archetype}`,
         `Chip: ${mission.title}`,
-        `Specs: ${state.node} | ${state.area} mm² | Goal: ${state.ppa}`,
-        `Working Rate: ${state.finalYieldPct.toFixed(1)}% (${state.finalGood} working chips per wafer)`,
-        `Fix Chosen: ${decision.title}`,
-        `Top Wafer Matches: ${state.topMatches.join(' & ')}`,
+        `Specs: ${state.node}, ${state.area} mm², Priority: ${state.ppa}`,
+        `Final Yield: ${state.finalYieldPct.toFixed(1)}% (${state.finalGood} good dies)`,
+        `Fix: ${decision.title}`,
+        `Matched Areas: ${state.topMatches.join(', ')}`,
       ].join('\n');
 
       try {
@@ -2181,25 +1757,24 @@
         ta.select();
         document.execCommand('copy');
         document.body.removeChild(ta);
-        showToast('Chip Passport copied to your clipboard.');
+        showToast('Passport summary copied.');
       } catch (err) {
-        showToast('Could not copy automatically — use Print Passport instead.');
+        showToast('Could not copy automatically. Use Print instead.');
       }
     });
 
     document.getElementById('btn-reset').addEventListener('click', () => {
       if (state.isProbing) return;
-      state.missionId = null;
+      state.missionId = 'edge_ai';
       state.node = '7nm';
-      state.area = 100;
+      state.area = 65;
       state.ppa = 'Low Power';
       state.probeTested = false;
       state.triageId = null;
       navToStep(1);
-      showToast('Lab reset — pick a new chip to start over.');
+      showToast('Lab reset.');
     });
 
-    // Boot directly into Step 1 and initialize Word Guide + Back link
     window.addEventListener('DOMContentLoaded', () => {
       try {
         wireRouteLink(document.getElementById('link-back-wafer'), 'home', 'Wafer Home');
